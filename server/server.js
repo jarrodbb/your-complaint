@@ -1,13 +1,17 @@
+// Import Express.js framework, to create web server, define routes and handle HTTP request & response
 const express = require("express");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
+// Import path module, for file & directory paths, to resolve & manipulate file paths
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 
+// Set the PORT on which web server will listen., or default port 3001
 const PORT = process.env.PORT || 3001;
+// Create intance of the Express application, app variable is used to define routes, middleware & other app settings
 const app = express();
 const server = new ApolloServer({
   typeDefs,
@@ -21,7 +25,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  // Serve up static assets
+  // Serve static files from client folder
   app.use(
     "/images",
     express.static(path.join(__dirname, "../client/public/images"))
