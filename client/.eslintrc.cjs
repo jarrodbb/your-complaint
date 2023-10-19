@@ -12,9 +12,34 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
+    'no-duplicate-case': 'error',
+    'no-empty': 'error',
+    'no-extra-semi': 'error',
+    'no-func-assign': 'error',
+    'no-irregular-whitespace': 'error',
+    'no-unreachable': 'error',
+    'curly': 'error',
+    'dot-notation': 'error',
+    'eqeqeq': 'error',
+    'no-empty-function': 'error',
+    'no-multi-spaces': 'error',
+    'no-mixed-spaces-and-tabs': 'error',
+    'no-trailing-spaces': 'error',
+    'default-case': 'error',
+    'no-fallthrough': 'error',
+    'no-unused-vars': 'warn',
+    'no-use-before-define': 'error',
+    'no-redeclare': 'error',
+    'brace-style': 'error',
+    'indent': ['warn', 2],
+    'quotes': ['error', 'double'],
+    'semi': ['error', 'always'],
+    'radix': 'off',
+
+    // React Refresh rule
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   },
-}
+};
