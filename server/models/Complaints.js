@@ -4,7 +4,7 @@ const commentsSchema = require("./Comments");
 
 const complaintSchema = new Schema(
   {
-    Description: {
+    description: {
       type: String,
       required: true,
       trim: true,
