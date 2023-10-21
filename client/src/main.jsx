@@ -11,8 +11,6 @@ import Contact from "./pages/contact/contact.jsx";
 import Terms from "./pages/terms/terms.jsx";
 import Donate from "./components/Donate/donate.jsx";
 
-
-
 // Import specific components from 'react-router-dom' library
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Import React component from 'CreateComplaint'
@@ -28,7 +26,6 @@ import Donate from "./components/Donate/donate.jsx";
 //   document.getElementById('root')
 // );
 
-
 //Define some routes
 const router = createBrowserRouter([
   {
@@ -41,32 +38,29 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "profile",
+        path: "/profile",
         element: <Profile />,
       },
       {
-        path: "contact",
+        path: "/contact",
         element: <Contact />,
       },
       {
-        path: "terms",
+        path: "/terms",
         element: <Terms />,
       },
       {
-        path: "Donate",
+        path: "/Donate",
         element: <Donate />,
       },
     ],
   },
 ]);
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
 
-
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <App />
 // );
-
