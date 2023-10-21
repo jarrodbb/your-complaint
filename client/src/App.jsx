@@ -4,7 +4,7 @@ import "./App.css";
 import Navbar from "./components/navbar/navbar";
 import Header from "./components/header/header";
 import HomePage from "./pages/homepage/Homepage";
-import Contact from "./pages/contact/contact";
+// import Contact from "./pages/contact/contact";
 import Footer from "./components/footer/footer";
 
 import { Outlet } from "react-router-dom";
@@ -15,7 +15,6 @@ const App = () => {
       <Navbar />
       <Header />
       <HomePage />
-      <Contact />
       <Outlet />
       <Footer />
     </>
