@@ -34,3 +34,17 @@ mutation deleteComplaint($id: ID!) {
     }
   }
 `;
+
+// Mutation to register a new user. It takes 'username,' 'email,' and 'password' as input and returns a user token and user data.
+export const REGISTER_USER = gql`
+  mutation register($username: String!, $email: String!, $password: String!) {
+    register(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+        email
+      }
+    }
+  }
+`;
