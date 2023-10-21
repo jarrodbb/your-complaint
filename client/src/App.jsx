@@ -7,6 +7,8 @@ import HomePage from "./pages/homepage/Homepage";
 import Contact from "./pages/contact/contact";
 import Footer from "./components/footer/footer";
 
+import { Outlet } from "react-router-dom";
+
 const App = () => {
   return (
     <>
@@ -14,6 +16,7 @@ const App = () => {
       <Header />
       <HomePage />
       <Contact />
+      <Outlet />
       <Footer />
     </>
   );
