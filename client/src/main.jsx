@@ -28,6 +28,7 @@ import Donate from "./components/Donate/donate.jsx";
 //   document.getElementById('root')
 // );
 
+
 //Define some routes
 const router = createBrowserRouter([
   {
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
