@@ -3,7 +3,7 @@
 import "./App.css";
 import Navbar from "./components/navbar/navbar";
 import Header from "./components/header/header";
-import HomePage from "./pages/homepage/Homepage";
+// import HomePage from "./pages/homepage/Homepage";
 // import Contact from "./pages/contact/contact";
 import Footer from "./components/footer/footer";
 
@@ -14,7 +14,6 @@ const App = () => {
     <>
       <Navbar />
       <Header />
-      <HomePage />
       <Outlet />
       <Footer />
     </>

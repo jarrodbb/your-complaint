@@ -26,7 +26,7 @@ const NavBar = () => {
           Project
         </a>
         {/* Link for "Contact" */}
-        <Link to="/terms" className={currentPage === "/contact" ? "nav-link active" : "nav-link"}>
+        <Link to="/contact" className={currentPage === "/contact" ? "nav-link active" : "nav-link"}>
           <i className="far fa fa-phone"></i>
           Contact
         </Link>
