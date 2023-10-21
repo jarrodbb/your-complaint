@@ -39,3 +39,14 @@ query getUsers {
     }
   }
 `;
+
+// Query to fetch a specific user by their 'id.' It takes 'id' as input and returns the user's data.
+export const GET_USER = gql`
+query getUser($id: ID!) {
+  user(_id: $id) {
+    _id
+    username
+    email
+    }
+  }
+`;
