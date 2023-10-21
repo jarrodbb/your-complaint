@@ -25,3 +25,12 @@ mutation updateComplaint($id: ID!, $text: String!) {
     }
   }
 `;
+
+// Mutation to delete a complaint. It takes the 'id' of the complaint as input and returns the deleted complaint's data.
+export const DELETE_COMPLAINT = gql`
+mutation deleteComplaint($id: ID!) {
+  deleteComplaint(id: $id) {
+    _id
+    }
+  }
+`;
