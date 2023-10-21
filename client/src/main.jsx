@@ -17,7 +17,6 @@ import './index.css'
 //   document.getElementById('root')
 // );
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <App />
 );
