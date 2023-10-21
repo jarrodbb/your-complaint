@@ -44,7 +44,7 @@ const complaintSchema = new Schema(
   }
 );
 
-userSchema.virtual("commentsCount").get(function () {
+complaintSchema.virtual("commentsCount").get(function () {
   return this.comments.length;
 });
 

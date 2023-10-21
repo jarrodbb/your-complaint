@@ -1,6 +1,5 @@
 // ADD REACTIONS. thumbs up, thumbs down...But maybe somthing different.
 
-
 //Import User and Complaint models
 const { User, Complaints } = require("../models");
 //Import for authentication
@@ -106,79 +105,82 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-  },
 
-  deleteComplaint: async (parent, { complaintID }, context) => {
-    if (context.user) {
-      const complaint = await Complaints.findOneAndRemove({ _id: complaintID });
-      const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { complaints: complaintID } }
-      );
-      return user;
-    }
-    throw AuthenticationError;
-  },
+    deleteComplaint: async (parent, { complaintID }, context) => {
+      if (context.user) {
+        const complaint = await Complaints.findOneAndRemove({
+          _id: complaintID,
+        });
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { complaints: complaintID } },
+          { runValidators: true, new: true }
+        );
+        return user;
+      }
+      throw AuthenticationError;
+    },
 
-  addComment: async (
-    parent,
-    { complaintID, author, description, image, link },
-    context
-  ) => {
-    if (context.user) {
-      const complaint = await Complaints.findOneAndUpdate(
-        { _id: complaintID },
-        {
-          $addToSet: {
-            comments: {
-              author,
-              description,
-              image,
-              link,
+    addComment: async (
+      parent,
+      { complaintID, author, description, image, link },
+      context
+    ) => {
+      if (context.user) {
+        const complaint = await Complaints.findOneAndUpdate(
+          { _id: complaintID },
+          {
+            $addToSet: {
+              comments: {
+                author,
+                description,
+                image,
+                link,
+              },
             },
           },
-        },
-        { runValidators: true, new: true }
-      );
-      return complaint;
-    }
-    throw AuthenticationError;
-  },
+          { runValidators: true, new: true }
+        );
+        return complaint;
+      }
+      throw AuthenticationError;
+    },
 
-  updateComment: async (
-    parent,
-    { complaintID, commentID, description, image, link },
-    context
-  ) => {
-    if (context.user) {
-      const complaint = await Complaints.findOneAndUpdate(
-        { _id: complaintID, "comments._id": commentID },
-        {
-          $set: {
-            comments: {
-              description,
-              image,
-              link,
+    updateComment: async (
+      parent,
+      { complaintID, commentID, description, image, link },
+      context
+    ) => {
+      if (context.user) {
+        const complaint = await Complaints.findOneAndUpdate(
+          { _id: complaintID, "comments._id": commentID },
+          {
+            $set: {
+              comments: {
+                description,
+                image,
+                link,
+              },
             },
           },
-        },
-        { runValidators: true, new: true }
-      );
-      return complaint;
-    }
-    throw AuthenticationError;
-  },
+          { runValidators: true, new: true }
+        );
+        return complaint;
+      }
+      throw AuthenticationError;
+    },
 
-  removeComment: async (parent, { complaintID, commentID }, context) => {
-    if (context.user) {
-      const complaint = await Complaints.findByIdAndUpdate(
-        { _id: complaintID },
-        { $pull: { comments: { commentID } } },
-        { runValidators: true, new: true }
-      );
-      return complaint;
-    }
-    throw AuthenticationError;
+    removeComment: async (parent, { complaintID, commentID }, context) => {
+      if (context.user) {
+        const complaint = await Complaints.findByIdAndUpdate(
+          { _id: complaintID },
+          { $pull: { comments: { commentID } } },
+          { runValidators: true, new: true }
+        );
+        return complaint;
+      }
+      throw AuthenticationError;
+    },
   },
 };
 
