@@ -5,7 +5,7 @@ const terms = () => {
     <section id='terms'>
       <h1>Terms and conditions</h1>
       <div className="text-box">
-        <p>Insert lack of Terms and conditions</p>
+        <p>ALL YOUR DATA ARE BELONG TO US</p>
       </div>
     </section>
   );
