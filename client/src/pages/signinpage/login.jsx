@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "./newpostpage.css";
 
-const NewPostForm = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
-    title: "",
-    postContent: "",
+    email: "",
+    password: "",
   });
 
   const handleInputChange = (event) => {
@@ -16,7 +15,7 @@ const NewPostForm = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/api/posts", {
+      const response = await fetch("/api/users/login", {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {
@@ -31,33 +30,35 @@ const NewPostForm = () => {
         alert(errorData.message);
       }
     } catch (error) {
-      console.error("Error submitting the form:", error);
+      console.error("Error logging in:", error);
     }
   };
 
   return (
-    <form className="new-post-form" onSubmit={handleFormSubmit}>
+    <form className="login-form" onSubmit={handleFormSubmit}>
       <label>
-        Title:
+        Email:
         <input
-          type="text"
-          name="title"
-          value={formData.title}
+          type="email"
+          name="email"
+          value={formData.email}
           onChange={handleInputChange}
+          required
         />
       </label>
       <label>
-        Post Content:
+        Password:
         <input
-          type="text"
-          name="postContent"
-          value={formData.postContent}
+          type="password"
+          name="password"
+          value={formData.password}
           onChange={handleInputChange}
+          required
         />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit">Login</button>
     </form>
   );
 };
 
-export default NewPostForm;
+export default Login;
