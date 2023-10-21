@@ -1,5 +1,5 @@
 /* Styles for the nav bar */
-/* .navbar-container {
+.navbar-container {
   position: fixed;
   top: 0;
   right: 0;
@@ -9,7 +9,7 @@
   justify-content: flex-end;
   width: 100vw;
   z-index: 1000;
-} */
+}
 
 .navbar-container a:hover {
   background: rgba(255, 0, 0, 0.3);
