@@ -20,7 +20,7 @@ type Comments {
     _id: ID!
     author: String!
     description: String!
-    created: Sting
+    created: String
     image: [String]
     link: String
 }
@@ -33,19 +33,19 @@ type Auth {
 
 type Query {
     me: User
-    complaints: [Complaint]
+    complaints: [Complaints]
 }
 
 type Mutation {
     login(email: String!, password: String!): Auth
-    adduser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
     addComplaint(description: String!, image: [String]): User
-    updateComplaint(complaintID:ID!, description: String!, image: [String]): Complaint
-    deleteComplaint(complaintID:ID!): User
-    addComment(complaintID:ID!, author: String!, description: String!, image: [String], link: String): Complaint
-    updateComment( complaintID:ID!, commentID:ID!, description: String!, image: [String], link: String): Complaint
-    removeComment(complaintID:ID!, commentID!): Complaint
+    updateComplaint(complaintID: ID!, description: String!, image: [String]): Complaints
+    deleteComplaint(complaintID: ID!): User
+    addComment(complaintID: ID!, author: String!, description: String!, image: [String], link: String): Complaints
+    updateComment( complaintID: ID!, commentID:ID!, description: String!, image: [String], link: String): Complaints
+    removeComment(complaintID: ID!, commentID:ID!): Complaints
 }
 
 `;
