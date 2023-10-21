@@ -13,3 +13,15 @@ mutation createComplaint($category: String!, $text: String!) {
     }
   }
 `;
+
+// Mutation to update an existing complaint. It takes the 'id' of the complaint and the new 'text' as input and returns the updated complaint's data.
+export const UPDATE_COMPLAINT = gql`
+mutation updateComplaint($id: ID!, $text: String!) {
+  updateComplaint($id: $id, text: $text) {
+    _id
+    category
+    text
+    createdAt
+    }
+  }
+`;
