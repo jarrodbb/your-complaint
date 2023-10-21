@@ -28,3 +28,14 @@ query getComplaint($id: ID!) {
     }
   }
 `;
+
+// Query to fetch a list of users. It doesn't require any input and returns an array of user objects.
+export const GET_USERS = gql`
+query getUsers {
+  users {
+    _id
+    username
+    email
+    }
+  }
+`;
