@@ -8,10 +8,11 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href="#home" data-text="Home">
+        {/* Link for "Home" */}
+        <Link to="/" className={currentPage === "/" ? "nav-link active" : "nav-link"} data-text="Home">
           <i className="far fa fa-home"></i>
           Home
-        </a>
+        </Link>
         <Link to="/profile" data-text="Profile">
           <i className="far fa-user"></i>
           Profile
@@ -24,10 +25,11 @@ const NavBar = () => {
           <i className="far fa-folder-open"></i>
           Project
         </a>
-        <a href="#contact" data-text="Contact">
+        {/* Link for "Contact" */}
+        <Link to="/terms" className={currentPage === "/contact" ? "nav-link active" : "nav-link"}>
           <i className="far fa fa-phone"></i>
           Contact
-        </a>
+        </Link>
         {/* Link for "Terms and Conditions" */}
         <Link to="/terms" className={currentPage === "/terms" ? "nav-link active" : "nav-link"}>
           <i className="far fa fa-book"></i>
