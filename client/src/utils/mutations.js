@@ -48,3 +48,17 @@ export const REGISTER_USER = gql`
     }
   }
 `;
+
+// Mutation to log in a user. It takes 'email' and 'password' as input and returns a user token and user data.
+export const LOGIN_USER = gql`
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
+      email
+      }
+    }
+  }
+  `;
