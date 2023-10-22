@@ -30,6 +30,7 @@ const userSchema = new Schema(
     },
     isModerator: {
       type: Boolean,
+      default: false
     },
     complaints: [
       {
