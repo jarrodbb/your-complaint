@@ -1,4 +1,4 @@
-import "/signup.css";
+import "./signup.css";
 
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
@@ -131,7 +131,8 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                {/* <Link href="../signin/login.jsx" variant="body2"> */}
+                <Link href="/SignIn" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

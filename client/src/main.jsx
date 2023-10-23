@@ -10,6 +10,8 @@ import Profile from "./pages/profile/profile.jsx";
 import Contact from "./pages/contact/contact.jsx";
 import Terms from "./pages/terms/terms.jsx";
 import Donate from "./components/Donate/donate.jsx";
+import SignUp from "./pages/signup/signup.jsx";
+import SignIn from "./pages/signin/login.jsx";
 
 // Import specific components from 'react-router-dom' library
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "/Donate",
         element: <Donate />,
+      },
+      {
+        path: "/SignUp",
+        element: <SignUp />,
+      },
+      {
+        path: "/SignIn",
+        element: <SignIn />,
       },
     ],
   },
