@@ -44,3 +44,54 @@ const ComplaintForm = ({ closemodal }) => {
     onDrop,
     accept: "image/*, video/*",
   });
+
+
+  // Render complaint form within a <div> element.
+  return (
+    <div className="complaint-form">
+      <h2>Make a Complaint</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Category:
+          <select value={category} onChange={handleCategoryChange}>
+            <option value="General">General</option>
+            <option value="Food">Food</option>
+            <option value="Work">Work</option>
+            <option value="Finance">Finance</option>
+            <option value="Life">Life</option>
+            <option value="Health">Health</option>
+            <option value="Technology">Technology</option>
+            <option value="Random">Random</option>
+
+          </select>
+        </label>
+        {/* Textarea for entering the complaint text */}
+        <textarea
+          placeholder="Type your complaint here"
+          value={complaintText}
+          onChange={handleTextChange}
+        />
+
+        {/* Dropzone for image upload */}
+        <div {...getRootProps()} className="dropzone">
+          <input {...getInputProps()} />
+          <p>Drag 'n' drop an image here, or click to select one</p>
+        </div>
+
+        {/* Display the uploaded image if available */}
+        {image && (
+          <div className="uploaded-image">
+            <p>Uploaded Image:</p>
+            <img src={URL.createObjectURL(image)} alt="Uploaded" />
+          </div>
+        )}
+
+        {/* Submission button */}
+        <button type="submit">Submit Complaint</button>
+      </form>
+    </div>
+  );
+};
+
+// Export 'ComplaintForm' component to make it available for use in other parts of app
+export default ComplaintForm;
