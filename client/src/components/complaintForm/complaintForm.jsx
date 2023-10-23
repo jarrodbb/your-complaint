@@ -45,7 +45,6 @@ const ComplaintForm = ({ closemodal }) => {
     accept: "image/*, video/*",
   });
 
-
   // Render complaint form within a <div> element.
   return (
     <div className="complaint-form">
