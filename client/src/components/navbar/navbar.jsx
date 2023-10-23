@@ -21,10 +21,6 @@ const NavBar = () => {
           <i className="far fa-file-code"></i>
           Skills
         </a>
-        <a href="#project" data-text="Project">
-          <i className="far fa-folder-open"></i>
-          Project
-        </a>
         {/* Link for "Contact" */}
         <Link to="/contact" className={currentPage === "/contact" ? "nav-link active" : "nav-link"}>
           <i className="far fa fa-phone"></i>
@@ -40,6 +36,11 @@ const NavBar = () => {
           <i className="far fa-heart"></i>
           Donate
         </Link>
+        {/* Link for "Signup/Signin" */}
+        <a href="#signup" data-text="Sign-up/Sign-in">
+          <i className="far fa-user-circle"></i>
+          Sign-up/Sign-in
+        </a>
       </div>
     </nav>
   );
