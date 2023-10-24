@@ -34,7 +34,7 @@ function LatestComplaint() {
       <CssBaseline />
       <Container maxWidth="lg">
         <main>
-          <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
             {console.log("hell" + complaintData)}
             <div className="col-12 col-md-10 my-3">
               {loading ? (

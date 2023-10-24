@@ -79,8 +79,8 @@ function Post({ complaint }) {
   //   },
   // });
   return (
-    <Grid item xs={12} md={12}>
-      <CardActionArea component="a" href={`/Complaint/${complaint._id}`}>
+    <Grid item xs={12} md={6}>
+      <CardActionArea component="a" href="#">
         <Card sx={{ display: "flex" }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
