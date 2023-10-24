@@ -11,7 +11,10 @@ type User {
 type Complaints {
     _id: ID!
     description: String!
-    image: [String]
+    category: String!
+    image: String
+    date: String
+    votes: Int
     createdAt: String
     comments: [Comments]
 }
@@ -21,7 +24,7 @@ type Comments {
     author: String!
     description: String!
     created: String
-    image: [String]
+    image: String
     link: String
 }
 
@@ -40,8 +43,8 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
-    addComplaint(description: String!, image: [String]): User
-    updateComplaint(complaintID: ID!, description: String!, image: [String]): Complaints
+    addComplaint(description: String!, category: String!,date: String, image: [String]): User
+    updateComplaint(complaintID: ID!, votes: Int, category: String!, description: String!, image: [String]): Complaints
     deleteComplaint(complaintID: ID!): User
     addComment(complaintID: ID!, author: String!, description: String!, image: [String], link: String): Complaints
     updateComment( complaintID: ID!, commentID:ID!, description: String!, image: [String], link: String): Complaints

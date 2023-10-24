@@ -9,12 +9,20 @@ const complaintSchema = new Schema(
       required: true,
       trim: true,
     },
+    category: {
+      type: String,
+      required: true,
+    },
 
     image: {
       type: String,
     },
     date: {
       type: String,
+    },
+    votes: {
+      type: Number,
+      default: 0,
     },
     createdAt: {
       type: Date,

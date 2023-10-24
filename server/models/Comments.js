@@ -1,12 +1,11 @@
 const { Schema } = require("mongoose");
 
 const commentsSchema = new Schema({
-  author: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
+  author: {
+    type: String,
+    required: true,
+  },
+
   description: {
     type: String,
     required: true,

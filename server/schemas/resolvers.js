@@ -15,7 +15,10 @@ const resolvers = {
       throw AuthenticationError;
     },
     complaints: async () => {
-      return Complaints.find();
+      const complaints = await Complaints.find();
+      console.log(complaints);
+      console.log(complaints[1].comments);
+      return complaints;
     },
   },
   //Mutations defined
@@ -66,10 +69,15 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    addComplaint: async (parent, { description, date, image }, context) => {
+    addComplaint: async (
+      parent,
+      { description, category, date, image },
+      context
+    ) => {
       if (context.user) {
         const complaint = await Complaints.create({
           description,
+          category,
           date,
           image,
         });
@@ -86,7 +94,7 @@ const resolvers = {
     //How to pass the complaint id from the front end? Will it be stored in the state?
     updateComplaint: async (
       parent,
-      { complaintId, description, date, image },
+      { complaintId, votes, description, category, date, image },
       context
     ) => {
       if (context.user) {
@@ -94,7 +102,9 @@ const resolvers = {
           { _id: complaintId },
           {
             $set: {
+              votes,
               description,
+              category,
               date,
               image,
             },
