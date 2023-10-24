@@ -7,46 +7,57 @@ import { gql } from "@apollo/client";
 
 // Query to fetch a list of complaints. It doesn't require any input and returns an array of complaint objects
 export const GET_COMPLAINTS = gql`
-query getComplaints {
-  complaints {
-    _id
-    category
-    text
-    createdAt
+  query complaints {
+    complaints {
+      _id
+      description
+      category
+      date
+      votes
+      image
+      createdAt
+      comments {
+        _id
+        author
+        description
+        created
+        image
+        link
+      }
     }
   }
 `;
 
 // Query to fetch a specific complaint by its 'id.' It takes 'id' as input and returns the complaint's data.
 export const GET_COMPLAINT = gql`
-query getComplaint($id: ID!) {
-  complaint(_id: $id) {
-    _id
-    category
-    text
-    createdAt
+  query getComplaint($id: ID!) {
+    complaint(_id: $id) {
+      _id
+      category
+      text
+      createdAt
     }
   }
 `;
 
 // Query to fetch a list of users. It doesn't require any input and returns an array of user objects.
 export const GET_USERS = gql`
-query getUsers {
-  users {
-    _id
-    username
-    email
+  query getUsers {
+    users {
+      _id
+      username
+      email
     }
   }
 `;
 
 // Query to fetch a specific user by their 'id.' It takes 'id' as input and returns the user's data.
 export const GET_USER = gql`
-query getUser($id: ID!) {
-  user(_id: $id) {
-    _id
-    username
-    email
+  query getUser($id: ID!) {
+    user(_id: $id) {
+      _id
+      username
+      email
     }
   }
 `;

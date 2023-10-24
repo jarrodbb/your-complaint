@@ -9,17 +9,19 @@ db.once("open", async () => {
   const complaints = await Complaints.insertMany([
     {
       description: "ordered 6 nuggies, only got 5",
+      category: "Food",
       image: "",
-      date: "",
+      date: "06/06/23",
+      votes: 2,
       comments: [
         {
-          author: "Btrang",
+          author: "kalid",
           description: "This is un-australian",
           image: "",
           link: "",
         },
         {
-          author: "JBlan",
+          author: "jblan",
           description: "Boycot Maccas",
           image: "",
           link: "",
@@ -29,16 +31,18 @@ db.once("open", async () => {
     {
       description: "Co-worker stole my lunch",
       image: "",
-      date: "",
+      category: "Work",
+      date: "05/05/23",
+      votes: 10,
       comments: [
         {
-          author: "KalidN",
+          author: "kalid",
           description: "They should be fired",
           image: "",
           link: "",
         },
         {
-          author: "JBlan",
+          author: "jblan",
           description: "Quit",
           image: "",
           link: "",
@@ -49,7 +53,7 @@ db.once("open", async () => {
   console.log("users complaints");
 
   await User.create({
-    username: "JayBlan",
+    username: "jblan",
     email: "jay@gmail.com",
 
     password: "abcd1234",
@@ -58,13 +62,14 @@ db.once("open", async () => {
   });
 
   await User.create({
-    username: "KalidN",
+    username: "kalid",
     email: "kalid@gmail.com",
 
     password: "abcd1234",
     isModerator: false,
     complaints: [complaints[1]._id],
   });
+
   console.log("users seeded");
   process.exit();
 });
