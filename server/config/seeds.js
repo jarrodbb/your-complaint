@@ -8,7 +8,7 @@ db.once("open", async () => {
 
   const complaints = await Complaints.insertMany([
     {
-      description: "ordered 6 nuggies, only got 5",
+      description: "Ordered 6 nuggies, only got 5",
       category: "Food",
       image: "",
       date: "06/06/23",
