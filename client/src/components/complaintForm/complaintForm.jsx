@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
+
+// Define GraphQL mutation to upload an image as an attachment
+const UPLOAD_IMAGE = gql`
+mutation uploadImage($file: Upload!) {
+  uploadImage(file: $file) {
+    filename
+    mimetype
+    encoding
+  }
+}
+`;
 
 // Define React functional component called 'ComplaintForm' which takes 'closeModal' as a prop.
 const ComplaintForm = ({ closemodal }) => {
-
   // 'category' state variable tracks the selected category for the complaint, with 'General' as the initial value.
   const [category, setCategory] = useState("General");
-
   // 'complaintText' state variable stores the text of the complaint.
   const [complaintText, setComplaintText] = useState("");
-
   // 'image' state variable is used to store an uploaded image (initially set to 'null').
   const [image, setImage] = useState(null);
+
+  const [uploadImage] = useMutation(UPLOAD_IMAGE);
 
   // 'handleCategoryChange' function updates the 'category' state when the user selects a category.
   const handleCategoryChange = (e) => {
@@ -25,15 +37,30 @@ const ComplaintForm = ({ closemodal }) => {
 
   // 'onDrop' function is called when the user drops an image into the dropzone. It handles the uploaded image files.
   const onDrop = (acceptedFiles) => {
-
     if (acceptedFiles.length > 0) {
       setImage(acceptedFiles[0]);
     }
   };
 
   // 'handleSubmit' function is called when the user submits the form.
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if image is uploaded
+    if (image) {
+      try {
+        // Upload image and get response
+        const { data } = await uploadImage({ variables: { file: image } });
+
+        // Check if image upload was successful
+        if (data.uploadImage) {
+          // Extract the uploaded image details
+          const { filename, mimetype, encoding } = data.uploadImage;
+        }
+      } catch (error) {
+        console.error("Image upload error:", error);
+      }
+    }
 
     // Close the modal after submission
     closemodal();

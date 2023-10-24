@@ -33,6 +33,11 @@ type Auth {
     user: User
   }
 
+  input ComplaintInput {
+    category: String!
+    complaintText: String!
+    image: Upload
+}
 
 type Query {
     me: User

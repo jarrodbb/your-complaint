@@ -18,7 +18,7 @@ import DisplayTopVoted from "../../components/DisplayTopVoted";
 const theme = createTheme();
 
 export default function Homepage() {
- const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -27,16 +27,15 @@ export default function Homepage() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
- return (
+  return (
     <div>
+      <h1>Welcome to the Homepage</h1>
       <LatestComplaintList />
       <DisplayTopVoted />
       <button onClick={openModal} className="make-complaint-button">
           Make a Complaint
-        </button>
-        {isModalOpen && <ComplaintForm closeModal={closeModal} />}
+      </button>
+      {isModalOpen && <ComplaintForm closeModal={closeModal} />}
     </div>
-         )
-        }
-
-
+  );
+}
