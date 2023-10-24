@@ -37,6 +37,7 @@ type Auth {
 type Query {
     me: User
     complaints: [Complaints]
+    complaint(complaintID: ID!): Complaints
 }
 
 type Mutation {
