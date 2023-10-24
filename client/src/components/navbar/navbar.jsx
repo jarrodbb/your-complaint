@@ -1,10 +1,18 @@
 import React from "react";
 import "./navbar.css";
 
+import AuthService from "../../utils/auth";
+
 import { Link, useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const currentPage = useLocation().pathname;
+  const isAuthenticated = AuthService.loggedIn();
+  // console.log();
+
+  const handleLogout = () => {
+    AuthService.logout();
+  };
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -13,6 +21,7 @@ const NavBar = () => {
           <i className="far fa fa-home"></i>
           Home
         </Link>
+        {/* Link for "Profile" */}
         <Link to="/profile" data-text="Profile">
           <i className="far fa-user"></i>
           Profile
@@ -20,10 +29,6 @@ const NavBar = () => {
         <a href="#skills" data-text="Skills">
           <i className="far fa-file-code"></i>
           Skills
-        </a>
-        <a href="#project" data-text="Project">
-          <i className="far fa-folder-open"></i>
-          Project
         </a>
         {/* Link for "Contact" */}
         <Link to="/contact" className={currentPage === "/contact" ? "nav-link active" : "nav-link"}>
@@ -40,6 +45,20 @@ const NavBar = () => {
           <i className="far fa-heart"></i>
           Donate
         </Link>
+        {/* Link for "Signup/Signin" */}
+        {/* Conditional rendering for "Sign-up/Sign-in" or "Logout" */}
+        {isAuthenticated ? (
+          // Render Logout button if user is authenticated
+          <button onClick={handleLogout}>
+            <i className="far fa-user"></i> Logout
+          </button>
+        ) : (
+          // Render Login button if user is not authenticated
+          <Link to="/SignUp" className={currentPage === "/donate" ? "nav-link active" : "nav-link"}>
+            <i className="far fa-user-circle"></i>
+            Sign up/in
+          </Link>
+        )}
       </div>
     </nav>
   );

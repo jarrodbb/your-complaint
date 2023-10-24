@@ -1,4 +1,7 @@
 import "./Homepage.css";
+import React, { useState } from "react";
+import ComplaintForm from "../../components/complaintForm/complaintForm";
+
 // import {complainCategories} from "../../components/utils/";
 // import MainFeaturedPost from "../../components/FeaturedPost/FeaturedPost";
 // import Post from "../../components/posts/Post";
@@ -15,42 +18,25 @@ import DisplayTopVoted from "../../components/DisplayTopVoted";
 const theme = createTheme();
 
 export default function Homepage() {
-  //   title: "Maccas gave me 9 nuggets instead of 10!!!",
-  //   date: "9th September 1999",
-  //   description:
-  //     "Brave heroic Karen strikes down evil minimum wage maccas workers",
-  //   image:
-  //     "https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg",
-  //   imageText: "My Mug shot",
-  //   imageLabel: "Mugshot",
-  //   linkText: "Continue reading…"
-  // };
+ const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const featuredPost = [
-  //   {
-  //     title: "Small complaint",
-  //     date: "NOW",
-  //     description:
-  //       "This is a complaint",
-  //     image:
-  //       "https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg",
-  //     imageLabel: "Image Text"
-  //   },
-  //   {
-  //     title: "I complain",
-  //     date: "NOW",
-  //     description:
-  //       "This is a complaint",
-  //     image:
-  //       "https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg",
-  //     imageLabel: "Image Text"
-  //   }
-  // ];
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  return (
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+ return (
     <div>
       <LatestComplaintList />
       <DisplayTopVoted />
+      <button onClick={openModal} className="make-complaint-button">
+          Make a Complaint
+        </button>
+        {isModalOpen && <ComplaintForm closeModal={closeModal} />}
     </div>
-  );
-}
+         )
+        }
+
+
