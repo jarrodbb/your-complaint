@@ -20,6 +20,10 @@ const resolvers = {
       console.log(complaints[1].comments);
       return complaints;
     },
+    complaint: async (parent, { complaintID }) => {
+      const complaint = await Complaints.findOne({ _id: complaintID });
+      return complaint;
+    },
   },
   //Mutations defined
   Mutation: {
