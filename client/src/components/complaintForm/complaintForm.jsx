@@ -3,6 +3,9 @@ import { useDropzone } from "react-dropzone";
 import { useMutation } from "@apollo/client";
 import { gql } from "@apollo/client";
 
+// Import PropTypes validation
+import PropTypes from "prop-types";
+
 // Define GraphQL mutation to upload an image as an attachment
 const UPLOAD_IMAGE = gql`
 mutation uploadImage($file: Upload!) {
@@ -15,7 +18,7 @@ mutation uploadImage($file: Upload!) {
 `;
 
 // Define React functional component called 'ComplaintForm' which takes 'closeModal' as a prop.
-const ComplaintForm = ({ closemodal }) => {
+const ComplaintForm = ({ closeModal }) => {
   // 'category' state variable tracks the selected category for the complaint, with 'General' as the initial value.
   const [category, setCategory] = useState("General");
   // 'complaintText' state variable stores the text of the complaint.
@@ -63,7 +66,7 @@ const ComplaintForm = ({ closemodal }) => {
     }
 
     // Close the modal after submission
-    closemodal();
+    closeModal();
   };
 
   // 'useDropzone' hook provides dropzone functionality.
@@ -117,6 +120,11 @@ const ComplaintForm = ({ closemodal }) => {
       </form>
     </div>
   );
+};
+
+// PropTypes validation to ensure that props are passed correctly
+ComplaintForm.propTypes = {
+  closeModal: PropTypes.func.isRequired,
 };
 
 // Export 'ComplaintForm' component to make it available for use in other parts of app
