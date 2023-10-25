@@ -1,32 +1,36 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useMutation } from "@apollo/client";
-import { gql } from "@apollo/client";
+// import { gql } from "@apollo/client";
+import { CREATE_COMPLAINT } from "../../utils/mutations";
 
 // Import PropTypes validation
 import PropTypes from "prop-types";
+import { GET_COMPLAINTS } from "../../utils/queries";
 
 // Define GraphQL mutation to upload an image as an attachment
-const UPLOAD_IMAGE = gql`
-mutation uploadImage($file: Upload!) {
-  uploadImage(file: $file) {
-    filename
-    mimetype
-    encoding
-  }
-}
-`;
+// const UPLOAD_IMAGE = gql`
+//   mutation uploadImage($file: Upload!) {
+//     uploadImage(file: $file) {
+//       filename
+//       mimetype
+//       encoding
+//     }
+//   }
+// `;
 
 // Define React functional component called 'ComplaintForm' which takes 'closeModal' as a prop.
 const ComplaintForm = ({ closeModal }) => {
+  const [addComplaint, { error }] = useMutation(CREATE_COMPLAINT);
+
   // 'category' state variable tracks the selected category for the complaint, with 'General' as the initial value.
   const [category, setCategory] = useState("General");
   // 'complaintText' state variable stores the text of the complaint.
   const [complaintText, setComplaintText] = useState("");
   // 'image' state variable is used to store an uploaded image (initially set to 'null').
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
 
-  const [uploadImage] = useMutation(UPLOAD_IMAGE);
+  // const [uploadImage] = useMutation(UPLOAD_IMAGE);
 
   // 'handleCategoryChange' function updates the 'category' state when the user selects a category.
   const handleCategoryChange = (e) => {
@@ -39,41 +43,54 @@ const ComplaintForm = ({ closeModal }) => {
   };
 
   // 'onDrop' function is called when the user drops an image into the dropzone. It handles the uploaded image files.
-  const onDrop = (acceptedFiles) => {
-    if (acceptedFiles.length > 0) {
-      setImage(acceptedFiles[0]);
-    }
-  };
+  // const onDrop = (acceptedFiles) => {
+  //   if (acceptedFiles.length > 0) {
+  //     setImage(acceptedFiles[0]);
+  //   }
+  // };
 
   // 'handleSubmit' function is called when the user submits the form.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { data } = await addComplaint({
+        variables: {
+          description: complaintText,
+          category: category,
+        },
+      });
+      setCategory("General");
 
-    // Check if image is uploaded
-    if (image) {
-      try {
-        // Upload image and get response
-        const { data } = await uploadImage({ variables: { file: image } });
-
-        // Check if image upload was successful
-        if (data.uploadImage) {
-          // Extract the uploaded image details
-          const { filename, mimetype, encoding } = data.uploadImage;
-        }
-      } catch (error) {
-        console.error("Image upload error:", error);
-      }
+      complaintText("");
+    } catch (err) {
+      console.error(err);
     }
 
+    // Check if image is uploaded
+    // if (image) {
+    //   try {
+    //     // Upload image and get response
+    //     const { data } = await uploadImage({ variables: { file: image } });
+
+    //     // Check if image upload was successful
+    //     if (data.uploadImage) {
+    //       // Extract the uploaded image details
+    //       const { filename, mimetype, encoding } = data.uploadImage;
+    //     }
+    //   } catch (error) {
+    //     console.error("Image upload error:", error);
+    //   }
+    // }
+    // console.log(image);
     // Close the modal after submission
     closeModal();
   };
 
   // 'useDropzone' hook provides dropzone functionality.
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*, video/*",
-  });
+  // const { getRootProps, getInputProps } = useDropzone({
+  //   onDrop,
+  //   accept: "image/*, video/*",
+  // });
 
   // Render complaint form within a <div> element.
   return (
@@ -91,7 +108,6 @@ const ComplaintForm = ({ closeModal }) => {
             <option value="Health">Health</option>
             <option value="Technology">Technology</option>
             <option value="Random">Random</option>
-
           </select>
         </label>
         {/* Textarea for entering the complaint text */}
@@ -102,18 +118,18 @@ const ComplaintForm = ({ closeModal }) => {
         />
 
         {/* Dropzone for image upload */}
-        <div {...getRootProps()} className="dropzone">
+        {/* <div {...getRootProps()} className="dropzone">
           <input {...getInputProps()} />
           <p>Drag 'n' drop an image here, or click to select one</p>
-        </div>
+        </div> */}
 
         {/* Display the uploaded image if available */}
-        {image && (
+        {/* {image && (
           <div className="uploaded-image">
             <p>Uploaded Image:</p>
             <img src={URL.createObjectURL(image)} alt="Uploaded" />
           </div>
-        )}
+        )} */}
 
         {/* Submission button */}
         <button type="submit">Submit Complaint</button>
