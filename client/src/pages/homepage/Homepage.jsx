@@ -34,8 +34,8 @@ export default function Homepage() {
       <CssBaseline />
       <Container maxWidth="lg">
         <div>
-          <LatestComplaint />
           <DisplayTopVoted />
+          <LatestComplaint />
           <button onClick={openModal} className="make-complaint-button">
           Make a Complaint
           </button>

@@ -7,10 +7,15 @@ import { GET_COMPLAINTS } from "../../utils/queries";
 import Container from "@mui/material/Container";
 
 import TopVote from "../../components/topVotedPost";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+// import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-const theme = createTheme();
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+
+// const theme = createTheme();
 
 function DisplayTopVoted() {
   const [allComplaints, setComplaints] = useState([]);
@@ -19,49 +24,70 @@ function DisplayTopVoted() {
   console.log(data);
   const complaintData = data?.complaints || [];
 
-//   function sortedComplaints() {
-//    const test =  complaintData.sort(function (a, b) {
-//         return a.votes - b.votes
-//     })
-// console.log(test)
-//   }
-
- 
-
-
-//     useEffect(() => {
-//       if (data) {
-//         sortedComplaints()
-//       } else if (!loading) {
-//         console.log("there is an error");
-//       }
-//     }, []);
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <main>
-          <Grid container spacing={4}>
-            <h1>Top Voted</h1>
-            {console.log("hell" + complaintData)}
-            <div className="col-12 col-md-10 my-3">
-              {loading ? (
-                <div>Loading...</div>
-              ) : (
-                <div>
-                  {complaintData.map((complaint) => (
-                    <div key={complaint._id}>
-                      <TopVote complaint={complaint} />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </Grid>
-        </main>
-      </Container>
-    </ThemeProvider>
+    <Paper
+      sx={{
+        position: "relative",
+        backgroundColor: "grey.800",
+        color: "#fff",
+        mb: 4,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundImage: "url('https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg')"
+      }}
+    >
+      {/* Increase the priority of the hero background image */}
+      {complaintData.map(complaint => (
+        <div key={complaint._id}>
+          <img
+            style={{ display: "none" }}
+            src={complaint.image}
+            alt={complaint.imageText}
+          />
+          <Box
+            sx={{
+              // position: "absolute",
+              top: 0,
+              bottom: 0,
+              right: 0,
+              left: 0,
+              backgroundColor: "rgba(0,0,0,.3)"
+            }}
+          >
+            <Grid container>
+              <Grid item md={6}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    p: { xs: 3, md: 6 },
+                    pr: { md: 0 }
+                  }}
+                >
+                  <Typography
+                    component="h1"
+                    variant="h3"
+                    color="inherit"
+                    gutterBottom
+                  >
+                    {complaint.title}
+                  </Typography>
+                  <Typography variant="h5" color="inherit" paragraph>
+                    {complaint.description}
+                  </Typography>
+                  <Typography variant="h5" color="inherit" paragraph>
+                    {complaint.date}
+                  </Typography>
+                  <Link variant="subtitle1" href={complaint.linkText}>
+                    {complaint.linkText}
+                  </Link>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </div>
+      ))}
+    </Paper>
   );
 }
 

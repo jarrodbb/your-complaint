@@ -8,7 +8,8 @@ db.once("open", async () => {
 
   const complaints = await Complaints.insertMany([
     {
-      description: "Ordered 6 nuggies, only got 5",
+      title: "Brave Karen fights minimum wage workers",
+      description: "Ordered 6 nuggies, only got 5!!",
       category: "Food",
       image: "",
       date: "06/06/23",
@@ -29,7 +30,8 @@ db.once("open", async () => {
       ],
     },
     {
-      description: "Co-worker stole my lunch",
+      title: "Co-worker attempted murder by starvation!",
+      description: "Mate stole my lunch",
       image: "",
       category: "Work",
       date: "05/05/23",

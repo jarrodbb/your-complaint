@@ -9,6 +9,7 @@ export const GET_COMPLAINTS = gql`
   query complaints {
     complaints {
       _id
+      title
       description
       category
       date
@@ -32,6 +33,7 @@ export const GET_COMPLAINT = gql`
   query complaint($complaintID: ID!) {
     complaint(complaintID: $complaintID) {
       _id
+      title
       description
       category
       image

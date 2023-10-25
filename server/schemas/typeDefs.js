@@ -10,6 +10,7 @@ type User {
 
 type Complaints {
     _id: ID!
+    title: String!
     description: String!
     category: String!
     image: String
@@ -33,11 +34,6 @@ type Auth {
     user: User
   }
 
-  input ComplaintInput {
-    category: String!
-    complaintText: String!
-    image: Upload
-}
 
 type Query {
     me: User

@@ -8,6 +8,7 @@ mutation createComplaint($category: String!, $text: String!) {
   createComplaint($category: $$category, text: $text) {
     _id
     $category
+    title
     text
     createdAt
     }
@@ -20,6 +21,7 @@ mutation updateComplaint($id: ID!, $text: String!) {
   updateComplaint($id: $id, text: $text) {
     _id
     category
+    title
     text
     createdAt
     }
