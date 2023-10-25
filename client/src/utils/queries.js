@@ -2,7 +2,6 @@
 // It allows us to define GraphQL queries using GraphQL syntax within JavaScript files
 import { gql } from "@apollo/client";
 
-
 // Define GraphQL queries. Each query corresponds to an operation that retrieves data from the server
 
 // Query to fetch a list of complaints. It doesn't require any input and returns an array of complaint objects
@@ -31,12 +30,23 @@ export const GET_COMPLAINTS = gql`
 
 // Query to fetch a specific complaint by its 'id.' It takes 'id' as input and returns the complaint's data.
 export const GET_COMPLAINT = gql`
-  query getComplaint($id: ID!) {
-    complaint(_id: $id) {
+  query complaint($complaintID: ID!) {
+    complaint(complaintID: $complaintID) {
       _id
+      description
       category
-      text
+      image
+      date
+      votes
       createdAt
+      comments {
+        _id
+        author
+        description
+        created
+        image
+        link
+      }
     }
   }
 `;

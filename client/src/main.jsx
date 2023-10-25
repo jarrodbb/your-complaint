@@ -12,6 +12,7 @@ import Terms from "./pages/terms/terms.jsx";
 import Donate from "./components/Donate/donate.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import SignIn from "./pages/signin/login.jsx";
+import SingleComplaint from "./pages/SingleComplaint/SingleComplaint.jsx";
 
 // Import specific components from 'react-router-dom' library
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/SignIn",
         element: <SignIn />,
+      },
+      {
+        path: "/Complaint/:complaintID",
+        element: <SingleComplaint />,
       },
     ],
   },
