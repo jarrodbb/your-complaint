@@ -46,7 +46,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <StoreProvider>
         <Navbar />
-        <Header openModal={openModal} /> {/* Pass openModal function to the Header component */}
+        {/* <Header openModal={openModal} /> Pass openModal function to the Header component */}
         <Outlet />
         <Footer />
         {/* {isModalOpen && <ComplaintForm closeModal={closeModal} />} Render the ComplaintForm component */}

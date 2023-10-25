@@ -91,9 +91,9 @@ function Post({ complaint }) {
               {complaint.category}
               {console.log("test" + complaint.category)}
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
+            {/* <Typography variant="subtitle1" color="text.secondary">
               {complaint.date}
-            </Typography>
+            </Typography> */}
             <Typography variant="subtitle1" paragraph>
               {complaint.description}
             </Typography>

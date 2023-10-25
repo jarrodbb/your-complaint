@@ -5,7 +5,6 @@ import { useQuery } from "@apollo/client";
 import { GET_COMPLAINTS } from "../../utils/queries";
 
 import Container from "@mui/material/Container";
-
 import TopVote from "../../components/topVotedPost";
 // import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import CssBaseline from "@mui/material/CssBaseline";
