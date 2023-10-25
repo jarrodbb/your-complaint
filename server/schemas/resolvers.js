@@ -97,7 +97,9 @@ const resolvers = {
           { $addToSet: { complaints: complaint._id } },
           { runValidators: true, new: true }
         );
+        console.log(user)
         return user;
+
       }
       throw AuthenticationError;
     },
