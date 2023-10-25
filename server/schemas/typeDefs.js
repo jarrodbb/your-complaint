@@ -10,13 +10,14 @@ type User {
 
 type Complaints {
     _id: ID!
-    title: String!
-    description: String!
-    category: String!
+    title: String
+    description: String
+    category: String
     image: String
     date: String
     votes: Int
-    createdAt: String
+    unsupportedVotes: Int
+    created: String
     comments: [Comments]
 }
 
@@ -24,7 +25,7 @@ type Comments {
     _id: ID!
     author: String!
     description: String!
-    created: String
+    createdAt: String
     image: String
     link: String
 }
@@ -39,6 +40,7 @@ type Query {
     me: User
     complaints: [Complaints]
     complaint(complaintID: ID!): Complaints
+    userComplaint(complaintID: ID!): User
 }
 
 type Mutation {
@@ -51,6 +53,8 @@ type Mutation {
     addComment(complaintID: ID!, author: String!, description: String!, image: [String], link: String): Complaints
     updateComment( complaintID: ID!, commentID:ID!, description: String!, image: [String], link: String): Complaints
     removeComment(complaintID: ID!, commentID:ID!): Complaints
+    createVote(complaintID: ID!): Complaints
+    createVoteUnsupported(complaintID: ID!): Complaints
 }
 
 `;
