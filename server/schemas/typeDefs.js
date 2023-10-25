@@ -10,6 +10,7 @@ type User {
 
 type Complaints {
     _id: ID!
+    title: String
     description: String!
     category: String!
     image: String

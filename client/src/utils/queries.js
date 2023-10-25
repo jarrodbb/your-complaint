@@ -10,6 +10,7 @@ export const GET_COMPLAINTS = gql`
   query complaints {
     complaints {
       _id
+      title
       description
       category
       date

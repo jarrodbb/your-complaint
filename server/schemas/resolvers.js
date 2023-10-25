@@ -71,11 +71,12 @@ const resolvers = {
 
     addComplaint: async (
       parent,
-      { description, category, date, image },
+      { title, description, category, date, image },
       context
     ) => {
       if (context.user) {
         const complaint = await Complaints.create({
+          title,
           description,
           category,
           date,
@@ -94,7 +95,7 @@ const resolvers = {
     //How to pass the complaint id from the front end? Will it be stored in the state?
     updateComplaint: async (
       parent,
-      { complaintId, votes, description, category, date, image },
+      { complaintId, votes, title, description, category, date, image },
       context
     ) => {
       if (context.user) {
@@ -103,6 +104,7 @@ const resolvers = {
           {
             $set: {
               votes,
+              title,
               description,
               category,
               date,
