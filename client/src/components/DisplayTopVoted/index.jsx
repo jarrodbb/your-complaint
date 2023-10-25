@@ -24,7 +24,16 @@ function DisplayTopVoted() {
   console.log(data);
   const complaintData = data?.complaints || [];
 
-  return (
+  // Find the complaint with the highest votes using sorting
+  let maxVotesComplaint = null;
+  for (let i = 0; i < complaintData.length; i++) {
+    if (!maxVotesComplaint || complaintData[i].votes > maxVotesComplaint.votes) {
+      maxVotesComplaint = complaintData[i];
+    }
+  }
+  console.log("maxVotesComplaint is", maxVotesComplaint);
+
+ return (
     <Paper
       sx={{
         position: "relative",
@@ -37,17 +46,16 @@ function DisplayTopVoted() {
         backgroundImage: "url('https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg')"
       }}
     >
-      {/* Increase the priority of the hero background image */}
-      {complaintData.map(complaint => (
-        <div key={complaint._id}>
+      {/* Render the complaint with the highest votes */}
+      {maxVotesComplaint && (
+        <div>
           <img
             style={{ display: "none" }}
-            src={complaint.image}
-            alt={complaint.imageText}
+            src={maxVotesComplaint.image}
+            alt={maxVotesComplaint.imageText}
           />
           <Box
             sx={{
-              // position: "absolute",
               top: 0,
               bottom: 0,
               right: 0,
@@ -70,23 +78,20 @@ function DisplayTopVoted() {
                     color="inherit"
                     gutterBottom
                   >
-                    {complaint.title}
+                    {maxVotesComplaint.title}
                   </Typography>
                   <Typography variant="h5" color="inherit" paragraph>
-                    {complaint.description}
+                    {maxVotesComplaint.description}
                   </Typography>
                   <Typography variant="h5" color="inherit" paragraph>
-                    {complaint.date}
+                    {maxVotesComplaint.date}
                   </Typography>
-                  <Link variant="subtitle1" href={complaint.linkText}>
-                    {complaint.linkText}
-                  </Link>
                 </Box>
               </Grid>
             </Grid>
           </Box>
         </div>
-      ))}
+      )}
     </Paper>
   );
 }

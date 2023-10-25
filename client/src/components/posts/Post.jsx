@@ -84,8 +84,12 @@ function Post({ complaint }) {
         <Card sx={{ display: "flex" }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
+              {complaint.title}
+              {console.log("test" + complaint.title)}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
               {complaint.category}
-              {console.log("test" + complaint.description)}
+              {console.log("test" + complaint.category)}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
               {complaint.date}
