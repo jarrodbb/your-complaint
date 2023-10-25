@@ -37,11 +37,11 @@ function LatestComplaint() {
 
   console.log(complaintData);
 
-return (
+  return (
     <Grid item xs={12} md={6}>
       {complaintData.map(complaint => (
         <CardActionArea component="a" href={`/Complaint/${complaint._id}`} key={complaint._id}>
-          <Card sx={{ display: "flex" }}>
+          <Card sx={{ display: "flex", width: "100%" }}>
             <CardContent sx={{ flex: 1 }}>
               <Typography component="h2" variant="h5">
                 {complaint.title}
@@ -56,14 +56,12 @@ return (
               Continue reading...
               </Typography>
             </CardContent>
-            {complaint.image && (
-          <CardMedia
-            component="img"
-            sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-            image="https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg"
-            alt="text"
-          />
-            )}
+            <CardMedia
+              component="img"
+              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+              image="https://source.unsplash.com/random?wallpapers"
+              alt="text"
+            />
           </Card>
         </CardActionArea>
       ))}

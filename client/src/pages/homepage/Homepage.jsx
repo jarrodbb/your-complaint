@@ -72,21 +72,22 @@ export default function Homepage() {
       <Container maxWidth="lg">
         <Header title="Complain" sections={sections} />
         <DisplayTopVoted />
-        <Grid container spacing={4}>
-          <LatestComplaint />
-        </Grid>
+        <LatestComplaint />
         <button onClick={openModal} className="make-complaint-button">
           Make a Complaint
         </button>
         {isModalOpen && <ComplaintForm closeModal={closeModal} />}
-        <Grid container spacing={5} sx={{ mt: 3 }}>
-          <Sidebar
-            title={sidebar.title}
-            description={sidebar.description}
-            archives={sidebar.archives}
-            social={sidebar.social}
-          />
+        <Grid container justifyContent="center" alignItems="center" spacing={10} sx={{ mt: 10, height: "100vh" }}>
+            <Grid item xs={12} md={6}>
+            <Sidebar
+              title={sidebar.title}
+              description={sidebar.description}
+              archives={sidebar.archives}
+              social={sidebar.social}
+            />
+          </Grid>
         </Grid>
+
       </Container>
     </ThemeProvider>
   );
