@@ -33,6 +33,7 @@ export const GET_COMPLAINT = gql`
   query complaint($complaintID: ID!) {
     complaint(complaintID: $complaintID) {
       _id
+      title
       description
       category
       image
