@@ -12,7 +12,7 @@ import { GET_COMPLAINT } from "../../utils/queries";
 import DisplayAllComments from "../../components/displayAllComments/displayAllComments";
 import { CREATE_VOTE } from "../../utils/mutations";
 import { CREATE_VOTE_UNSUPPORTED } from "../../utils/mutations";
-import CommentForm from "../../components/complaintForm/complaintForm"
+import CommentForm from "../../components/commentForm/commentForm";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
@@ -144,8 +144,13 @@ function SingleComplaint() {
         </div>
         <button onClick={openModal} className="make-complaint-button">
           Add a comment
-          </button>
-          {isModalOpen && <CommentForm closeModal={closeModal} />}
+        </button>
+        {isModalOpen && (
+          <CommentForm
+            closeModal={closeModal}
+            singleComplaint={singleComplaint}
+          />
+        )}
       </Grid>
     </Grid>
   );

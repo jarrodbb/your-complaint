@@ -20,7 +20,7 @@ import { GET_COMPLAINTS } from "../../utils/queries";
 // `;
 
 // Define React functional component called 'ComplaintForm' which takes 'closeModal' as a prop.
-const ComplaintForm = ({ closeModal }) => {
+const ComplaintForm = ({ closeModal}) => {
   const [addComplaint, { error }] = useMutation(CREATE_COMPLAINT);
 
   // 'category' state variable tracks the selected category for the complaint, with 'General' as the initial value.
