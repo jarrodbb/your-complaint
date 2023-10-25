@@ -14,13 +14,14 @@ export const GET_COMPLAINTS = gql`
       category
       date
       votes
+      unsupportedVotes
       image
-      createdAt
+      created
       comments {
         _id
         author
         description
-        created
+        createdAt
         image
         link
       }
@@ -39,14 +40,44 @@ export const GET_COMPLAINT = gql`
       image
       date
       votes
-      createdAt
+      unsupportedVotes
+      created
       comments {
         _id
         author
         description
-        created
+        createdAt
         image
         link
+      }
+    }
+  }
+`;
+export const GET_USER_BY_COMPLAINT = gql`
+  query userComplaint($complaintID: ID!) {
+    userComplaint(complaintID: $complaintID) {
+      _id
+      username
+      email
+      password
+      isModerator
+      complaints {
+        _id
+        title
+        description
+        category
+        image
+        date
+        votes
+        created
+        comments {
+          _id
+          author
+          description
+          createdAt
+          image
+          link
+        }
       }
     }
   }

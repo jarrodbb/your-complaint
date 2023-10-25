@@ -29,6 +29,10 @@ const complaintSchema = new Schema(
       type: Number,
       default: 0,
     },
+    unsupportedVotes: {
+      type: Number,
+      default: 0,
+    },
     createdAt: {
       type: Date,
       default: Date.now,

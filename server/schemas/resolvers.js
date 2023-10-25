@@ -24,6 +24,12 @@ const resolvers = {
       const complaint = await Complaints.findOne({ _id: complaintID });
       return complaint;
     },
+    userComplaint: async (parent, { complaintID }) => {
+      const user = await User.findOne({ complaints: complaintID }).populate(
+        "complaints"
+      );
+      return user;
+    },
   },
   //Mutations defined
   Mutation: {
@@ -196,6 +202,24 @@ const resolvers = {
         return complaint;
       }
       throw AuthenticationError;
+    },
+
+    createVote: async (parent, { complaintID }) => {
+      const complaints = await Complaints.findOneAndUpdate(
+        { _id: complaintID },
+        { $inc: { [`votes`]: 1 } },
+        { new: true }
+      );
+      return complaints;
+    },
+
+    createVoteUnsupported: async (parent, { complaintID }) => {
+      const complaints = await Complaints.findOneAndUpdate(
+        { _id: complaintID },
+        { $inc: { [`unsupportedVotes`]: 1 } },
+        { new: true }
+      );
+      return complaints;
     },
   },
 };
