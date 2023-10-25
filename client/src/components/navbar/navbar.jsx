@@ -56,7 +56,7 @@ const NavBar = () => {
           // Render Login button if user is not authenticated
           <Link to="/SignUp" className={currentPage === "/donate" ? "nav-link active" : "nav-link"}>
             <i className="far fa-user-circle"></i>
-            Sign up/in
+            SIGN UP/IN
           </Link>
         )}
       </div>
