@@ -40,7 +40,7 @@ function LatestComplaint() {
 return (
     <Grid item xs={12} md={6}>
       {complaintData.map(complaint => (
-        <CardActionArea component="a" href="#" key={complaint._id}>
+        <CardActionArea component="a" href={`/Complaint/${complaint._id}`} key={complaint._id}>
           <Card sx={{ display: "flex" }}>
             <CardContent sx={{ flex: 1 }}>
               <Typography component="h2" variant="h5">
