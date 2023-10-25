@@ -4,34 +4,34 @@ import { gql } from "@apollo/client";
 // Define GraphQL mutations. Each mutation corresponds to an operation that modifies data on the server.
 // Mutation to create a new complaint. It takes the 'category' and 'text' as input and returns the created complaint's data.
 export const CREATE_COMPLAINT = gql`
-mutation addComplaint($description: String!, $category: String!) {
-  addComplaint(description: $description, category: $category) {
-    _id
-    username
-    email
-    password
-    isModerator
-    complaints {
+  mutation addComplaint($description: String!, $category: String!) {
+    addComplaint(description: $description, category: $category) {
       _id
-      title
-      description
-      category
-      image
-      date
-      votes
-      unsupportedVotes
-      created
-      comments {
+      username
+      email
+      password
+      isModerator
+      complaints {
         _id
-        author
+        title
         description
-        createdAt
+        category
         image
-        link
+        date
+        votes
+        unsupportedVotes
+        created
+        comments {
+          _id
+          author
+          description
+          createdAt
+          image
+          link
+        }
       }
     }
   }
-}
 `;
 
 // Mutation to update an existing complaint. It takes the 'id' of the complaint and the new 'text' as input and returns the updated complaint's data.
@@ -110,6 +110,38 @@ export const CREATE_VOTE = gql`
 export const CREATE_VOTE_UNSUPPORTED = gql`
   mutation createVoteUnsupported($complaintID: ID!) {
     createVoteUnsupported(complaintID: $complaintID) {
+      _id
+      title
+      description
+      category
+      image
+      date
+      votes
+      unsupportedVotes
+      created
+      comments {
+        _id
+        author
+        description
+        createdAt
+        image
+        link
+      }
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation addComment(
+    $complaintId: ID!
+    $author: String!
+    $description: String!
+  ) {
+    addComment(
+      complaintID: $complaintId
+      author: $author
+      description: $description
+    ) {
       _id
       title
       description
