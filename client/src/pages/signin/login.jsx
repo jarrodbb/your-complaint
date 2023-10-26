@@ -12,6 +12,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { LOGIN_USER } from "../../utils/mutations";
+import { useState } from "react"; // Import useState
+import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
 
 function Copyright(props) {
   return (
@@ -34,14 +38,50 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const [userFormData, setUserFormData] = useState({ email: "", password: "" });
+  // const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password")
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      //Implement mutation pass the form data stored in the state as the
+      const { data } = await login({
+        variables: { ...userFormData },
+      });
+
+      Auth.login(data.login.token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      email: "",
+      password: "",
     });
   };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -52,7 +92,7 @@ export default function SignIn() {
             marginTop: 8,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -68,7 +108,6 @@ export default function SignIn() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-
               <Grid item xs={12}>
                 <TextField
                   required
@@ -77,6 +116,8 @@ export default function SignIn() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleInputChange}
+                  value={userFormData.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -88,6 +129,8 @@ export default function SignIn() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleInputChange}
+                  value={userFormData.password}
                 />
               </Grid>
             </Grid>
@@ -100,8 +143,7 @@ export default function SignIn() {
               Sign in and complain
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
-              </Grid>
+              <Grid item></Grid>
             </Grid>
           </Box>
         </Box>
