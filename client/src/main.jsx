@@ -13,6 +13,7 @@ import Donate from "./components/Donate/donate.jsx";
 import SignUp from "./pages/signup/signup.jsx";
 import SignIn from "./pages/signin/login.jsx";
 import SingleComplaint from "./pages/SingleComplaint/SingleComplaint.jsx";
+import CategoryPage from "./pages/categorypage/categorypage.jsx";
 
 // Import specific components from 'react-router-dom' library
 // import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/Complaint/:complaintID",
         element: <SingleComplaint />,
+      },
+      {
+        path: "/category/:categoryName",
+        element: <CategoryPage />,
       },
     ],
   },

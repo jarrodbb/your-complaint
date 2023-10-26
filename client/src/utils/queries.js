@@ -104,3 +104,28 @@ export const GET_USER = gql`
     }
   }
 `;
+
+// Query to fetch a complaint by category
+export const GET_COMPLAINTS_BY_CATEGORY = gql`
+  query complaintsByCategory($category: String!) {
+    complaintsByCategory(category: $category) {
+      _id
+      title
+      description
+      category
+      date
+      votes
+      unsupportedVotes
+      image
+      created
+      comments {
+        _id
+        author
+        description
+        createdAt
+        image
+        link
+      }
+    }
+  }
+`;
