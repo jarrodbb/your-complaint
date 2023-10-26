@@ -1,71 +1,42 @@
+// Import Express.js framework, to create web server, define routes and handle HTTP request & response
 const express = require("express");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
+// Import path module, for file & directory paths, to resolve & manipulate file paths
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
-
-// Import User model and necessary dependencies for signup
-const { User } = require("./models/User");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
-
+// Set the PORT on which web server will listen., or default port 3001
 const PORT = process.env.PORT || 3001;
+// Create intance of the Express application, app variable is used to define routes, middleware & other app settings
 const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
-
+// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-
-  app.use("/images", express.static(path.join(__dirname, "../client/public/images")),
-
-  // Define the signup route
-  app.post("/api/signup", async (req, res) => {
-    try {
-      const { username, email, password } = req.body;
-
-      // Check if a user with the same email already exists
-      const existingUser = await User.findOne({ email });
-
-      if (existingUser) {
-        res.status(400).json({ message: "User with this email already exists" });
-        return;
-      }
-
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Create the new user
-      const newUser = await User.create({ username, email, password: hashedPassword });
-
-      // Sign a token for the new user
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-        expiresIn: "1h", // You can adjust the expiration time
-      });
-
-      res.status(200).json({ token, user: newUser });
-    } catch (error) {
-      console.error(error);
-      res.status(400).json({ message: "Registration failed" });
-    }
-  });
-
+  // Serve static files from client folder
+  app.use(
+    "/images",
+    express.static(path.join(__dirname, "../client/public/images"))
+  );
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: authMiddleware,
+    })
+  );
   if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/dist"));
-
+    app.use(express.static(path.join(__dirname, "../client/dist")));
     app.get("*", (req, res) => {
       res.sendFile(path.join(__dirname, "../client/dist/index.html"));
     });
   }
-
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
@@ -73,5 +44,5 @@ const startApolloServer = async () => {
     });
   });
 };
-
+// Call the async function to start the server
 startApolloServer();
