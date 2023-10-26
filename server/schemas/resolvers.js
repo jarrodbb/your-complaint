@@ -30,6 +30,11 @@ const resolvers = {
       );
       return user;
     },
+
+    complaintsByCategory: async (parent, { category }) => {
+      const complaints = await Complaints.find({ category: category });
+      return complaints;
+    },
   },
   //Mutations defined
   Mutation: {
@@ -97,9 +102,8 @@ const resolvers = {
           { $addToSet: { complaints: complaint._id } },
           { runValidators: true, new: true }
         );
-        console.log(user)
+        console.log(user);
         return user;
-
       }
       throw AuthenticationError;
     },
@@ -169,7 +173,7 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-
+    //https://mongoosejs.com/docs/api/model.html#Model.find()
     updateComment: async (
       parent,
       { complaintID, commentID, description, image, link },

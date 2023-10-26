@@ -8,7 +8,7 @@ const CategoryPage = () => {
   const { categoryName } = useParams();
   console.log(categoryName);
   const { loading, error, data } = useQuery(GET_COMPLAINTS_BY_CATEGORY, {
-    variables: { category: categoryName }
+    variables: { category: categoryName },
   });
 
   if (loading) {
@@ -19,14 +19,15 @@ const CategoryPage = () => {
     return <p>Error: {error.message}</p>;
   }
 
-  const complaints = data?.complaintsByCategory ?? [];
+  const complaints = data?.complaintsByCategory || [];
+  console.log(complaints);
 
   if (complaints.length > 0) {
     return (
       <div>
         <h2>Complaints in {categoryName}</h2>
         <ul>
-          {complaints.map(complaint => (
+          {complaints.map((complaint) => (
             <li key={complaint._id}>{complaint.title}</li>
           ))}
         </ul>
