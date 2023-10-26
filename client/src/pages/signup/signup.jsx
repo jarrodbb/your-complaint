@@ -163,7 +163,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Alert from "react-bootstrap/Alert";
 
 import { useMutation } from "@apollo/client";
-import { addUser } from "../../utils/mutations";
+import { ADD_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 function Copyright(props) {
@@ -187,11 +187,15 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const SignUp = () => {
-  const [userFormData, setUserFormData] = useState({ email: "", password: "", username: "" });
-  const [validated] = useState(false);
+  const [userFormData, setUserFormData] = useState({
+    email: "",
+    password: "",
+    username: "",
+  });
+  // const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-
-  const [signup] = useMutation(addUser);
+  console.log(userFormData);
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -208,12 +212,11 @@ const SignUp = () => {
     }
 
     try {
-      const { data } = await signup({
-        variables: userFormData,
+      const { data } = await addUser({
+        variables: { ...userFormData },
       });
 
-      const { token, user } = data.signup;
-      Auth.login(token);
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -231,7 +234,7 @@ const SignUp = () => {
             marginTop: 8,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -242,8 +245,8 @@ const SignUp = () => {
           </Typography>
           <Box
             component="form"
-            noValidate
-            validated={validated} // Add the validated prop here
+            // noValidate
+            // validated={validated} // Add the validated prop here
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
@@ -256,6 +259,20 @@ const SignUp = () => {
                   label="username"
                   name="username"
                   autoComplete="username"
+                  onChange={handleInputChange}
+                  value={userFormData.username}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="email"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleInputChange}
+                  value={userFormData.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -296,7 +313,12 @@ const SignUp = () => {
               </Grid>
             </Grid>
           </Box>
-          <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          <Alert
+            dismissible
+            onClose={() => setShowAlert(false)}
+            show={showAlert}
+            variant="danger"
+          >
             Something went wrong with your signup!
           </Alert>
         </Box>
