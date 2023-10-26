@@ -57,7 +57,7 @@ export const DELETE_COMPLAINT = gql`
 `;
 
 // Mutation to register a new user. It takes 'username,' 'email,' and 'password' as input and returns a user token and user data.
-export const REGISTER_USER = gql`
+export const addUser = gql`
   mutation register($username: String!, $email: String!, $password: String!) {
     register(username: $username, email: $email, password: $password) {
       token
