@@ -22,14 +22,14 @@ import Sidebar from "../../components/sidebars/sidebar";
 const theme = createTheme();
 
 const sections = [
-  { title: "General", url: "#" },
-  { title: "Food", url: "#" },
-  { title: "Work", url: "#" },
-  { title: "Finance", url: "#" },
-  { title: "Life", url: "#" },
-  { title: "Health", url: "#" },
-  { title: "Technology", url: "#" },
-  { title: "Random", url: "#" },
+  { title: "General", url: "/category/general" },
+  { title: "Food", url: "/category/food" },
+  { title: "Work", url: "/category/work" },
+  { title: "Finance", url: "/category/finance" },
+  { title: "Life", url: "/category/life" },
+  { title: "Health", url: "/category/health" },
+  { title: "Technology", url: "/category/technology" },
+  { title: "Random", url: "/category/random" },
 ];
 
 const sidebar = {
@@ -78,7 +78,7 @@ export default function Homepage() {
         </button>
         {isModalOpen && <ComplaintForm closeModal={closeModal} />}
         <Grid container justifyContent="center" alignItems="center" spacing={10} sx={{ mt: 10, height: "100vh" }}>
-            <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6}>
             <Sidebar
               title={sidebar.title}
               description={sidebar.description}

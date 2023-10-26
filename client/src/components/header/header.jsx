@@ -10,6 +10,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
+// import CategoryPage from "../../pages/categorypage/categorypage";
+
 
 // const Header = () => {
 //   return (
@@ -61,6 +63,7 @@ function Header(props) {
             sx={{ p: 1, flexShrink: 0 }}
           >
             {section.title}
+            {/* <CategoryPage category={section.url} /> */}
           </Link>
         ))}
       </Toolbar>
