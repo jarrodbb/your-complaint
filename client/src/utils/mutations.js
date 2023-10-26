@@ -136,11 +136,17 @@ export const CREATE_COMMENT = gql`
     $complaintId: ID!
     $author: String!
     $description: String!
+    $title: String!
+    $date: String!
+    $image: String
   ) {
     addComment(
       complaintID: $complaintId
       author: $author
       description: $description
+      title: $title
+      date: $date
+      image: $image
     ) {
       _id
       title
