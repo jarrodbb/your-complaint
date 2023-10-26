@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+  max-width: 300px;
+  margin: 20px auto;
+}
+
+Form {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.submit-button {
+  background-color: rgb(13, 29, 255);
+  color: aliceblue;
+  display: block;
+  margin: 15px auto;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.submit-button:hover {
+  background-color: #897c80;
+}
+
+.test-style {
+  height: 100px;
+}
+
+
+.error-display {
+  background-color: beige;
+  color: red;
+  font-size: 16px;
+}
