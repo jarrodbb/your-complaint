@@ -41,6 +41,7 @@ type Query {
     complaints: [Complaints]
     complaint(complaintID: ID!): Complaints
     userComplaint(complaintID: ID!): User
+    complaintsByCategory(category: String!): [Complaints]
 }
 
 type Mutation {
