@@ -22,20 +22,19 @@ import Sidebar from "../../components/sidebars/sidebar";
 const theme = createTheme();
 
 const sections = [
-  { title: "General", url: "/category/general" },
-  { title: "Food", url: "/category/food" },
-  { title: "Work", url: "/category/work" },
-  { title: "Finance", url: "/category/finance" },
-  { title: "Life", url: "/category/life" },
-  { title: "Health", url: "/category/health" },
-  { title: "Technology", url: "/category/technology" },
-  { title: "Random", url: "/category/random" },
+  { title: "General", url: "/category/General" },
+  { title: "Food", url: "/category/Food" },
+  { title: "Work", url: "/category/Work" },
+  { title: "Finance", url: "/category/Finance" },
+  { title: "Life", url: "/category/Life" },
+  { title: "Health", url: "/category/Health" },
+  { title: "Technology", url: "/category/Technology" },
+  { title: "Random", url: "/category/Random" },
 ];
 
 const sidebar = {
   title: "About",
-  description:
-    "Complaining is a way of life",
+  description: "Complaining is a way of life",
   archives: [
     { title: "March 2020", url: "#" },
     { title: "February 2020", url: "#" },
@@ -47,13 +46,13 @@ const sidebar = {
     { title: "July 1999", url: "#" },
     { title: "June 1999", url: "#" },
     { title: "May 1999", url: "#" },
-    { title: "April 1999", url: "#" }
+    { title: "April 1999", url: "#" },
   ],
   social: [
     { name: "GitHub", icon: GitHubIcon },
     { name: "Twitter", icon: TwitterIcon },
-    { name: "Facebook", icon: FacebookIcon }
-  ]
+    { name: "Facebook", icon: FacebookIcon },
+  ],
 };
 
 export default function Homepage() {
@@ -77,7 +76,13 @@ export default function Homepage() {
           Make a Complaint
         </button>
         {isModalOpen && <ComplaintForm closeModal={closeModal} />}
-        <Grid container justifyContent="center" alignItems="center" spacing={10} sx={{ mt: 10, height: "100vh" }}>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          spacing={10}
+          sx={{ mt: 10, height: "100vh" }}
+        >
           <Grid item xs={12} md={6}>
             <Sidebar
               title={sidebar.title}
@@ -87,14 +92,10 @@ export default function Homepage() {
             />
           </Grid>
         </Grid>
-
       </Container>
     </ThemeProvider>
   );
-
 }
-
-
 
 //   return (
 

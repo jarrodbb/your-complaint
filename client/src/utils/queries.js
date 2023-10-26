@@ -113,10 +113,10 @@ export const GET_COMPLAINTS_BY_CATEGORY = gql`
       title
       description
       category
+      image
       date
       votes
       unsupportedVotes
-      image
       created
       comments {
         _id
