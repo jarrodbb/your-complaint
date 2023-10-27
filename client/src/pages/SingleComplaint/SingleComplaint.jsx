@@ -20,7 +20,6 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -182,7 +181,11 @@ function SingleComplaint() {
             <div>
               {complaintComments.map((comment) => (
                 <div key={comment._id}>
-                  <DisplayAllComments comment={comment} currentUser={currentUser}/>
+                  <DisplayAllComments
+                    complaintID={complaintID}
+                    comment={comment}
+                    currentUser={currentUser}
+                  />
                 </div>
               ))}
             </div>

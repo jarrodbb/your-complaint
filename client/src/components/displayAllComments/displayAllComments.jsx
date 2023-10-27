@@ -24,8 +24,7 @@ const style = {
   pb: 3,
 };
 
-
-function DisplayAllComments({ comment, currentUser }) {
+function DisplayAllComments({ complaintID, comment, currentUser }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -67,7 +66,11 @@ function DisplayAllComments({ comment, currentUser }) {
           >
             <Box sx={{ ...style, width: 400 }}>
               <h2 id="parent-modal-title">Text in a modal</h2>
-              <EditCommentForm commentDescription={comment.description} />
+              <EditCommentForm
+                complaintID={complaintID}
+                comment={comment}
+                handleClose={handleClose}
+              />
             </Box>
           </Modal>
         </div>

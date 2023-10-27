@@ -179,17 +179,20 @@ const resolvers = {
     //https://mongoosejs.com/docs/api/model.html#Model.find()
     updateComment: async (
       parent,
-      { complaintID, commentID, description },
+      { complaintID, commentID, description, author },
       context
     ) => {
       if (context.user) {
         const complaint = await Complaints.findOneAndUpdate(
-          { _id: complaintID, comments: commentID },
+          { _id: complaintID, "comments._id": commentID },
           {
             $set: {
-              comments: {
-                description,
-              },
+              "comments.$.author": author,
+              "comments.$.description": description,
+              // comments: {
+              //   author,
+              //   description,
+              // },
             },
           },
           { runValidators: true, new: true }
@@ -232,3 +235,27 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+// updateComment: async (
+//   parent,
+//   { complaintID, commentID, description, author },
+//   context
+// ) => {
+//   if (context.user) {
+//     const complaint = await Complaints.findOneAndUpdate(
+//       { _id: complaintID, "comments._id": commentID },
+//       {
+//         $set: {
+//           comments: {
+//             author,
+//             description,
+
+//           },
+//         },
+//       },
+//       { runValidators: true, new: true }
+//     );
+//     return complaint;
+//   }
+//   throw AuthenticationError;
+// },
