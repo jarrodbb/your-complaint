@@ -21,6 +21,8 @@ const ComplaintForm = ({ closeModal }) => {
   // 'image' state variable is used to store an uploaded image (initially set to 'null').
   const [image, setImage] = useState(null);
 
+  const [title, setTitle] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -46,6 +48,17 @@ const ComplaintForm = ({ closeModal }) => {
     }
   };
 
+  const handleTitleChange = (e) => {
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+    if (inputValue === "") {
+      return setErrorMessage("Please include a Title"), setTitle("");
+    } else {
+      setTitle(e.target.value);
+    }
+  };
+
   // 'handleSubmit' function is called when the user submits the form.
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,6 +66,7 @@ const ComplaintForm = ({ closeModal }) => {
     try {
       const { data } = await addComplaint({
         variables: {
+          title: title,
           description: complaintText,
           category: category,
           image: image,
@@ -102,6 +116,14 @@ const ComplaintForm = ({ closeModal }) => {
           </select>
         </label>
         {/* Textarea for entering the complaint text */}
+        <textarea
+          placeholder="Title"
+          value={title}
+          name="title"
+          type="text"
+          required
+          onChange={handleTitleChange}
+        />
         <textarea
           placeholder="Type your complaint here"
           value={complaintText}

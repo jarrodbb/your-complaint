@@ -17,7 +17,6 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
-
 const theme = createTheme();
 
 function LatestComplaint() {
@@ -34,39 +33,45 @@ function LatestComplaint() {
   //       console.log("there is an error");
   //     }
   //   }, []);
-
-  console.log(complaintData);
-
-  return (
-    <Grid item xs={12} md={6}>
-      {complaintData.map(complaint => (
-        <CardActionArea component="a" href={`/Complaint/${complaint._id}`} key={complaint._id}>
-          <Card sx={{ display: "flex", width: "100%" }}>
-            <CardContent sx={{ flex: 1 }}>
-              <Typography component="h2" variant="h5">
-                {complaint.title}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                {complaint.date}
-              </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {complaint.description}
-              </Typography>
-              <Typography variant="subtitle1" color="primary">
-              Continue reading...
-              </Typography>
-            </CardContent>
-            <CardMedia
-              component="img"
-              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-              image="https://source.unsplash.com/random?wallpapers"
-              alt="text"
-            />
-          </Card>
-        </CardActionArea>
-      ))}
-    </Grid>
-  );
+  
+    return (
+      <Grid item xs={12} md={6}>
+        {complaintData.map((complaint) => (
+          <CardActionArea
+            component="a"
+            href={`/Complaint/${complaint._id}`}
+            key={complaint._id}
+          >
+            <Card sx={{ display: "flex", width: "100%" }}>
+              <CardContent sx={{ flex: 1 }}>
+                <Typography component="h2" variant="h5">
+                  {complaint.title}
+                </Typography>
+                <Typography variant="subtitle1" color="text.secondary">
+                  {complaint.date}
+                </Typography>
+                <Typography variant="subtitle1" paragraph>
+                  {complaint.description}
+                </Typography>
+                <Typography variant="subtitle1" color="primary">
+                  Continue reading...
+                </Typography>
+              </CardContent>
+              <CardMedia
+                component="img"
+                sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+                image= {
+                  complaint.image === ""
+                    ? "https://source.unsplash.com/random?wallpapers"
+                    : complaint.image
+                }
+                alt="text"
+              />
+            </Card>
+          </CardActionArea>
+        ))}
+      </Grid>
+    );
 }
 PropTypes.propTypes = {
   post: PropTypes.shape({
@@ -74,8 +79,10 @@ PropTypes.propTypes = {
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     imageLabel: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
-  }).isRequired
+    title: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default LatestComplaint;
+
+

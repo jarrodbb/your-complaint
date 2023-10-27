@@ -4,34 +4,34 @@ import { gql } from "@apollo/client";
 // Define GraphQL mutations. Each mutation corresponds to an operation that modifies data on the server.
 // Mutation to create a new complaint. It takes the 'category' and 'text' as input and returns the created complaint's data.
 export const CREATE_COMPLAINT = gql`
-  mutation addComplaint($description: String!, $category: String!) {
-    addComplaint(description: $description, category: $category) {
+ mutation addComplaint($description: String!, $title: String!, $category: String!, $date: String, $image: String) {
+  addComplaint(description: $description, title: $title, category: $category, date: $date, image: $image) {
+    _id
+    username
+    email
+    password
+    isModerator
+    complaints {
       _id
-      username
-      email
-      password
-      isModerator
-      complaints {
+      title
+      description
+      category
+      image
+      date
+      votes
+      unsupportedVotes
+      created
+      comments {
         _id
-        title
+        author
         description
-        category
+        createdAt
         image
-        date
-        votes
-        unsupportedVotes
-        created
-        comments {
-          _id
-          author
-          description
-          createdAt
-          image
-          link
-        }
+        link
       }
     }
   }
+}
 `;
 
 // Mutation to update an existing complaint. It takes the 'id' of the complaint and the new 'text' as input and returns the updated complaint's data.

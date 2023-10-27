@@ -48,7 +48,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String!, email: String!, password: String!): User
-    addComplaint(description: String!, category: String!,date: String, image: [String]): User
+    addComplaint(description: String!, title:String!, category: String!, date: String, image: String): User
     updateComplaint(complaintID: ID!, votes: Int, category: String!, description: String!, image: [String]): Complaints
     deleteComplaint(complaintID: ID!): User
     addComment(complaintID: ID!, author: String!, description: String!, image: [String], link: String): Complaints
