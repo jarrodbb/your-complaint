@@ -49,7 +49,7 @@ function SingleComplaint() {
   const [currentUser, setCurrentUser] = useState("");
 
   useEffect(() => {
-    if (Auth.loggedIn) {
+    if (Auth.loggedIn()) {
       const userInfo = Auth.getProfile().data.username;
 
       setCurrentUser(userInfo);
@@ -180,35 +180,55 @@ function SingleComplaint() {
               {complaintComments.map((comment) => (
                 <div key={comment._id}>
                   <DisplayAllComments comment={comment} />
+
+                  {currentUser === comment.author ? (
+                    <div key={comment._id}>
+                      <Button onClick={handleOpen}>Edit</Button>
+                      <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="parent-modal-title"
+                        aria-describedby="parent-modal-description"
+                      >
+                        <Box sx={{ ...style, width: 400 }}>
+                          <h2 id="parent-modal-title">Text in a modal</h2>
+                          <EditCommentForm
+                            commentDescription={comment.description}
+                          />
+                        </Box>
+                      </Modal>
+                    </div>
+                  ) : (
+                    <div>test</div>
+                  )}
                 </div>
               ))}
             </div>
           )}
         </div>
-
-        
+        {/* 
         <div>
-          {currentUser === comment.author ? (
-            <div key={comment._id}>
-            {complaintComments.map((comment) =>
-              <Button onClick={handleOpen}>Edit</Button>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="parent-modal-title"
-                aria-describedby="parent-modal-description"
-              >
-                <Box sx={{ ...style, width: 400 }}>
-                  <h2 id="parent-modal-title">Text in a modal</h2>
-                  <EditCommentForm commentDescription={comment.description} />
-                </Box>
-              </Modal>
-            </div>
-            }) : (
-            <div>test</div>
-          )
-        )}
-        </div>
+          {complaintComments.map((comment) =>
+            currentUser === comment.author ? (
+              <div key={comment._id}>
+                <Button onClick={handleOpen}>Edit</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="parent-modal-title"
+                  aria-describedby="parent-modal-description"
+                >
+                  <Box sx={{ ...style, width: 400 }}>
+                    <h2 id="parent-modal-title">Text in a modal</h2>
+                    <EditCommentForm commentDescription={comment.description} />
+                  </Box>
+                </Modal>
+              </div>
+            ) : (
+              <div>test</div>
+            )
+          )}
+        </div> */}
 
         <>
           {Auth.loggedIn() ? (
