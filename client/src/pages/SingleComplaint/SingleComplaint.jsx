@@ -19,7 +19,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import EditCommentForm from "../../components/editCommentForm/editCommentForm";
+
 
 const style = {
   position: "absolute",
@@ -116,61 +116,64 @@ function SingleComplaint() {
   };
 
   return (
-    <Grid item xs={12} md={6}>
-      <Card sx={{ display: "flex" }}>
-        <CardContent sx={{ flex: 1 }}>
-          <Typography component="h2" variant="h5">
-            {singleComplaint.category}
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            {userComplaint.username}
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            {singleComplaint.date}
-          </Typography>
-          <Typography variant="subtitle1" paragraph>
-            {singleComplaint.description}
-          </Typography>
-          <Typography variant="subtitle1" paragraph>
-            {singleComplaint.votes}'s votes of support
-          </Typography>
-          <Typography variant="subtitle1" paragraph>
-            {singleComplaint.unsupportedVotes}'s votes not in support
-          </Typography>
-          <Typography variant="subtitle1" paragraph>
-            {singleComplaint.createdAt}
-          </Typography>
-        </CardContent>
-        <CardMedia
-          component="img"
-          sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-          image="https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg"
-          alt="text"
-        />
-      </Card>
-      <div>
-        {Auth.loggedIn() ? (
-          <div>
-            <button
-              className="btn btn-sm btn-danger ml-auto"
-              onClick={() => handleVote()}
-            >
-              How did you manage?
-            </button>
-            <button
-              className="btn btn-sm btn-danger ml-auto"
-              onClick={() => handleVoteUnsupport()}
-            >
-              Stop Complaining!
-            </button>
-          </div>
-        ) : (
-          <p>
-            You need to be logged in to add a vote. Please{" "}
-            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-          </p>
-        )}
-      </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={6}>
+        <Card sx={{ display: "flex" }}>
+          <CardContent sx={{ flex: 1 }}>
+            <Typography component="h2" variant="h5">
+              {singleComplaint.category}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {userComplaint.username}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {singleComplaint.date}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {singleComplaint.description}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {singleComplaint.votes}'s votes of support
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {singleComplaint.unsupportedVotes}'s votes not in support
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {singleComplaint.createdAt}
+            </Typography>
+          </CardContent>
+          <CardMedia
+            component="img"
+            sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+            image="https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg"
+            alt="text"
+          />
+        </Card>
+        <div>
+          {Auth.loggedIn() ? (
+            <div>
+              <button
+                className="btn btn-sm btn-danger ml-auto"
+                onClick={() => handleVote()}
+              >
+                How did you manage?
+              </button>
+              <button
+                className="btn btn-sm btn-danger ml-auto"
+                onClick={() => handleVoteUnsupport()}
+              >
+                Stop Complaining!
+              </button>
+            </div>
+          ) : (
+            <p>
+              You need to be logged in to add a vote. Please{" "}
+              <Link to="/login">login</Link> or{" "}
+              <Link to="/signup">signup.</Link>
+            </p>
+          )}
+        </div>
+      </Grid>
       <Grid item xs={12} md={6}>
         <div className="col-12 col-md-10 my-3">
           {loading ? (
@@ -179,76 +182,28 @@ function SingleComplaint() {
             <div>
               {complaintComments.map((comment) => (
                 <div key={comment._id}>
-                  <DisplayAllComments comment={comment} />
-
-                  {currentUser === comment.author ? (
-                    <div key={comment._id}>
-                      <Button onClick={handleOpen}>Edit</Button>
-                      <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="parent-modal-title"
-                        aria-describedby="parent-modal-description"
-                      >
-                        <Box sx={{ ...style, width: 400 }}>
-                          <h2 id="parent-modal-title">Text in a modal</h2>
-                          <EditCommentForm
-                            commentDescription={comment.description}
-                          />
-                        </Box>
-                      </Modal>
-                    </div>
-                  ) : (
-                    <div>test</div>
-                  )}
+                  <DisplayAllComments comment={comment} currentUser={currentUser}/>
                 </div>
               ))}
             </div>
           )}
         </div>
-        {/*
-        <div>
-          {complaintComments.map((comment) =>
-            currentUser === comment.author ? (
-              <div key={comment._id}>
-                <Button onClick={handleOpen}>Edit</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="parent-modal-title"
-                  aria-describedby="parent-modal-description"
-                >
-                  <Box sx={{ ...style, width: 400 }}>
-                    <h2 id="parent-modal-title">Text in a modal</h2>
-                    <EditCommentForm commentDescription={comment.description} />
-                  </Box>
-                </Modal>
-              </div>
-            ) : (
-              <div>test</div>
-            )
-          )}
-        </div> */}
-
-        <>
-          {Auth.loggedIn() ? (
-            <button onClick={openModal} className="make-complaint-button">
-              Add a comment
-            </button>
-          ) : (
-            <p>
-              You need to be logged in to add a comment. Please{" "}
-              <Link to="/login">login</Link> or{" "}
-              <Link to="/signup">signup.</Link>
-            </p>
-          )}
-          {isModalOpen && (
-            <CommentForm
-              closeModal={closeModal}
-              singleComplaint={singleComplaint}
-            />
-          )}
-        </>
+        {Auth.loggedIn() ? (
+          <button onClick={openModal} className="make-complaint-button">
+            Add a comment
+          </button>
+        ) : (
+          <p>
+            You need to be logged in to add a comment. Please{" "}
+            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+          </p>
+        )}
+        {isModalOpen && (
+          <CommentForm
+            closeModal={closeModal}
+            singleComplaint={singleComplaint}
+          />
+        )}
       </Grid>
     </Grid>
   );
