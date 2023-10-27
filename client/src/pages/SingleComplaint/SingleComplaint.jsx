@@ -19,6 +19,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
+import EditComplaint from "../../components/editComlaint/editComplaint";
 
 const style = {
   position: "absolute",
@@ -127,6 +128,9 @@ function SingleComplaint() {
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
               {singleComplaint.date}
+            </Typography>{" "}
+            <Typography variant="subtitle1" paragraph>
+              {singleComplaint.title}
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {singleComplaint.description}
@@ -148,6 +152,32 @@ function SingleComplaint() {
             alt="text"
           />
         </Card>
+        {currentUser === userComplaint.username ? (
+          <div>
+            <Button onClick={handleOpen}>Edit</Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="parent-modal-title"
+              aria-describedby="parent-modal-description"
+            >
+              <Box sx={{ ...style, width: 400 }}>
+                <h2 id="parent-modal-title">Text in a modal</h2>
+                <EditComplaint
+                  complaintId={singleComplaint._id}
+                  title={singleComplaint.title}
+                  category={singleComplaint.category}
+                  username={userComplaint.username}
+                  date={singleComplaint.date}
+                  description={singleComplaint.description}
+                  handleClose={handleClose}
+                />
+              </Box>
+            </Modal>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <div>
           {Auth.loggedIn() ? (
             <div>
