@@ -26,10 +26,10 @@ const NavBar = () => {
           <i className="far fa-user"></i>
           Profile
         </Link>
-        <a href="#skills" data-text="Skills">
+        {/* <a href="#skills" data-text="Skills">
           <i className="far fa-file-code"></i>
           Skills
-        </a>
+        </a> */}
         {/* Link for "Contact" */}
         <Link to="/contact" className={currentPage === "/contact" ? "nav-link active" : "nav-link"}>
           <i className="far fa fa-phone"></i>
