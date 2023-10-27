@@ -17,15 +17,18 @@ import Auth from "../../utils/auth";
 // `;
 
 const CommentForm = ({ closeModal, singleComplaint }) => {
+  console.log(singleComplaint);
   const [addComment, { error }] = useMutation(CREATE_COMMENT);
 
   const [author, setAuthor] = useState("");
 
-  const userInfo = Auth.getProfile().authenticatedPerson.username;
+  useEffect(() => {
+    const userInfo = Auth.getProfile().data.username;
 
-  setAuthor(userInfo);
+    setAuthor(userInfo);
+  }, []);
 
-  [complaintText, setComplaintText] = useState("");
+  const [complaintText, setComplaintText] = useState("");
 
   const [image, setImage] = useState(
     "https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg"
@@ -40,6 +43,7 @@ const CommentForm = ({ closeModal, singleComplaint }) => {
     try {
       const { data } = await addComment({
         variables: {
+          complaintID: singleComplaint._id,
           author: author,
           description: complaintText,
         },

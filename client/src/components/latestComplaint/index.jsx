@@ -16,11 +16,17 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { useStoreContext } from "../../utils/GlobalState";
 
 
 const theme = createTheme();
 
 function LatestComplaint() {
+  const [state, dispatch] = useStoreContext();
+
+  const {complaints} = state
+
+  console.log(complaints)
   const [allComplaints, setComplaints] = useState([]);
 
   const { loading, data } = useQuery(GET_COMPLAINTS);

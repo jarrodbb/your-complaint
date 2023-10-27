@@ -129,3 +129,29 @@ export const GET_COMPLAINTS_BY_CATEGORY = gql`
     }
   }
 `;
+
+export const GET_ME = gql`
+query me {
+  me {
+    _id
+    title
+    description
+    category
+    image
+    date
+    votes
+    unsupportedVotes
+    created
+    comments {
+      _id
+      author
+      description
+      createdAt
+      image
+      link
+    }
+  }
+}
+
+`
+
