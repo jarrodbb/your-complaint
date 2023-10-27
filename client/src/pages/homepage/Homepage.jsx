@@ -15,10 +15,14 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LatestComplaint from "../../components/latestComplaint";
 import DisplayTopVoted from "../../components/DisplayTopVoted";
-
+import { useStoreContext } from "../../utils/GlobalState";
+import { ADD_COMPLAINT } from "../../utils/actions";
+import { GET_ME } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
+import Auth from "../../utils/auth";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebars/sidebar";
-
+import { useEffect } from "react";
 const theme = createTheme();
 
 const sections = [
@@ -56,6 +60,43 @@ const sidebar = {
 };
 
 export default function Homepage() {
+  // const [state, dispatch] = useStoreContext();
+  
+
+  // useEffect(() => {
+  //   const { loading, data } = useQuery(GET_ME);
+  //   const authPerson = Auth.getProfile().data.username;
+  //   if (authPerson) {
+  //     const usersComplaints = data?.complaints || [];
+
+  //     if (usersComplaints) {
+  //       dispatch({
+  //         type: ADD_COMPLAINT,
+  //         complaints: [usersComplaints],
+  //       });
+  //     }
+  //   }
+  //   return
+  // }, []);
+  // const authPerson = Auth.getProfile().data.username
+
+  // console.log(authPerson)
+
+  // if (authPerson) {
+
+  //     const { loading, data } = useQuery(GET_ME);
+
+  //     const usersComplaints = data?.complaints || [];
+
+  //     if (usersComplaints) {
+  //       dispatch({
+  //         type: ADD_COMPLAINT,
+  //         complaints: [usersComplaints],
+  //       });
+  //     }
+
+  // }
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

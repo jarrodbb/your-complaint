@@ -10,7 +10,12 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("complaints");
+        const user = await User.findOne({ _id: context.user._id }).populate(
+          "complaints"
+        );
+        console.log(user.complaints);
+
+        return user.complaints;
       }
       throw AuthenticationError;
     },
@@ -151,7 +156,7 @@ const resolvers = {
 
     addComment: async (
       parent,
-      { complaintID, author, description, image, link },
+      { complaintID, author, description },
       context
     ) => {
       if (context.user) {
@@ -162,8 +167,6 @@ const resolvers = {
               comments: {
                 author,
                 description,
-                image,
-                link,
               },
             },
           },
@@ -176,18 +179,16 @@ const resolvers = {
     //https://mongoosejs.com/docs/api/model.html#Model.find()
     updateComment: async (
       parent,
-      { complaintID, commentID, description, image, link },
+      { complaintID, commentID, description },
       context
     ) => {
       if (context.user) {
         const complaint = await Complaints.findOneAndUpdate(
-          { _id: complaintID, "comments._id": commentID },
+          { _id: complaintID, comments: commentID },
           {
             $set: {
               comments: {
                 description,
-                image,
-                link,
               },
             },
           },

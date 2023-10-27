@@ -13,7 +13,7 @@ export const reducer = (state, action) => {
   case ADD_COMPLAINT:
     return {
       ...state,
-      complaints: [...action.complaint],
+      complaints: [...action.complaints],
     };
 
   case ADD_COMMENT:

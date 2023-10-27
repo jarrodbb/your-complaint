@@ -133,20 +133,42 @@ export const CREATE_VOTE_UNSUPPORTED = gql`
 
 export const CREATE_COMMENT = gql`
   mutation addComment(
-    $complaintId: ID!
+    $complaintID: ID!
     $author: String!
     $description: String!
-    $title: String!
-    $date: String!
-    $image: String
   ) {
     addComment(
-      complaintID: $complaintId
+      complaintID: $complaintID
       author: $author
       description: $description
-      title: $title
-      date: $date
-      image: $image
+    ) {
+      _id
+      title
+      description
+      category
+      image
+      date
+      votes
+      unsupportedVotes
+      created
+      comments {
+        _id
+        author
+        description
+        createdAt
+        image
+        link
+      }
+    }
+  }
+`;
+
+export const UPDATE_COMMENT = gql`
+  mutation Mutation($complaintID: ID!, $commentID: ID!, $description: String!) {
+    updateComment(
+      complaintID: $complaintID
+      commentID: $commentID
+      description: $description
     ) {
       _id
       title
