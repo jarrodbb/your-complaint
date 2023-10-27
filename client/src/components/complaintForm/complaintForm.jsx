@@ -75,8 +75,9 @@ const ComplaintForm = ({ closeModal }) => {
       });
       setCategory("General");
       setImage("");
-      complaintText("");
+      setComplaintText("");
       setSelectedDate(null);
+      setTitle("");
     } catch (err) {
       console.error(err);
     }
