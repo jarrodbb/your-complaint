@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
+
 import { useMutation } from "@apollo/client";
 import { UPDATE_COMMENT } from "../../utils/mutations";
 

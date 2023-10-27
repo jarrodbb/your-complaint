@@ -48,13 +48,37 @@ export const CREATE_COMPLAINT = gql`
 
 // Mutation to update an existing complaint. It takes the 'id' of the complaint and the new 'text' as input and returns the updated complaint's data.
 export const UPDATE_COMPLAINT = gql`
-  mutation updateComplaint($id: ID!, $text: String!) {
-    updateComplaint(id: $id, text: $text) {
+  mutation updateComplaint(
+    $complaintID: ID!
+    $description: String!
+    $title: String
+    $category: String
+    $date: String
+  ) {
+    updateComplaint(
+      complaintID: $complaintID
+      description: $description
+      title: $title
+      category: $category
+      date: $date
+    ) {
       _id
-      category
       title
-      text
-      createdAt
+      description
+      category
+      image
+      date
+      votes
+      unsupportedVotes
+      created
+      comments {
+        _id
+        author
+        description
+        createdAt
+        image
+        link
+      }
     }
   }
 `;

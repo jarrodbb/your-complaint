@@ -86,6 +86,7 @@ function DisplayTopVoted() {
                     >
                       {maxVotesComplaint.title}
                     </Typography>
+
                     <Typography variant="h5" color="inherit" paragraph>
                       {maxVotesComplaint.description}
                     </Typography>
