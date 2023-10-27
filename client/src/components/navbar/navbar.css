@@ -39,7 +39,7 @@
 @media screen and (max-width: 600px) {
   .navbar-container a {
    font-size: 0.6rem;
-   display: none;
+   /* display: none; */
   
 }
 }
