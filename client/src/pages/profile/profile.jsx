@@ -1,5 +1,6 @@
 import "./profile.css";
-import React from "react";
+// import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../../utils/queries";
@@ -10,11 +11,12 @@ const Profile = () => {
   const { loading, data } = useQuery(GET_ME);
   // Extract user data from the query response, or set it to an empty object if data is not available yet
   const userData = data?.me || {};
+  const userDataLength = Object.keys(userData).length;
+  console.log("profile data is" , data);
 
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-
   return (
     <section id="profile">
       <h1>Profile</h1>
