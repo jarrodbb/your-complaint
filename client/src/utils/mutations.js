@@ -4,34 +4,46 @@ import { gql } from "@apollo/client";
 // Define GraphQL mutations. Each mutation corresponds to an operation that modifies data on the server.
 // Mutation to create a new complaint. It takes the 'category' and 'text' as input and returns the created complaint's data.
 export const CREATE_COMPLAINT = gql`
- mutation addComplaint($description: String!, $title: String!, $category: String!, $date: String, $image: String) {
-  addComplaint(description: $description, title: $title, category: $category, date: $date, image: $image) {
-    _id
-    username
-    email
-    password
-    isModerator
-    complaints {
+  mutation addComplaint(
+    $description: String!
+    $title: String!
+    $category: String!
+    $date: String
+    $image: String
+  ) {
+    addComplaint(
+      description: $description
+      title: $title
+      category: $category
+      date: $date
+      image: $image
+    ) {
       _id
-      title
-      description
-      category
-      image
-      date
-      votes
-      unsupportedVotes
-      created
-      comments {
+      username
+      email
+      password
+      isModerator
+      complaints {
         _id
-        author
+        title
         description
-        createdAt
+        category
         image
-        link
+        date
+        votes
+        unsupportedVotes
+        created
+        comments {
+          _id
+          author
+          description
+          createdAt
+          image
+          link
+        }
       }
     }
   }
-}
 `;
 
 // Mutation to update an existing complaint. It takes the 'id' of the complaint and the new 'text' as input and returns the updated complaint's data.
@@ -164,11 +176,17 @@ export const CREATE_COMMENT = gql`
 `;
 
 export const UPDATE_COMMENT = gql`
-  mutation Mutation($complaintID: ID!, $commentID: ID!, $description: String!) {
+  mutation updateComment(
+    $complaintID: ID!
+    $commentID: ID!
+    $description: String!
+    $author: String!
+  ) {
     updateComment(
       complaintID: $complaintID
       commentID: $commentID
       description: $description
+      author: $author
     ) {
       _id
       title

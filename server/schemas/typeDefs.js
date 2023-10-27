@@ -52,7 +52,7 @@ type Mutation {
     updateComplaint(complaintID: ID!, votes: Int, category: String!, description: String!, image: [String]): Complaints
     deleteComplaint(complaintID: ID!): User
     addComment(complaintID: ID!, author: String!, description: String!): Complaints
-    updateComment( complaintID: ID!, commentID:ID!, description: String!): Complaints
+    updateComment( complaintID: ID!, commentID:ID!, description: String!, author:String!): Complaints
     removeComment(complaintID: ID!, commentID:ID!): Complaints
     createVote(complaintID: ID!): Complaints
     createVoteUnsupported(complaintID: ID!): Complaints
