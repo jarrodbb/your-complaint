@@ -1,0 +1,32 @@
+/* Styling for the main header container */
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Styling for the "Subscribe" button */
+.header .header-subscribe {
+  margin-right: 20px;
+  background-color: #0073e6;
+  color: #fff;
+}
+
+/* Styling for the "Make A Complaint" button */
+.header .header-complaint {
+  background-color: #ff5722;
+  color: #fff;
+}
+
+/* Styling for the navigation links */
+.header .header-nav-link {
+  text-decoration: none;
+  color: #0073e6;
+  margin-right: 10px;
+}
+
+/* Styling for the navigation links on hover */
+.header .header-nav-link:hover {
+  text-decoration: underline;
+  color: #ff5722;
+}

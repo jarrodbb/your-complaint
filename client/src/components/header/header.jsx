@@ -42,7 +42,6 @@ function Header(props) {
           {title}
         </Typography>
         <IconButton>
-          <SearchIcon />
         </IconButton>
         <Button variant="outlined" size="lrg">
           <Link to="/complaint-form" style={{ textDecoration: "none", color: "inherit" }}>
