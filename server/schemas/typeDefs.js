@@ -37,7 +37,7 @@ type Auth {
 
 
 type Query {
-    me: Complaints
+    me: User
     complaints: [Complaints]
     complaint(complaintID: ID!): Complaints
     userComplaint(complaintID: ID!): User

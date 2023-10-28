@@ -23,9 +23,9 @@ const theme = createTheme();
 function LatestComplaint() {
   const [state, dispatch] = useStoreContext();
 
-  const {complaints} = state
+  const {complaints} = state;
 
-  console.log(complaints)
+  console.log(complaints);
   const [allComplaints, setComplaints] = useState([]);
 
   const { loading, data } = useQuery(GET_COMPLAINTS);
