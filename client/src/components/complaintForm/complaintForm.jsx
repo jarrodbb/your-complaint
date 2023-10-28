@@ -33,7 +33,9 @@ const ComplaintForm = ({ closeModal }) => {
     const inputType = target.name;
     const inputValue = target.value;
     if (inputValue === "") {
-      return setErrorMessage("Please include a description");
+      return (
+        setErrorMessage("Please include a description"), setComplaintText("")
+      );
     } else {
       setComplaintText(e.target.value);
     }
@@ -46,7 +48,7 @@ const ComplaintForm = ({ closeModal }) => {
     const inputType = target.name;
     const inputValue = target.value;
     if (inputValue === "") {
-      return setErrorMessage("Please include a Title");
+      return setErrorMessage("Please include a Title"), setTitle("");
     } else {
       setTitle(e.target.value);
     }
