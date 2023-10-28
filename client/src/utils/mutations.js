@@ -85,9 +85,32 @@ export const UPDATE_COMPLAINT = gql`
 
 // Mutation to delete a complaint. It takes the 'id' of the complaint as input and returns the deleted complaint's data.
 export const DELETE_COMPLAINT = gql`
-  mutation deleteComplaint($id: ID!) {
-    deleteComplaint(id: $id) {
+  mutation deleteComplaint($complaintID: ID!) {
+    deleteComplaint(complaintID: $complaintID) {
       _id
+      username
+      email
+
+      isModerator
+      complaints {
+        _id
+        title
+        description
+        category
+        image
+        date
+        votes
+        unsupportedVotes
+        created
+        comments {
+          _id
+          author
+          description
+          createdAt
+          image
+          link
+        }
+      }
     }
   }
 `;
