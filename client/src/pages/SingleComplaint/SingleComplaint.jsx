@@ -20,6 +20,8 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import EditComplaint from "../../components/editComlaint/editComplaint";
+import { DELETE_COMPLAINT } from "../../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -36,7 +38,10 @@ const style = {
 };
 
 function SingleComplaint() {
+  const [deleteComplaint, { error: err }] = useMutation(DELETE_COMPLAINT);
+
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -114,6 +119,21 @@ function SingleComplaint() {
       console.error(err);
     }
   };
+  let navigate = useNavigate();
+
+  const handleDeleteComplaint = async () => {
+    try {
+      await deleteComplaint({
+        variables: {
+          complaintID: complaintID,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
+    navigate("/");
+  };
 
   return (
     <Grid container spacing={2}>
@@ -174,6 +194,9 @@ function SingleComplaint() {
                 />
               </Box>
             </Modal>
+            <div>
+              <Button onClick={handleDeleteComplaint}>Delete</Button>
+            </div>
           </div>
         ) : (
           <div></div>
