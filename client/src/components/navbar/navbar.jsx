@@ -8,7 +8,6 @@ import { Link, useLocation } from "react-router-dom";
 const NavBar = () => {
   const currentPage = useLocation().pathname;
   const isAuthenticated = AuthService.loggedIn();
-  // console.log();
 
   const handleLogout = () => {
     AuthService.logout();
@@ -54,10 +53,12 @@ const NavBar = () => {
           </button>
         ) : (
           // Render Login button if user is not authenticated
-          <Link to="/SignUp" className={currentPage === "/donate" ? "nav-link active" : "nav-link"}>
-            <i className="far fa-user-circle"></i>
+          <button>
+            <Link to="/SignUp" className={currentPage === "/donate" ? "nav-link active" : "nav-link"}>
+              <i className="far fa-user-circle"></i>
             SIGN UP/IN
-          </Link>
+            </Link>
+          </button>
         )}
       </div>
     </nav>
