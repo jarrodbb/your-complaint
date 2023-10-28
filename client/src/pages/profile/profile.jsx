@@ -23,7 +23,7 @@ const Profile = () => {
       {Auth.loggedIn() ? (
         <div>
           <p> Your: User ID: {userData._id}</p>
-          <h2>Complaints:</h2>
+          <h2>Your Complaints:</h2>
           <ul>
             {complaints.map((complaint) => (
               <li key={complaint._id}>
