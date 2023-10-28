@@ -25,6 +25,11 @@ const style = {
   pb: 3,
 };
 
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 const Profile = () => {
   const [open, setOpen] = React.useState(false);
 
@@ -43,47 +48,67 @@ const Profile = () => {
 
   const userData = data?.me || {};
   const complaints = userData.complaints || [];
-  console.log("username" + userData.username);
-  console.log("User Data is", userData);
+  const defaultImageLink = "https://source.unsplash.com/random?wallpapers";
 
   return (
     <section id="profile">
       <h1>Profile</h1>
       {Auth.loggedIn() ? (
         <div>
-          <p> Your: User ID: {userData._id}</p>
-          <h2>Complaints:</h2>
-          <div>
-            <Button onClick={handleOpen}>Update Profile</Button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="parent-modal-title"
-              aria-describedby="parent-modal-description"
+          <Typography variant="body1">
+            Your User ID: <strong>{userData._id}</strong>
+          </Typography>
+          <Button onClick={handleOpen}>Update Profile</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="parent-modal-title"
+            aria-describedby="parent-modal-description"
+          >
+            <Box sx={{ ...style, width: 400 }}>
+              <h2 id="parent-modal-title">Text in a modal</h2>
+              <EditUserDetails
+                userID={userData._id}
+                username={userData.username}
+                email={userData.email}
+                handleClose={handleClose}
+              />
+            </Box>
+          </Modal>
+          <Typography variant="h2"> Your Complaints:</Typography>
+          {complaints.map((complaint) => (
+            <CardActionArea
+              component={Link}
+              to={`/Complaint/${complaint._id}`}
+              key={complaint._id}
             >
-              <Box sx={{ ...style, width: 400 }}>
-                <h2 id="parent-modal-title">Text in a modal</h2>
-                <EditUserDetails
-                  userID={userData._id}
-                  username={userData.username}
-                  email={userData.email}
-                  handleClose={handleClose}
+              <Card sx={{ display: "flex", width: "100%" }}>
+                <CardContent sx={{ flex: 1 }}>
+                  <Typography component="h2" variant="h5">
+                    {complaint.title}
+                  </Typography>
+                  <Typography variant="subtitle1" color="text.secondary">
+                    {complaint.date}
+                  </Typography>
+                  <Typography variant="subtitle1" paragraph>
+                    {complaint.description}
+                  </Typography>
+                  <Typography variant="subtitle1" color="primary">
+                    Continue reading...
+                  </Typography>
+                </CardContent>
+                <CardMedia
+                  component="img"
+                  sx={{
+                    width: 160,
+                    display: { xs: "none", sm: "block" },
+                  }}
+                  image={complaint.image || defaultImageLink}
+                  alt="text"
                 />
-              </Box>
-            </Modal>
-          </div>
-          <ul>
-            {complaints.map((complaint) => (
-              <li key={complaint._id}>
-                <strong>Title:</strong> {complaint.title}
-                <br />
-                Description: {complaint.description}
-                <br />
-                Category: {complaint.category}
-                <hr />
-              </li>
-            ))}
-          </ul>
+              </Card>
+            </CardActionArea>
+          ))}
         </div>
       ) : (
         <p>
