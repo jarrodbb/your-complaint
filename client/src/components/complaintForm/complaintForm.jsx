@@ -175,7 +175,7 @@ const ComplaintForm = ({ closeModal }) => {
             <input accept="image/*" type="file" onChange={convertToBase64} />
             {/* Display the selected image */}
             {image ? (
-              <img width={100} height={100} src={image} alt="Uploaded" />
+              <img width={300} height={300} src={image} alt="Uploaded" />
             ) : null}
           </div>
         </div>
