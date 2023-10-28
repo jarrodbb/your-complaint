@@ -13,9 +13,7 @@ const resolvers = {
         const user = await User.findOne({ _id: context.user._id }).populate(
           "complaints"
         );
-        console.log(user.complaints);
-
-        return user.complaints;
+        return user;
       }
       throw AuthenticationError;
     },
