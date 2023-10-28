@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMutation } from "@apollo/client";
 import { CREATE_COMPLAINT } from "../../utils/mutations";
 import PropTypes from "prop-types";
 import { GET_COMPLAINTS } from "../../utils/queries";
+import Auth from "../../utils/auth";
 
 // Define 'ComplaintForm' component, responsible for capturing and submitting user complaints
 const ComplaintForm = ({ closeModal }) => {
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const userInfo = Auth.getProfile().data.username;
+
+    setUsername(userInfo);
+  }, []);
   // Use 'useMutation' hook to execute the 'CREATE_COMPLAINT' mutation from Apollo Client
   const [addComplaint, { error }] = useMutation(CREATE_COMPLAINT);
 
@@ -65,6 +73,7 @@ const ComplaintForm = ({ closeModal }) => {
           title: title,
           description: complaintText,
           category: category,
+          username: username,
           image: image,
           date: selectedDate,
         },
@@ -104,7 +113,9 @@ const ComplaintForm = ({ closeModal }) => {
           const fileSize = Math.round(file.size / 1024); // File size in KB
 
           if (fileSize > maxSize) {
-            setErrorMessage("Image size is too large. Please choose a smaller image.");
+            setErrorMessage(
+              "Image size is too large. Please choose a smaller image."
+            );
             setImage(null); // Clear the image
           } else {
             setImage(reader.result); // Image is within size limits

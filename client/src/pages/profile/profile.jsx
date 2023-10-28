@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import EditUserDetails from "../../components/editUserDetails/editUserDetails";
+import DeleteUser from "../../components/deleteUser/deleteUser";
 
 const style = {
   position: "absolute",
@@ -40,6 +41,15 @@ const Profile = () => {
     setOpen(false);
   };
 
+  const [deleteModalOpen, setDeleteOpen] = React.useState(false);
+
+  const handledeleteOpen = () => {
+    setDeleteOpen(true);
+  };
+  const handledeleteClose = () => {
+    setDeleteOpen(false);
+  };
+
   const { loading, data } = useQuery(GET_ME);
 
   if (loading) {
@@ -66,7 +76,7 @@ const Profile = () => {
             aria-describedby="parent-modal-description"
           >
             <Box sx={{ ...style, width: 400 }}>
-              <h2 id="parent-modal-title">Text in a modal</h2>
+              <h2 id="parent-modal-title"></h2>
               <EditUserDetails
                 userID={userData._id}
                 username={userData.username}
@@ -75,6 +85,19 @@ const Profile = () => {
               />
             </Box>
           </Modal>
+          <Button onClick={handledeleteOpen}>DELETE Profile</Button>
+          <Modal
+            open={deleteModalOpen}
+            onClose={handledeleteClose}
+            aria-labelledby="parent-modal-title"
+            aria-describedby="parent-modal-description"
+          >
+            <Box sx={{ ...style, width: 400 }}>
+              <h2 id="parent-modal-title"></h2>
+              <DeleteUser userID={userData._id} username={userData.username} />
+            </Box>
+          </Modal>
+
           <Typography variant="h2"> Your Complaints:</Typography>
           {complaints.map((complaint) => (
             <CardActionArea

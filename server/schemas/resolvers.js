@@ -68,6 +68,18 @@ const resolvers = {
       return { token, user };
     },
 
+    deleteUser: async (parent, { userID, username }, context) => {
+      if (context.user) {
+        const user = await User.findByIdAndRemove({ _id: userID });
+        const complaints = await Complaints.deleteMany(
+          { username: username },
+          { new: true }
+        );
+        const message = "user deleted";
+        return message;
+      }
+    },
+
     updateUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
         if (password) {
@@ -113,7 +125,7 @@ const resolvers = {
 
     addComplaint: async (
       parent,
-      { title, description, category, date, image },
+      { title, description, category, username, date, image },
       context
     ) => {
       if (context.user) {
@@ -121,6 +133,7 @@ const resolvers = {
           title,
           description,
           category,
+          username,
           date,
           image,
         });

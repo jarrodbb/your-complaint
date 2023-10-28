@@ -13,6 +13,7 @@ type Complaints {
     title: String
     description: String
     category: String
+    username: String
     image: String
     date: String
     votes: Int
@@ -35,6 +36,10 @@ type Auth {
     user: User
   }
 
+  type Message {
+    message: String
+  }
+
 
 type Query {
     me: User
@@ -47,8 +52,9 @@ type Query {
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
+    deleteUser(userID: ID! username: String!): Message
     updateUser(username: String!, email: String!, password: String): Auth
-    addComplaint(description: String!, title:String!, category: String!, date: String, image: String): User
+    addComplaint(description: String!, title:String!, category: String!, username: String, date: String, image: String): User
     updateComplaint(complaintID: ID!, title:String, category: String, description: String!, date:String): Complaints
     deleteComplaint(complaintID: ID!): User
     addComment(complaintID: ID!, author: String!, description: String!): Complaints
