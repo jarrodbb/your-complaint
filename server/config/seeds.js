@@ -9,8 +9,10 @@ db.once("open", async () => {
   const complaints = await Complaints.insertMany([
     {
       title: "Brave Karen fights minimum wage workers",
-      description: "Ordered 6 nuggies, only got 5!!  Should i sue maccas? Is this a hate crime?",
+      description:
+        "Ordered 6 nuggies, only got 5!!  Should i sue maccas? Is this a hate crime?",
       category: "Food",
+      username: "jblan",
       image: "",
       date: "06/06/23",
       votes: 12,
@@ -51,7 +53,7 @@ db.once("open", async () => {
         },
       ],
     },
-        {
+    {
       title: "Why are workers so lazy?",
       description: "I want my workers to work 18 hours a day but they refused?",
       image: "",
@@ -75,7 +77,8 @@ db.once("open", async () => {
     },
     {
       title: "My 9 year old daughter refuses to pay rent",
-      description: "Inflation is high but my daughter hasn't paid rent in 9 years now!! should i call the police?",
+      description:
+        "Inflation is high but my daughter hasn't paid rent in 9 years now!! should i call the police?",
       image: "",
       category: "Finance",
       date: "05/05/23",
@@ -117,9 +120,10 @@ db.once("open", async () => {
         },
       ],
     },
-        {
+    {
       title: "Is my doctor fat shaming my cat?",
-      description: "My vegan cat hasn't been moving for about a month now and i think my Dr is really rude using words like is she dead or is the cat alseep",
+      description:
+        "My vegan cat hasn't been moving for about a month now and i think my Dr is really rude using words like is she dead or is the cat alseep",
       image: "",
       category: "Health",
       date: "05/05/23",
@@ -151,7 +155,8 @@ db.once("open", async () => {
     },
     {
       title: "WORLD'S YOUNGEST BABY JUST BORN",
-      description: "My baby was born without clothes, did the doctor steal them?",
+      description:
+        "My baby was born without clothes, did the doctor steal them?",
       image: "",
       category: "Life",
       date: "01/01/19",
@@ -213,7 +218,7 @@ db.once("open", async () => {
     email: "jay@gmail.com",
 
     password: "abcd1234",
-    isModerator: false,
+    isModerator: true,
     complaints: [complaints[0]._id],
   });
 
@@ -226,7 +231,7 @@ db.once("open", async () => {
     complaints: [complaints[1]._id],
   });
 
-    await User.create({
+  await User.create({
     username: "karen007",
     email: "karen007@gmail.com",
 
@@ -235,17 +240,13 @@ db.once("open", async () => {
     complaints: [complaints[3]._id],
   });
 
-    await User.create({
+  await User.create({
     username: "kindBoss",
     email: "kindboss@gmail.com",
     password: "abcd1234",
     isModerator: false,
     complaints: [complaints[2]._id],
   });
-
-
-
-
 
   console.log("users seeded");
   process.exit();

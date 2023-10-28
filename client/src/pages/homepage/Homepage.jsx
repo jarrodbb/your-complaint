@@ -60,42 +60,19 @@ const sidebar = {
 };
 
 export default function Homepage() {
-  // const [state, dispatch] = useStoreContext();
-  
+  const [isAdmin, setIsAdmin] = useState();
 
-  // useEffect(() => {
-  //   const { loading, data } = useQuery(GET_ME);
-  //   const authPerson = Auth.getProfile().data.username;
-  //   if (authPerson) {
-  //     const usersComplaints = data?.complaints || [];
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      const userInfo = Auth.getProfile().data.isModerator;
+      console.log(userInfo);
+      setIsAdmin(userInfo);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
 
-  //     if (usersComplaints) {
-  //       dispatch({
-  //         type: ADD_COMPLAINT,
-  //         complaints: [usersComplaints],
-  //       });
-  //     }
-  //   }
-  //   return
-  // }, []);
-  // const authPerson = Auth.getProfile().data.username
-
-  // console.log(authPerson)
-
-  // if (authPerson) {
-
-  //     const { loading, data } = useQuery(GET_ME);
-
-  //     const usersComplaints = data?.complaints || [];
-
-  //     if (usersComplaints) {
-  //       dispatch({
-  //         type: ADD_COMPLAINT,
-  //         complaints: [usersComplaints],
-  //       });
-  //     }
-
-  // }
+  console.log(isAdmin);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -112,7 +89,7 @@ export default function Homepage() {
       <Container maxWidth="lg">
         <Header title="Complain" sections={sections} />
         <DisplayTopVoted />
-        <LatestComplaint />
+        <LatestComplaint isAdmin={isAdmin} />
         <button onClick={openModal} className="make-complaint-button">
           Make a Complaint
         </button>
