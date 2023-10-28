@@ -16,14 +16,41 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
 import { useStoreContext } from "../../utils/GlobalState";
+import Modal from "@mui/material/Modal";
+
+import * as React from "react";
+import Box from "@mui/material/Box";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 const theme = createTheme();
 
-function LatestComplaint() {
+function LatestComplaint(isAdmin) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [state, dispatch] = useStoreContext();
 
-  const {complaints} = state;
+  const { complaints } = state;
 
   console.log(complaints);
   const [allComplaints, setComplaints] = useState([]);
@@ -32,15 +59,11 @@ function LatestComplaint() {
   console.log(data);
   const complaintData = data?.complaints || [];
 
-  //   useEffect(() => {
-  //     if (data) {
-  //       setComplaints(complaintData);
-  //     } else if (!loading) {
-  //       console.log("there is an error");
-  //     }
-  //   }, []);
-
   const defaultImageLink = "https://source.unsplash.com/random?wallpapers";
+
+  const handleDelete = async (e) => {
+    console.log;
+  };
 
   return (
     <Grid item xs={12} md={6}>
@@ -73,6 +96,24 @@ function LatestComplaint() {
             />
           </Card>
         </CardActionArea>
+
+        //  {isAdmin ? (
+        //   <div>
+        //     <Button onClick={handleOpen}>Confirm</Button>
+        //     <Modal
+        //       open={open}
+        //       onClose={handleClose}
+        //       aria-labelledby="parent-modal-title"
+        //       aria-describedby="parent-modal-description"
+        //     >
+        //       <Box sx={{ ...style, width: 400 }}>
+        //         <h2 id="parent-modal-title"></h2>
+        //       </Box>
+        //     </Modal>
+        //   </div>
+        // ) : (
+        //   <div></div>
+        // )}
       ))}
     </Grid>
   );
@@ -89,4 +130,22 @@ PropTypes.propTypes = {
 
 export default LatestComplaint;
 
-
+// return (
+//   {isAdmin ? (
+//     <div>
+//       <Button onClick={handleOpen}>Confirm</Button>
+//       <Modal
+//         open={open}
+//         onClose={handleClose}
+//         aria-labelledby="parent-modal-title"
+//         aria-describedby="parent-modal-description"
+//       >
+//         <Box sx={{ ...style, width: 400 }}>
+//           <h2 id="parent-modal-title"></h2>
+//         </Box>
+//       </Modal>
+//     </div>
+//   ) : (
+//     <div></div>
+//   )}
+// )

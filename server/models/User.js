@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
@@ -30,7 +30,7 @@ const userSchema = new Schema(
     },
     isModerator: {
       type: Boolean,
-      default: false
+      default: false,
     },
     complaints: [
       {
