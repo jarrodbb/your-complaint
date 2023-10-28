@@ -42,10 +42,11 @@ function Header(props) {
           {title}
         </Typography>
         <IconButton>
-          <SearchIcon />
         </IconButton>
-        <Button variant="outlined" size="small">
-          Sign up
+        <Button variant="outlined" size="lrg">
+          <Link to="/complaint-form" style={{ textDecoration: "none", color: "inherit" }}>
+          Make A Complaint
+          </Link>
         </Button>
       </Toolbar>
       <Toolbar
