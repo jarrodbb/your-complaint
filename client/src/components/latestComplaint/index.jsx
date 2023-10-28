@@ -39,45 +39,43 @@ function LatestComplaint() {
   //       console.log("there is an error");
   //     }
   //   }, []);
-  
-    return (
-      <Grid item xs={12} md={6}>
-        {complaintData.map((complaint) => (
-          <CardActionArea
-            component="a"
-            href={`/Complaint/${complaint._id}`}
-            key={complaint._id}
-          >
-            <Card sx={{ display: "flex", width: "100%" }}>
-              <CardContent sx={{ flex: 1 }}>
-                <Typography component="h2" variant="h5">
-                  {complaint.title}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                  {complaint.date}
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {complaint.description}
-                </Typography>
-                <Typography variant="subtitle1" color="primary">
-                  Continue reading...
-                </Typography>
-              </CardContent>
-              <CardMedia
-                component="img"
-                sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-                image= {
-                  complaint.image === ""
-                    ? "https://source.unsplash.com/random?wallpapers"
-                    : complaint.image
-                }
-                alt="text"
-              />
-            </Card>
-          </CardActionArea>
-        ))}
-      </Grid>
-    );
+
+  const defaultImageLink = "https://source.unsplash.com/random?wallpapers";
+
+  return (
+    <Grid item xs={12} md={6}>
+      {complaintData.map((complaint) => (
+        <CardActionArea
+          component="a"
+          href={`/Complaint/${complaint._id}`}
+          key={complaint._id}
+        >
+          <Card sx={{ display: "flex", width: "100%" }}>
+            <CardContent sx={{ flex: 1 }}>
+              <Typography component="h2" variant="h5">
+                {complaint.title}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                {complaint.date}
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                {complaint.description}
+              </Typography>
+              <Typography variant="subtitle1" color="primary">
+                Continue reading...
+              </Typography>
+            </CardContent>
+            <CardMedia
+              component="img"
+              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+              image={complaint.image || defaultImageLink}
+              alt="text"
+            />
+          </Card>
+        </CardActionArea>
+      ))}
+    </Grid>
+  );
 }
 PropTypes.propTypes = {
   post: PropTypes.shape({
