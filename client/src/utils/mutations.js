@@ -279,3 +279,37 @@ export const DELETE_COMMENT = gql`
     }
   }
 `;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($username: String!, $email: String!, $password: String) {
+    updateUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+        email
+        password
+        isModerator
+        complaints {
+          _id
+          title
+          description
+          category
+          image
+          date
+          votes
+          unsupportedVotes
+          created
+          comments {
+            _id
+            author
+            description
+            createdAt
+            image
+            link
+          }
+        }
+      }
+    }
+  }
+`;

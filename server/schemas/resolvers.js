@@ -4,6 +4,7 @@
 const { User, Complaints } = require("../models");
 //Import for authentication
 const { signToken, AuthenticationError } = require("../utils/auth");
+const bcrypt = require("bcrypt");
 
 const resolvers = {
   //Query defined to return user. Context used for authentication
@@ -67,15 +68,35 @@ const resolvers = {
       return { token, user };
     },
 
-    updateUser: async (parent, { username, email, password }) => {
+    updateUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
+        if (password) {
+          const saltRounds = 10;
+          hasedPassword = await bcrypt.hash(password, saltRounds);
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            {
+              $set: {
+                username,
+                email,
+                password: hasedPassword,
+              },
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          const token = signToken(user);
+          return { token, user };
+        }
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $set: {
               username,
               email,
-              password,
+              password: hasedPassword,
             },
           },
           {
@@ -83,7 +104,10 @@ const resolvers = {
             runValidators: true,
           }
         );
+        const token = signToken(user);
+        return { token, user };
       }
+
       throw AuthenticationError;
     },
 
