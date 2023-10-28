@@ -1,41 +1,34 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import base64 from 'react-native-base64'
 import { useMutation } from "@apollo/client";
-
 import { CREATE_COMPLAINT } from "../../utils/mutations";
-
-// Import PropTypes validation
 import PropTypes from "prop-types";
 import { GET_COMPLAINTS } from "../../utils/queries";
 
-// Define React functional component called 'ComplaintForm' which takes 'closeModal' as a prop.
+// Define 'ComplaintForm' component, responsible for capturing and submitting user complaints
 const ComplaintForm = ({ closeModal }) => {
+  // Use 'useMutation' hook to execute the 'CREATE_COMPLAINT' mutation from Apollo Client
   const [addComplaint, { error }] = useMutation(CREATE_COMPLAINT);
 
-  // 'category' state variable tracks the selected category for the complaint, with 'General' as the initial value.
+  // Define React state variables to manage form input fields and related data
   const [category, setCategory] = useState("General");
-  // 'complaintText' state variable stores the text of the complaint.
   const [complaintText, setComplaintText] = useState("");
-  // 'image' state variable is used to store an uploaded image (initially set to 'null').
   const [image, setImage] = useState(null);
-
   const [title, setTitle] = useState("");
-
   const [errorMessage, setErrorMessage] = useState("");
-
   const [selectedDate, setSelectedDate] = useState(null);
+  const maxSize = 1024; // Maximum image size in KB
 
-  // const [uploadImage] = useMutation(UPLOAD_IMAGE);
-
-  // 'handleCategoryChange' function updates the 'category' state when the user selects a category.
+  // Event handler to update the 'category' state based on user selection
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
   };
 
-  // 'handleTextChange' function updates the 'complaintText' state as the user types their complaint.
+  // Event handler to validate and update the 'complaintText' state as the user types
   const handleTextChange = (e) => {
+    // Retrieve the input type, input value, and validate user input
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
@@ -48,7 +41,9 @@ const ComplaintForm = ({ closeModal }) => {
     }
   };
 
+  // Event handler to validate and update the 'title' state as the user types
   const handleTitleChange = (e) => {
+    // Retrieve the input type, input value, and validate user input
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
@@ -59,11 +54,12 @@ const ComplaintForm = ({ closeModal }) => {
     }
   };
 
-  // 'handleSubmit' function is called when the user submits the form.
+  // Event handler for form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Execute 'CREATE_COMPLAINT' mutation and send complaint data to the server
       const { data } = await addComplaint({
         variables: {
           title: title,
@@ -72,7 +68,11 @@ const ComplaintForm = ({ closeModal }) => {
           image: image,
           date: selectedDate,
         },
+        // Update complaint list by refetching it from the server
+        refetchQueries: [{ query: GET_COMPLAINTS }],
       });
+
+      // Clear form fields and states upon successful submission
       setCategory("General");
       setImage("");
       setComplaintText("");
@@ -82,23 +82,43 @@ const ComplaintForm = ({ closeModal }) => {
       console.error(err);
     }
 
+    // Close the modal after submission
     closeModal();
   };
 
+  // Function to handle image selection and validate image size
   function convertToBase64(e) {
-    console.log(e);
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      console.log(reader.result);
-      setImage(reader.result);
-    };
-    reader.onerror = (error) => {
-      console.log("error: ", error);
-    };
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+
+        img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+          const fileSize = Math.round(file.size / 1024); // File size in KB
+
+          if (fileSize > maxSize) {
+            setErrorMessage("Image size is too large. Please choose a smaller image.");
+            setImage(null); // Clear the image
+          } else {
+            setImage(reader.result); // Image is within size limits
+          }
+        };
+      };
+
+      reader.onerror = (error) => {
+        console.log("error: ", error);
+      };
+    }
   }
 
-  // Render complaint form within a <div> element.
+  // Render the complaint form as a part of the user interface
   return (
     <div className="complaint-form">
       <h2>Make a Complaint</h2>
@@ -106,6 +126,7 @@ const ComplaintForm = ({ closeModal }) => {
         <label>
           Category:
           <select value={category} onChange={handleCategoryChange}>
+            {/* Define available complaint categories */}
             <option value="General">General</option>
             <option value="Food">Food</option>
             <option value="Work">Work</option>
@@ -116,7 +137,7 @@ const ComplaintForm = ({ closeModal }) => {
             <option value="Random">Random</option>
           </select>
         </label>
-        {/* Textarea for entering the complaint text */}
+        {/* Input field for the complaint title */}
         <textarea
           placeholder="Title"
           value={title}
@@ -125,6 +146,7 @@ const ComplaintForm = ({ closeModal }) => {
           required
           onChange={handleTitleChange}
         />
+        {/* Text area for entering the complaint description */}
         <textarea
           placeholder="Type your complaint here"
           value={complaintText}
@@ -133,6 +155,7 @@ const ComplaintForm = ({ closeModal }) => {
           required
           onChange={handleTextChange}
         />
+        {/* DatePicker component for selecting the complaint date */}
         <div className="App">
           <DatePicker
             selected={selectedDate}
@@ -147,19 +170,19 @@ const ComplaintForm = ({ closeModal }) => {
         </div>
         <div className="auth-wrapper">
           <div className="auth-inner" style={{ width: "auto" }}>
+            {/* Input for uploading an image */}
             Upload an image <br />
             <input accept="image/*" type="file" onChange={convertToBase64} />
-            {image === "" || image == null ? (
-              ""
-            ) : (
-              <img width={100} height={100} src={image} />
-            )}
+            {/* Display the selected image */}
+            {image ? (
+              <img width={300} height={300} src={image} alt="Uploaded" />
+            ) : null}
           </div>
         </div>
-
-        {/* Submission button */}
+        {/* Button to submit the complaint */}
         <button type="submit">Submit Complaint</button>
       </form>
+      {/* Display error message if there is any */}
       {errorMessage && (
         <div>
           <p className="error-text p-2 error-display mt-2">{errorMessage}</p>
@@ -169,10 +192,10 @@ const ComplaintForm = ({ closeModal }) => {
   );
 };
 
-// PropTypes validation to ensure that props are passed correctly
+// PropTypes validation to ensure 'closeModal' prop is passed correctly
 ComplaintForm.propTypes = {
   closeModal: PropTypes.func.isRequired,
 };
 
-// Export 'ComplaintForm' component to make it available for use in other parts of app
+// Export 'ComplaintForm' component for use in other parts of the application
 export default ComplaintForm;
