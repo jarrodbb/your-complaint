@@ -1,21 +1,13 @@
 import { useState, useEffect } from "react";
-// import { useStoreContext } from '../../utils/GlobalState';
-
 import { useQuery } from "@apollo/client";
 import { GET_COMPLAINTS } from "../../utils/queries";
-
-import Container from "@mui/material/Container";
-import TopVote from "../../components/topVotedPost";
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
 import CardActionArea from "@mui/material/CardActionArea";
+import { Link } from "react-router-dom";
 
-// const theme = createTheme();
 
 function DisplayTopVoted() {
   const [allComplaints, setComplaints] = useState([]);
@@ -38,7 +30,10 @@ function DisplayTopVoted() {
   console.log("maxVotesComplaint is", maxVotesComplaint);
 
   return (
-    <CardActionArea component="a" href="">
+    <CardActionArea
+      component={Link}
+      to={maxVotesComplaint ? `/Complaint/${maxVotesComplaint._id}` : "#"}
+    >
       <Paper
         sx={{
           position: "relative",

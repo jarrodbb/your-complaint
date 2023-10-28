@@ -156,10 +156,10 @@ function SingleComplaint() {
               {singleComplaint.description}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {singleComplaint.votes}'s votes of support
+              {singleComplaint.votes}&aposs votes of support
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {singleComplaint.unsupportedVotes}'s votes not in support
+              {singleComplaint.unsupportedVotes}&aposs votes not in support
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {singleComplaint.createdAt}
@@ -220,8 +220,8 @@ function SingleComplaint() {
           ) : (
             <p>
               You need to be logged in to add a vote. Please{" "}
-              <Link to="/login">login</Link> or{" "}
-              <Link to="/signup">signup.</Link>
+              <Link to="/SignIn">login</Link> or {" "}
+              <Link to="/SignUp">signup.</Link>
             </p>
           )}
         </div>
