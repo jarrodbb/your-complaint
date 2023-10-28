@@ -9,10 +9,6 @@ export default function EditCommentForm({ complaintID, comment, handleClose }) {
   const userName = Auth.getProfile().data.username;
   const [updateComment, { error }] = useMutation(UPDATE_COMMENT);
   const [descriptionText, setDescriptionText] = useState(comment.description);
-  console.log("complaintID " + complaintID);
-  console.log("commentID " + comment._id);
-
-  console.log("des " + descriptionText);
 
   const handleTextChange = (e) => {
     setDescriptionText(e.target.value);
@@ -27,7 +23,6 @@ export default function EditCommentForm({ complaintID, comment, handleClose }) {
           commentID: comment._id,
           description: descriptionText,
           author: userName,
-         
         },
       });
     } catch (err) {

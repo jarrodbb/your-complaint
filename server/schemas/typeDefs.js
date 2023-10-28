@@ -47,7 +47,7 @@ type Query {
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    updateUser(username: String!, email: String!, password: String!): User
+    updateUser(username: String!, email: String!, password: String): Auth
     addComplaint(description: String!, title:String!, category: String!, date: String, image: String): User
     updateComplaint(complaintID: ID!, title:String, category: String, description: String!, date:String): Complaints
     deleteComplaint(complaintID: ID!): User
