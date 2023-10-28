@@ -8,6 +8,7 @@ export const CREATE_COMPLAINT = gql`
     $description: String!
     $title: String!
     $category: String!
+    $username: String
     $date: String
     $image: String
   ) {
@@ -15,6 +16,7 @@ export const CREATE_COMPLAINT = gql`
       description: $description
       title: $title
       category: $category
+      username: $username
       date: $date
       image: $image
     ) {
@@ -66,6 +68,7 @@ export const UPDATE_COMPLAINT = gql`
       title
       description
       category
+      username
       image
       date
       votes
@@ -97,6 +100,7 @@ export const DELETE_COMPLAINT = gql`
         title
         description
         category
+        username
         image
         date
         votes
@@ -310,6 +314,14 @@ export const UPDATE_USER = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const DELETE_USER = gql`
+  mutation deleteUser($userID: ID!, $username: String!) {
+    deleteUser(userID: $userID, username: $username) {
+      message
     }
   }
 `;

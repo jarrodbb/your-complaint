@@ -18,6 +18,9 @@ const complaintSchema = new Schema(
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+    },
 
     image: {
       type: String,
