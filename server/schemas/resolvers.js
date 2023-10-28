@@ -202,9 +202,9 @@ const resolvers = {
 
     removeComment: async (parent, { complaintID, commentID }, context) => {
       if (context.user) {
-        const complaint = await Complaints.findByIdAndUpdate(
+        const complaint = await Complaints.findOneAndUpdate(
           { _id: complaintID },
-          { $pull: { comments: { commentID } } },
+          { $pull: { comments: { _id: commentID } } },
           { runValidators: true, new: true }
         );
         return complaint;

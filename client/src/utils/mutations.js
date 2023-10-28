@@ -232,3 +232,27 @@ export const UPDATE_COMMENT = gql`
     }
   }
 `;
+
+export const DELETE_COMMENT = gql`
+  mutation removeComment($complaintID: ID!, $commentID: ID!) {
+    removeComment(complaintID: $complaintID, commentID: $commentID) {
+      _id
+      title
+      description
+      category
+      image
+      date
+      votes
+      unsupportedVotes
+      created
+      comments {
+        _id
+        author
+        description
+        createdAt
+        image
+        link
+      }
+    }
+  }
+`;

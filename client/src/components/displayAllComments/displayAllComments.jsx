@@ -8,7 +8,9 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
+import { useMutation } from "@apollo/client";
 import EditCommentForm from "../../components/editCommentForm/editCommentForm";
+import { DELETE_COMMENT } from "../../utils/mutations";
 
 const style = {
   position: "absolute",
@@ -25,12 +27,26 @@ const style = {
 };
 
 function DisplayAllComments({ complaintID, comment, currentUser }) {
+  const [removeComment, { error }] = useMutation(DELETE_COMMENT);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleDeleteComment = async () => {
+    try {
+      await removeComment({
+        variables: {
+          complaintID: complaintID,
+          commentID: comment._id,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <Grid item xs={12} md={6}>
@@ -73,6 +89,9 @@ function DisplayAllComments({ complaintID, comment, currentUser }) {
               />
             </Box>
           </Modal>
+          <div>
+            <Button onClick={handleDeleteComment}>Delete</Button>
+          </div>
         </div>
       ) : (
         <div></div>
