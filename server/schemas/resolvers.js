@@ -264,6 +264,21 @@ const resolvers = {
       );
       return complaints;
     },
+
+    adminDelete: async (parent, { complaintID, username }, context) => {
+      if (context.user) {
+        const userComplaint = await Complaints.findByIdAndRemove({
+          _id: complaintID,
+        });
+        const user = await User.findOneAndUpdate(
+          { username: username },
+          { $pull: { complaints: complaintID } },
+          { runValidators: true, new: true }
+        );
+        const complaints = await Complaints.find();
+        return complaints;
+      }
+    },
   },
 };
 

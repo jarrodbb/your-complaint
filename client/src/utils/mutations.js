@@ -325,3 +325,28 @@ export const DELETE_USER = gql`
     }
   }
 `;
+
+export const ADMIN_DELETE = gql`
+  mutation adminDelete($complaintID: ID!, $username: String!) {
+    adminDelete(complaintID: $complaintID, username: $username) {
+      _id
+      title
+      description
+      category
+      username
+      image
+      date
+      votes
+      unsupportedVotes
+      created
+      comments {
+        _id
+        author
+        description
+        createdAt
+        image
+        link
+      }
+    }
+  }
+`;

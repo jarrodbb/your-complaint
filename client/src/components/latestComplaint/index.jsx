@@ -19,28 +19,31 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { useStoreContext } from "../../utils/GlobalState";
 import Modal from "@mui/material/Modal";
+import LatestComplaintCard from "../latestComplaintCard/latestComplaintCard";
 
 import * as React from "react";
 import Box from "@mui/material/Box";
+import DeleteAdmin from "../adminDelete/adminDelete";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   pt: 2,
+//   px: 4,
+//   pb: 3,
+// };
 
 const theme = createTheme();
 
-function LatestComplaint(isAdmin) {
+function LatestComplaint({ isAdmin }) {
   const [open, setOpen] = React.useState(false);
+  console.log("is this person admin " + isAdmin);
 
   const handleOpen = () => {
     setOpen(true);
@@ -68,52 +71,30 @@ function LatestComplaint(isAdmin) {
   return (
     <Grid item xs={12} md={6}>
       {complaintData.map((complaint) => (
-        <CardActionArea
-          component="a"
-          href={`/Complaint/${complaint._id}`}
-          key={complaint._id}
-        >
-          <Card sx={{ display: "flex", width: "100%" }}>
-            <CardContent sx={{ flex: 1 }}>
-              <Typography component="h2" variant="h5">
-                {complaint.title}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary">
-                {complaint.date}
-              </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {complaint.description}
-              </Typography>
-              <Typography variant="subtitle1" color="primary">
-                Continue reading...
-              </Typography>
-            </CardContent>
-            <CardMedia
-              component="img"
-              sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-              image={complaint.image || defaultImageLink}
-              alt="text"
-            />
-          </Card>
-        </CardActionArea>
+        <div key={complaint._id}>
+          <LatestComplaintCard complaint={complaint} isAdmin={isAdmin}/>
 
-        //  {isAdmin ? (
-        //   <div>
-        //     <Button onClick={handleOpen}>Confirm</Button>
-        //     <Modal
-        //       open={open}
-        //       onClose={handleClose}
-        //       aria-labelledby="parent-modal-title"
-        //       aria-describedby="parent-modal-description"
-        //     >
-        //       <Box sx={{ ...style, width: 400 }}>
-        //         <h2 id="parent-modal-title"></h2>
-        //       </Box>
-        //     </Modal>
-        //   </div>
-        // ) : (
-        //   <div></div>
-        // )}
+          {/* {isAdmin === true ? (
+            <div>
+              <Button onClick={handleOpen}>Admin Delete</Button>
+              <>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="parent-modal-title"
+                  aria-describedby="parent-modal-description"
+                >
+                  <Box sx={{ ...style, width: 400 }}>
+                    <h2 id="parent-modal-title"></h2>
+                    <DeleteAdmin complaintID={complaint._id} complaintUsername={complaint.username} />
+                  </Box>
+                </Modal>
+              </>
+            </div>
+          ) : (
+            <div></div>
+          )} */}
+        </div>
       ))}
     </Grid>
   );
