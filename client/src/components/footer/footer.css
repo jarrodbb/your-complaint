@@ -1,8 +1,42 @@
-.footer-text {
-    padding-bottom: 15%;
-    padding-top: 15%;
+/* Styles for the main footer container */
+.footer {
+  background-color: #333;
+  /* color: #fff; */
+  padding: 20px 0;
+  text-align: center;
 }
 
+/* Styling for the footer text */
+.footer-text {
+  margin-bottom: 10px !important;
+  padding-bottom: 15% !important;
+  padding-top: 15% !important;
+}
+
+/* Styling for the social icons */
+.social-icons {
+  margin-top: 10px;
+}
+
+/* Styling for the individual social icons */
+.social-icons a {
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+/* Styling for the social icons on hover */
+.social-icons a:hover {
+  text-decoration: underline;
+  color: rgb(186, 221, 221);
+}
+
+/* Styling for the font awesome icons */
 .icon {
-  margin-right: 10px;
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Styling for the copyright text */
+.footer-copyright {
+  margin-top: 10px;
 }
