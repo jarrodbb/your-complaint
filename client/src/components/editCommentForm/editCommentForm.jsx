@@ -43,7 +43,7 @@ export default function EditCommentForm({ complaintID, comment, handleClose }) {
         />
 
         {/* Submission button */}
-        <button type="submit">Submit Complaint</button>
+        <button type="submit">Submit update</button>
       </form>
     </div>
   );
