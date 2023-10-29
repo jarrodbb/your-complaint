@@ -1,0 +1,50 @@
+/* donate.css */
+
+#donate {
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.text-box {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.text-box p {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.text-box p:hover {
+  text-decoration: underline;
+}
+
+/* Modal */
+.MuiModal-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.MuiPaper-root {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.MuiPaper-root h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
