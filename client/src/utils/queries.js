@@ -12,6 +12,7 @@ export const GET_COMPLAINTS = gql`
       title
       description
       category
+      username
       date
       votes
       unsupportedVotes
@@ -37,6 +38,7 @@ export const GET_COMPLAINT = gql`
       title
       description
       category
+      username
       image
       date
       votes
@@ -113,6 +115,7 @@ export const GET_COMPLAINTS_BY_CATEGORY = gql`
       title
       description
       category
+      username
       image
       date
       votes
@@ -142,6 +145,7 @@ export const GET_ME = gql`
         title
         description
         category
+        username
         image
         date
         votes

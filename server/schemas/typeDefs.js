@@ -62,6 +62,7 @@ type Mutation {
     removeComment(complaintID: ID!, commentID:ID!): Complaints
     createVote(complaintID: ID!): Complaints
     createVoteUnsupported(complaintID: ID!): Complaints
+    adminDelete(complaintID: ID!, username: String!): [Complaints]
 }
 
 `;

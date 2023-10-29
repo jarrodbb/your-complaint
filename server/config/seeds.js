@@ -36,6 +36,7 @@ db.once("open", async () => {
       description: "My mate stole my lunch, should i eat him?",
       image: "",
       category: "Work",
+      username: "kalid",
       date: "05/05/23",
       votes: 10,
       comments: [
@@ -58,6 +59,7 @@ db.once("open", async () => {
       description: "I want my workers to work 18 hours a day but they refused?",
       image: "",
       category: "Work",
+      username: "kindBoss",
       date: "05/05/23",
       votes: 1,
       comments: [
@@ -81,6 +83,7 @@ db.once("open", async () => {
         "Inflation is high but my daughter hasn't paid rent in 9 years now!! should i call the police?",
       image: "",
       category: "Finance",
+      username: "karen007",
       date: "05/05/23",
       votes: 1,
       comments: [
@@ -109,6 +112,7 @@ db.once("open", async () => {
       description: "CEO says SUCKS FOR YOU GUYS",
       image: "",
       category: "Technology",
+      username: "karen007",
       date: "05/05/23",
       votes: 1,
       comments: [
@@ -126,6 +130,7 @@ db.once("open", async () => {
         "My vegan cat hasn't been moving for about a month now and i think my Dr is really rude using words like is she dead or is the cat alseep",
       image: "",
       category: "Health",
+      username: "karen007",
       date: "05/05/23",
       votes: 1,
       comments: [
@@ -142,6 +147,7 @@ db.once("open", async () => {
       description: "My neighbour was slightly annoyed, Thoughts?",
       image: "",
       category: "Random",
+      username: "kalid",
       date: "05/05/23",
       votes: 4,
       comments: [
@@ -159,6 +165,7 @@ db.once("open", async () => {
         "My baby was born without clothes, did the doctor steal them?",
       image: "",
       category: "Life",
+      username: "kalid",
       date: "01/01/19",
       votes: 2,
       comments: [
@@ -187,6 +194,7 @@ db.once("open", async () => {
       description: "CEOs rejoice as more babies return to the workplace",
       image: "",
       category: "General",
+      username: "kindBoss",
       date: "01/01/19",
       votes: 2,
       comments: [
@@ -228,7 +236,7 @@ db.once("open", async () => {
 
     password: "abcd1234",
     isModerator: false,
-    complaints: [complaints[1]._id],
+    complaints: [complaints[1]._id, complaints[6]._id, complaints[7]._id],
   });
 
   await User.create({
@@ -237,7 +245,7 @@ db.once("open", async () => {
 
     password: "abcd1234",
     isModerator: false,
-    complaints: [complaints[3]._id],
+    complaints: [complaints[3]._id, complaints[4]._id, complaints[5]._id],
   });
 
   await User.create({
@@ -245,7 +253,7 @@ db.once("open", async () => {
     email: "kindboss@gmail.com",
     password: "abcd1234",
     isModerator: false,
-    complaints: [complaints[2]._id],
+    complaints: [complaints[2]._id, complaints[8]._id],
   });
 
   console.log("users seeded");
