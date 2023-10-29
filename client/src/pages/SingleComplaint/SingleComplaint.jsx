@@ -202,7 +202,7 @@ function SingleComplaint() {
           <div></div>
         )}
         <div>
-          {Auth.loggedIn() ? (
+          {Auth.loggedIn() && currentUser != userComplaint.username ? (
             <div>
               <button
                 className="btn btn-sm btn-danger ml-auto"
@@ -218,11 +218,23 @@ function SingleComplaint() {
               </button>
             </div>
           ) : (
+            <div></div>
+            // <p>
+            //   You need to be logged in to add a vote. Please{" "}
+            //   <Link to="/SignIn">login</Link> or {" "}
+            //   <Link to="/SignUp">signup.</Link>
+            // </p>
+          )}
+        </div>
+        <div>
+          {!Auth.loggedIn() ? (
             <p>
               You need to be logged in to add a vote. Please{" "}
-              <Link to="/SignIn">login</Link> or {" "}
+              <Link to="/SignIn">login</Link> or{" "}
               <Link to="/SignUp">signup.</Link>
             </p>
+          ) : (
+            <div></div>
           )}
         </div>
       </Grid>
