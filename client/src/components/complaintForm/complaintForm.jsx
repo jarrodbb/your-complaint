@@ -28,6 +28,22 @@ const ComplaintForm = ({ closeModal }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const maxSize = 1024; // Maximum image size in KB
 
+  console.log(selectedDate);
+
+  if (selectedDate) {
+    const test = selectedDate.toString();
+    const myArray = test.split(" ");
+    console.log(myArray);
+    let elementstodelete = 6;
+    let k = myArray.filter((x, i) => i + elementstodelete < myArray.length);
+    console.log(k);
+    const formattedDate = k.join(" ");
+    console.log(formattedDate);
+  }
+
+  // console.log(new Date(selectedDate));
+  console.log(Date.now());
+
   // Event handler to update the 'category' state based on user selection
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
@@ -66,29 +82,66 @@ const ComplaintForm = ({ closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Execute 'CREATE_COMPLAINT' mutation and send complaint data to the server
-      const { data } = await addComplaint({
-        variables: {
-          title: title,
-          description: complaintText,
-          category: category,
-          username: username,
-          image: image,
-          date: selectedDate,
-        },
-        // Update complaint list by refetching it from the server
-        refetchQueries: [{ query: GET_COMPLAINTS }],
-      });
+    if (selectedDate) {
+      const test = selectedDate.toString();
+      const myArray = test.split(" ");
+      console.log(myArray);
+      let elementstodelete = 6;
+      let k = myArray.filter((x, i) => i + elementstodelete < myArray.length);
+      console.log(k);
+      const formattedDate = k.join(" ");
+      console.log(formattedDate);
 
-      // Clear form fields and states upon successful submission
-      setCategory("General");
-      setImage("");
-      setComplaintText("");
-      setSelectedDate(null);
-      setTitle("");
-    } catch (err) {
-      console.error(err);
+      try {
+        // Execute 'CREATE_COMPLAINT' mutation and send complaint data to the server
+        const { data } = await addComplaint({
+          variables: {
+            title: title,
+            description: complaintText,
+            category: category,
+            username: username,
+            image: image,
+            date: formattedDate,
+          },
+          // Update complaint list by refetching it from the server
+          refetchQueries: [{ query: GET_COMPLAINTS }],
+        });
+
+        // Clear form fields and states upon successful submission
+        setCategory("General");
+        setImage("");
+        setComplaintText("");
+        setSelectedDate(null);
+        setTitle("");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    if (!selectedDate) {
+      try {
+        // Execute 'CREATE_COMPLAINT' mutation and send complaint data to the server
+        const { data } = await addComplaint({
+          variables: {
+            title: title,
+            description: complaintText,
+            category: category,
+            username: username,
+            image: image,
+          },
+          // Update complaint list by refetching it from the server
+          refetchQueries: [{ query: GET_COMPLAINTS }],
+        });
+
+        // Clear form fields and states upon successful submission
+        setCategory("General");
+        setImage("");
+        setComplaintText("");
+        setSelectedDate(null);
+        setTitle("");
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     // Close the modal after submission

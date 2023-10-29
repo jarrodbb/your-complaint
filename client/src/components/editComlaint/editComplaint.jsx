@@ -73,6 +73,14 @@ export default function EditComplaint({
       }
       handleClose();
     } else {
+      const test = selectedDate.toString();
+      const myArray = test.split(" ");
+      console.log(myArray);
+      let elementstodelete = 6;
+      let k = myArray.filter((x, i) => i + elementstodelete < myArray.length);
+      console.log(k);
+      const formattedDate = k.join(" ");
+      console.log(formattedDate);
       try {
         const { data } = await updateComplaint({
           variables: {
@@ -80,7 +88,7 @@ export default function EditComplaint({
             description: complaintText,
             title: complaintTitle,
             category: complaintCategory,
-            date: selectedDate,
+            date: formattedDate,
           },
         });
       } catch (err) {
@@ -136,7 +144,7 @@ export default function EditComplaint({
             scrollableMonthYearDropdown
           />
         </div>
-        <button type="submit">Submit Complaint</button>
+        <button type="submit">Submit Updated Complaint</button>
       </form>
     </div>
   );
