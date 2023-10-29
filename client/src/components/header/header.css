@@ -1,31 +1,39 @@
 /* Styling for the main header container */
 .header {
-  background-color: #ffffff;
-  color: #171010;
-  padding: 20px;
-  padding-top: 60px;
-  /* z-index: 1001; */
+  background-color: #fafcfc !important;
+  color: #1d1313;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Styling for the "Subscribe" button */
 .header .header-subscribe {
-  margin-right: 20px;
   background-color: #0073e6;
   color: #fff;
+  padding: 4px 18px;
+  border: 2px solid #0073e6;
+  margin-right: 10px;
 }
 .header .header-subscribe:hover {
-  background-color: #ffffff;
-  color: blue;
+  background-color: #61d7de;
 }
 
-/* Styling for the "Make A Complaint" button */
+/* Styling for the "Make a Complaint" button */
 .header .header-complaint {
-  background-color: #0073e6;
-  color: #fff;
-}
+    background-color: #0073e6;
+    color: #fff;
+    padding: 6px 12px;
+    border: 2px solid #0073e6;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 10px;
+  }
+
+/* Styling for the "Make a Complaint" button on hover */
 .header .header-complaint:hover {
-  background-color: white;
-  color: blue;
+  background-color: #61d7de;
 }
 
 /* Styling for the navigation links */
@@ -33,10 +41,74 @@
   text-decoration: none;
   color: #0073e6;
   margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 /* Styling for the navigation links on hover */
 .header .header-nav-link:hover {
   text-decoration: underline;
   color: #ff5722;
+}
+
+/* Styling for the modal background */
+.complaint-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Styling for the modal content */
+.complaint-form form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Styling for the modal form elements */
+.complaint-form label {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+/* Styling for the modal form textareas */
+.complaint-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+
+/* Styling for the modal form buttons */
+.complaint-form button {
+  background: #0073e6;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Styling for the modal form buttons on hover */
+.complaint-form button:hover {
+  background: #ff9c22;
+}
+
+/* Styling for the error message */
+.error-display {
+  color: #ff2600;
 }
