@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./header.css";
 
 import PropTypes from "prop-types";
@@ -8,14 +8,25 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import ComplaintForm from "../../components/complaintForm/complaintForm";
 
 function Header(props) {
   const { sections, title } = props;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <React.Fragment>
       <Toolbar className="header" sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Button size="small" className="header-subscribe">
+        <Button className="header-subscribe" variant="contained" color="primary">
           Subscribe
         </Button>
         <Typography
@@ -28,11 +39,15 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <Button variant="outlined" size="large" className="header-complaint">
-          <Link to="/complaint-form" style={{ textDecoration: "none", color: "inherit" }}>
-            Make A Complaint
-          </Link>
+        <Button
+          onClick={openModal}
+          className="header-complaint"
+          variant="contained"
+          color="primary"
+        >
+          Make a Complaint
         </Button>
+        {isModalOpen && <ComplaintForm closeModal={closeModal} />}
       </Toolbar>
       <Toolbar
         component="nav"
@@ -61,10 +76,10 @@ Header.propTypes = {
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
+      url: PropTypes.string.isRequired,
     })
   ).isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 export default Header;

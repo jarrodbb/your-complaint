@@ -90,10 +90,6 @@ export default function Homepage() {
         <Header title="Complain" sections={sections} />
         <DisplayTopVoted />
         <LatestComplaint isAdmin={isAdmin} />
-        <button onClick={openModal} className="make-complaint-button">
-          Make a Complaint
-        </button>
-        {isModalOpen && <ComplaintForm closeModal={closeModal} />}
         <Grid
           container
           justifyContent="center"
