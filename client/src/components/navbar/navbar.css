@@ -1,45 +1,55 @@
 /* Styles for the nav bar */
 .navbar-container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  background-color: #333;
-  padding: 10px;
-  display: flex;
-  justify-content:center;
-  width: 100vw;
-  z-index: 1000;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  background-color: #37a3b6 !important;
+  padding: 10px !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  z-index: 1000 !important;
 }
 
-.navbar-container a:hover {
-  background: rgba(255, 0, 0, 0.3);
+/* Common styling for navigation links and buttons */
+.nav-link {
+  margin-left: 15px !important;
+  text-decoration: none !important;
+  color: #ffffff !important;
+  padding: 10px 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  border: none !important;
+  background: none !important;
+  transition: color 0.3s ease !important;
 }
 
-.navbar a {
-  margin-left: 15px;
-  text-decoration: none;
-  color: #ffffff;
+/* Hover effect for navigation links and buttons */
+.nav-link:hover {
+  background: rgba(162, 113, 113, 0.3) !important;
+  color: #007bff !important;
+  transition: color 0.3s ease !important;
 }
 
-.navbar i {
-  margin-right: 5px;
+/* Style for the icons */
+.nav-link i {
+  margin-right: 25px !important;
 }
 
 @media screen and (max-width: 768px) {
   .navbar-container {
-    padding: 0.4rem 0.7rem;
+    padding: 0.4rem 0.7rem !important;
   }
 
-  .navbar-container a {
-    padding: 0.7rem; 
-    font-size: 0.9rem;
+  .navbar-container .nav-link {
+    padding: 0.7rem !important;
+    font-size: 0.9rem !important;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .navbar-container a {
-   font-size: 0.6rem;
-   /* display: none; */
-  
-}
+  .navbar-container .nav-link {
+    font-size: 0.6rem !important;
+  }
 }

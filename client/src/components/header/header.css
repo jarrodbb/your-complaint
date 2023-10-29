@@ -1,8 +1,10 @@
 /* Styling for the main header container */
 .header {
-  background-color: #333;
-  color: #fff;
+  background-color: #ffffff;
+  color: #171010;
   padding: 20px;
+  padding-top: 60px;
+  /* z-index: 1001; */
 }
 
 /* Styling for the "Subscribe" button */
@@ -11,11 +13,19 @@
   background-color: #0073e6;
   color: #fff;
 }
+.header .header-subscribe:hover {
+  background-color: #ffffff;
+  color: blue;
+}
 
 /* Styling for the "Make A Complaint" button */
 .header .header-complaint {
-  background-color: #ff5722;
+  background-color: #0073e6;
   color: #fff;
+}
+.header .header-complaint:hover {
+  background-color: white;
+  color: blue;
 }
 
 /* Styling for the navigation links */

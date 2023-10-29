@@ -21,7 +21,7 @@ const NavBar = () => {
           Home
         </Link>
         {/* Link for "Profile" */}
-        <Link to="/profile" data-text="Profile">
+        <Link to="/profile" className={currentPage === "/Profile" ? "nav-link active" : "nav-link"}>
           <i className="far fa-user"></i>
           Profile
         </Link>
@@ -48,9 +48,10 @@ const NavBar = () => {
         {/* Conditional rendering for "Sign-up/Sign-in" or "Logout" */}
         {isAuthenticated ? (
           // Render Logout button if user is authenticated
-          <button onClick={handleLogout}>
+          <button onClick={handleLogout} className={isAuthenticated ? "nav-link" : "nav-link-hidden"}>
             <i className="far fa-user"></i> Logout
           </button>
+
         ) : (
           // Render Login button if user is not authenticated
           <button>

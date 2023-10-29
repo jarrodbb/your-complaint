@@ -1,7 +1,6 @@
-// import React from "react";
+import React from "react";
 import "./header.css";
 
-import * as React from "react";
 import PropTypes from "prop-types";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
@@ -10,27 +9,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
-// import CategoryPage from "../../pages/categorypage/categorypage";
-
-
-// const Header = () => {
-//   return (
-//     <header id="header" className="header">
-//       <p>Hello World let's complain (header stuff for now )</p>
-
-//     </header>
-//   );
-// };
-
-// export default Header;
-
 function Header(props) {
   const { sections, title } = props;
 
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Button size="small">Subscribe</Button>
+      <Toolbar className="header" sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Button size="small" className="header-subscribe">
+          Subscribe
+        </Button>
         <Typography
           component="h2"
           variant="h5"
@@ -41,11 +28,9 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
-        </IconButton>
-        <Button variant="outlined" size="lrg">
+        <Button variant="outlined" size="large" className="header-complaint">
           <Link to="/complaint-form" style={{ textDecoration: "none", color: "inherit" }}>
-          Make A Complaint
+            Make A Complaint
           </Link>
         </Button>
       </Toolbar>
@@ -61,10 +46,10 @@ function Header(props) {
             key={section.title}
             variant="body2"
             href={section.url}
+            className="header-nav-link"
             sx={{ p: 1, flexShrink: 0 }}
           >
             {section.title}
-            {/* <CategoryPage category={section.url} /> */}
           </Link>
         ))}
       </Toolbar>
