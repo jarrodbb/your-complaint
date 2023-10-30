@@ -84,7 +84,7 @@ const resolvers = {
       if (context.user) {
         if (password) {
           const saltRounds = 10;
-          hasedPassword = await bcrypt.hash(password, saltRounds);
+          const hasedPassword = await bcrypt.hash(password, saltRounds);
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
             {
@@ -108,7 +108,6 @@ const resolvers = {
             $set: {
               username,
               email,
-              password: hasedPassword,
             },
           },
           {
