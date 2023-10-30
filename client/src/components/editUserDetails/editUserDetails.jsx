@@ -109,7 +109,7 @@ export default function EditUserDetails({
         />
 
         {/* Submission button */}
-        <button type="submit">Submit Complaint</button>
+        <button type="submit">Submit Update</button>
       </form>
       {errorMessage && (
         <div>
