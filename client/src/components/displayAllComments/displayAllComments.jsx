@@ -81,7 +81,7 @@ function DisplayAllComments({ complaintID, comment, currentUser }) {
             aria-describedby="parent-modal-description"
           >
             <Box sx={{ ...style, width: 400 }}>
-              <h2 id="parent-modal-title">Text in a modal</h2>
+              
               <EditCommentForm
                 complaintID={complaintID}
                 comment={comment}

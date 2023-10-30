@@ -156,10 +156,10 @@ function SingleComplaint() {
               {singleComplaint.description}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {singleComplaint.votes}&aposs votes of support
+              {singleComplaint.votes} votes of support
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {singleComplaint.unsupportedVotes}&aposs votes not in support
+              {singleComplaint.unsupportedVotes} votes not in support
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {singleComplaint.createdAt}
@@ -182,7 +182,6 @@ function SingleComplaint() {
               aria-describedby="parent-modal-description"
             >
               <Box sx={{ ...style, width: 400 }}>
-                <h2 id="parent-modal-title">Text in a modal</h2>
                 <EditComplaint
                   complaintId={singleComplaint._id}
                   title={singleComplaint.title}
@@ -237,6 +236,42 @@ function SingleComplaint() {
             <div></div>
           )}
         </div>
+        <>
+          {Auth.loggedIn() ? (
+          
+              <button onClick={openModal} className="make-complaint-button">
+                Add a comment
+              </button>
+              // <Modal
+              //   open={isModalOpen}
+              //   onClose={openModal}
+              //   aria-labelledby="parent-modal-title"
+              //   aria-describedby="parent-modal-description"
+              // >
+              //   <Box sx={{ ...style, width: 400 }}>
+              //     <CommentForm
+              //       closeModal={closeModal}
+              //       singleComplaint={singleComplaint}
+              //     />
+              //   </Box>
+              // </Modal>
+          
+          ) : (
+            <p>
+              You need to be logged in to add a comment. Please{" "}
+              <Link to="/login">login</Link> or{" "}
+              <Link to="/signup">signup.</Link>
+            </p>
+          )}
+          {isModalOpen && (
+         
+                <CommentForm
+                  closeModal={closeModal}
+                  singleComplaint={singleComplaint}
+                />
+           
+          )}
+        </>
       </Grid>
       <Grid item xs={12} md={6}>
         <div className="col-12 col-md-10 my-3">
@@ -244,34 +279,22 @@ function SingleComplaint() {
             <div>Loading...</div>
           ) : (
             <div>
-              {complaintComments.map((comment) => (
-                <div key={comment._id}>
-                  <DisplayAllComments
-                    complaintID={complaintID}
-                    comment={comment}
-                    currentUser={currentUser}
-                  />
-                </div>
-              ))}
+              {{ complaintComments } ? (
+                complaintComments.map((comment) => (
+                  <div key={comment._id}>
+                    <DisplayAllComments
+                      complaintID={complaintID}
+                      comment={comment}
+                      currentUser={currentUser}
+                    />
+                  </div>
+                ))
+              ) : (
+                <>No Comments</>
+              )}
             </div>
           )}
         </div>
-        {Auth.loggedIn() ? (
-          <button onClick={openModal} className="make-complaint-button">
-            Add a comment
-          </button>
-        ) : (
-          <p>
-            You need to be logged in to add a comment. Please{" "}
-            <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-          </p>
-        )}
-        {isModalOpen && (
-          <CommentForm
-            closeModal={closeModal}
-            singleComplaint={singleComplaint}
-          />
-        )}
       </Grid>
     </Grid>
   );

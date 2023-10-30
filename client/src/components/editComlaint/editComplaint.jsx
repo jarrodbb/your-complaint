@@ -100,7 +100,7 @@ export default function EditComplaint({
 
   return (
     <div className="complaint-form">
-      <h2>Edit your complaint {username}</h2>
+     
       <form onSubmit={handleSubmit}>
         <label>
           Category:

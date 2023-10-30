@@ -191,7 +191,7 @@ function SingleComplaint() {
                         aria-describedby="parent-modal-description"
                       >
                         <Box sx={{ ...style, width: 400 }}>
-                          <h2 id="parent-modal-title">Text in a modal</h2>
+                     
                           <EditCommentForm
                             commentDescription={comment.description}
                           />
@@ -206,29 +206,7 @@ function SingleComplaint() {
             </div>
           )}
         </div>
-        {/*
-        <div>
-          {complaintComments.map((comment) =>
-            currentUser === comment.author ? (
-              <div key={comment._id}>
-                <Button onClick={handleOpen}>Edit</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="parent-modal-title"
-                  aria-describedby="parent-modal-description"
-                >
-                  <Box sx={{ ...style, width: 400 }}>
-                    <h2 id="parent-modal-title">Text in a modal</h2>
-                    <EditCommentForm commentDescription={comment.description} />
-                  </Box>
-                </Modal>
-              </div>
-            ) : (
-              <div>test</div>
-            )
-          )}
-        </div> */}
+       
 
         <>
           {Auth.loggedIn() ? (
