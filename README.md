@@ -38,10 +38,39 @@ https://your-complaint-b9ee4991068a.herokuapp.com/
 ![Testing Library React](https://img.shields.io/badge/Testing%20Library%20React-14.0.0-mediumpurple.svg)
 ![Vitest](https://img.shields.io/badge/Vitest-0.31.4-mediumblue.svg)
 
-
    
 ## 📄 Description
-Complain.com is a full stack web application
+Complain.com: Empowering Voices, Amplifying Concerns
+
+Complain.com is a dynamic and user-friendly full-stack web application designed to give voice to individuals' concerns and complaints. Built with the cutting-edge MERN stack (MongoDB, Express, React, Node.js), Complain.com offers a seamless experience for users to share, engage, and connect over various issues.
+
+Key Features:
+
+User Authentication: Complain.com provides a secure platform with user authentication, allowing individuals to sign up, sign in, and personalize their profiles.
+
+Complaint Creation and Management: Users can create, edit, and delete their own posts effortlessly. This feature ensures complete control over the content they share.
+
+Interactive Community: Complain.com fosters an interactive community where users can view, comment, and vote on other complaints. Upvotes and downvotes enable users to express agreement or disagreement, shaping the visibility of posts.
+
+Featured Posts: The platform showcases the top-voted posts as featured complaints on the homepage, giving prominence to issues that resonate most with the community.
+
+Rich Multimedia Support: Complain.com allows users to enrich their posts by uploading images, enhancing the storytelling experience. The image upload feature is user-friendly, utilizing file readers to save images efficiently.
+
+Email Component: The contact page features an email component powered by email.js, providing a direct channel for users to communicate concerns. The component is styled with Semantic UI/CSS and incorporates SweetAlert for alerts, ensuring seamless communication.
+
+Sleek UI/UX: Complain.com boasts an intuitive and visually appealing user interface, rendered using React and styled with Material-UI, Styled Components, and Emotion Styled. The design emphasizes a smooth user experience, enhancing engagement and navigation.
+
+Technology Stack:
+
+Frontend: React.js, Material-UI, Styled Components, Emotion Styled
+Backend: Node.js, Express.js, GraphQL
+Database: MongoDB, Mongoose ODM
+Authentication: Bcrypt
+Email Handling: email.js, Semantic UI/CSS, SweetAlert
+Image Handling: File Reader (Base-64 image storage)
+
+Complain.com stands as a testament to the power of technology in amplifying individual voices. With its intuitive interface, robust features, and engaging community, it empowers users to raise their concerns, foster discussions, and drive positive change.
+Join Complain.com today and make your voice heard.
 
 ## 🪛 Technologies used
 <p><a href="https://nodejs.org/">Node.js</a></p>
@@ -99,26 +128,62 @@ Complain.com is a full stack web application
   - [❔ Questions](#-questions)
    
 ## 🖥️ Installation
- npm i
+
+You can use our deployed link
+
+https://your-complaint-b9ee4991068a.herokuapp.com/
+
+or you can do a ```git clone```
+
+
+To install our dependencies run
+ ```npm install```
+
+run this command to seed the database
+
+```npm run seed```
+
+and finally run 
+
+```npm run develop```
+
+to start the local host server and graphQL apollo server
+
  
 ## 💬 Usage
-na
-
+Users can utlise Complain.com to sign up, sign in, log in or log out
+Users can make a new complaint/post as well as add comments to other posts and upvote or downvote posts.
+The highest rated posts will appear as a featured posts on the homepage.
 
 ## 🖼️ Screenshot
-![Alt Text] (![Alt Text] (./assets/gif/your Gif here))
 
+Homepage
+![Homepage](./assets/Homepage.png)
+
+Profile 
+![Profile](./assets/Profile.png)
+
+Contact
+Emailjs will send emails to Brian.trang9@gmail.com
+![Contact](./assets/Contact.png)
+
+Donate
+![Donate](./assets/Donate.png)
 
 ## 📹 Video
- 
+Complain gif
+![Complain-gif](./assets/Complain.com.gif)
+
 ## ⚖️ License
 This project is licensed under MIT
  
 ## 🤝 Contributing
-ii
+Brian Trang
+Jarrod Blanning
+Kalid Nadere
  
 ## 🛠️ Tests
-test
+N/A
  
 ## ❔ Questions
 If you have any questions about this project, please contact me directly at brian.trang9@gmail.com. Feel free to view more of my projects at https://github.com/MakeRedundant.
