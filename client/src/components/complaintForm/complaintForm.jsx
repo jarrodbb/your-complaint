@@ -154,7 +154,7 @@ const ComplaintForm = ({ closeModal }) => {
         <IconButton className="close-button" onClick={handleClose}>
           <CloseIcon />
         </IconButton>
-        <h2>Make a Complaint</h2>
+        
         <form onSubmit={handleSubmit}>
           <label>
             Category:

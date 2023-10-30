@@ -5,6 +5,8 @@ import { CREATE_COMMENT } from "../../utils/mutations";
 // import { gql } from "@apollo/client";
 import PropTypes from "prop-types";
 import Auth from "../../utils/auth";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 // const UPLOAD_IMAGE = gql`
 //   mutation uploadImage($file: Upload!) {
@@ -60,18 +62,22 @@ const CommentForm = ({ closeModal, singleComplaint }) => {
 
   return (
     <div className="complaint-form">
-      <h2>Make add a comment</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Textarea for entering the complaint text */}
-        <textarea
-          placeholder="Type your comment here"
-          value={complaintText}
-          onChange={handleTextChange}
-        />
+      <div className="modal-content">
+        <IconButton className="close-button" onClick={closeModal}>
+          <CloseIcon />
+        </IconButton>
+        <form onSubmit={handleSubmit}>
+          {/* Textarea for entering the complaint text */}
+          <textarea
+            placeholder="Type your comment here"
+            value={complaintText}
+            onChange={handleTextChange}
+          />
 
-        {/* Submission button */}
-        <button type="submit">Submit Complaint</button>
-      </form>
+          {/* Submission button */}
+          <button type="submit">Submit Complaint</button>
+        </form>
+      </div>
     </div>
   );
 };
