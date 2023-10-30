@@ -13,10 +13,9 @@ import { validateEmail } from "../../components/utils/Email Validate/helpers";
 
 // EmailJS
 // /Constant that stores the required IDs for sending emails via the EmailJS Service
-const TEMPLATE_ID = import.meta.env.TEMPLATE_ID;
-const USER_ID = import.meta.env.USER_ID;
-const SERVICE_ID = import.meta.env.SERVICE_ID;
-console.log("env stuff" + import.meta.env);
+const TEMPLATE_ID = "template_4aipo27";
+const USER_ID = "dNo7JEuizWBnqYSMg";
+const SERVICE_ID = "service_lv2pvc8";
 
 // EmailJS
 // /Constant that stores the required IDs for sending emails via the EmailJS Service
