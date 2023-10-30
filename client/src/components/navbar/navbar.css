@@ -4,16 +4,16 @@
   top: 0 !important;
   right: 0 !important;
   background-color: #37a3b6 !important;
-  padding: 5px !important;
-  display: flex !important;
-  justify-content: center !important;
+  padding: 5px 10px !important;
+  display: block !important;
+  justify-content: space-between !important;
+  align-items: center !important;
   width: 100vw !important;
   z-index: 1000 !important;
 }
 
 /* Common styling for navigation links and buttons */
 .nav-link {
-  margin-left: 15px !important;
   text-decoration: none !important;
   color: #ffffff !important;
   padding: 10px 20px !important;
@@ -34,7 +34,7 @@
 
 /* Style for the icons */
 .nav-link i {
-  margin-right: 25px !important;
+  margin-right: 10px !important;
 }
 
 #signup {
@@ -42,19 +42,59 @@
   border: none !important;
 }
 
-@media screen and (max-width: 768px) {
-  .navbar-container {
-    padding: 0.4rem 0.7rem !important;
-  }
-
-  .navbar-container .nav-link {
-    padding: 0.7rem !important;
-    font-size: 0.9rem !important;
-  }
+/* Hamburger Menu Styles for Small Screens */
+.mobile-menu-button {
+  display: none; /* Initially hidden on larger screens */
 }
 
-@media screen and (max-width: 600px) {
-  .navbar-container .nav-link {
-    font-size: 0.6rem !important;
+.mobile-menu {
+  display: none; /* Initially hidden on larger screens */
+}
+
+/* Styles for categories */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.categories a {
+  text-decoration: none;
+  color: #0073e6;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    padding: 5px 10px !important;
+    flex-direction: column; /* Stack items for small screens */
+  }
+
+  .nav-link {
+    padding: 10px 20px !important;
+  }
+
+  .nav-link i {
+    margin-right: 10px !important;
+  }
+
+  .mobile-menu-button {
+    display: block; /* Display on small screens */
+  }
+
+  .mobile-menu {
+    display: none; /* Initially hidden on small screens */
+  }
+  
+  .categories {
+    flex-direction: column;
+  }
+  
+  .categories a {
+    padding: 5px 10px;
   }
 }
