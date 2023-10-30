@@ -39,6 +39,7 @@
 
 #signup {
   background-color: #37a3b6;
+  border: none !important;
 }
 
 @media screen and (max-width: 768px) {
