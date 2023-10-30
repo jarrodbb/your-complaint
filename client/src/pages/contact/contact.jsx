@@ -1,7 +1,7 @@
 import "./contact.css";
 import React, { useState } from "react";
 import { Form, Input, TextArea, Button } from "semantic-ui-react";
-// require ("dotenv").config();
+// import dotenv from "react-dotenv";
 //Form, Input, TextArea, and Button are components from the Semantic UI React library for building forms.
 import emailjs from "emailjs-com";
 //emailjs is a library for sending emails using JavaScript.
@@ -13,13 +13,10 @@ import { validateEmail } from "../../components/utils/Email Validate/helpers";
 
 // EmailJS
 // /Constant that stores the required IDs for sending emails via the EmailJS Service
-const TEMPLATE_ID = "template_4aipo27";
-const USER_ID = "dNo7JEuizWBnqYSMg";
-const SERVICE_ID = "service_lv2pvc8";
-
-// process.env.TEMPLATE_ID,
-// process.env.USER_ID,
-// process.env.SERVICE_ID,
+const TEMPLATE_ID = import.meta.env.TEMPLATE_ID;
+const USER_ID = import.meta.env.USER_ID;
+const SERVICE_ID = import.meta.env.SERVICE_ID;
+console.log(import.meta.env);
 
 // !!!!!Refer to this !!!!!!!!!!!!
 //https://plainenglish.io/blog/how-to-build-a-contact-form-in-react-that-sends-emails-using-emailjs-70011d2563a3
