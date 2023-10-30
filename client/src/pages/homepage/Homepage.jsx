@@ -87,7 +87,7 @@ export default function Homepage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container style={{paddingTop: "90px"}} maxWidth="lg">
-        <Header title="Complain" sections={sections} />
+        <Header title="" sections={sections} />
         <DisplayTopVoted />
         <LatestComplaint isAdmin={isAdmin} />
         <Grid

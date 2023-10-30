@@ -124,9 +124,11 @@ function Header(props) {
           align="center"
           noWrap
           sx={{ flex: 1 }}
+          className="header-title" // Add this line
         >
-          {title}
+  Complain!
         </Typography>
+
         {userIsLoggedIn && ( // Display the "Make a Complaint" button only if the user is logged in
           <Button
             onClick={openModal}
