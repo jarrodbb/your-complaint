@@ -72,6 +72,7 @@ const CommentForm = ({ closeModal, singleComplaint }) => {
             placeholder="Type your comment here"
             value={complaintText}
             onChange={handleTextChange}
+            required
           />
 
           {/* Submission button */}

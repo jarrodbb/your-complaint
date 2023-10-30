@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import DeleteAdmin from "../adminDelete/adminDelete";
 import * as React from "react";
 import Button from "@mui/material/Button";
+import { red } from "@mui/material/colors";
+
 
 const style = {
   position: "absolute",
@@ -42,8 +44,8 @@ export default function AdminConditionalButton({ complaint, isAdmin }) {
               aria-labelledby="parent-modal-title"
               aria-describedby="parent-modal-description"
             >
-              <Box sx={{ ...style, width: 400 }}>
-                <h2 id="parent-modal-title"></h2>
+              <Box sx={{ ...style, width: 200 }}>
+             
                 <DeleteAdmin
                   complaintID={complaint._id}
                   complaintUsername={complaint.username}

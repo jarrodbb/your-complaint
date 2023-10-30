@@ -21,6 +21,9 @@ export default function LatestComplaintCard({ complaint, isAdmin }) {
             <Typography component="h2" variant="h5">
               {complaint.title}
             </Typography>
+            <Typography component="h2" variant="h5">
+              {complaint.username}
+            </Typography>
             <Typography variant="subtitle1" color="text.secondary">
               {complaint.date}
             </Typography>
