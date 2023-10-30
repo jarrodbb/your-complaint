@@ -166,7 +166,7 @@ function SingleComplaint() {
           </div>
         ) : (
           <p>
-            You need to be logged in to add a vote. Please{" "}
+            You need to be logged in to add a vote or displayAllComments. Please{" "}
             <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
           </p>
         )}
@@ -191,7 +191,6 @@ function SingleComplaint() {
                         aria-describedby="parent-modal-description"
                       >
                         <Box sx={{ ...style, width: 400 }}>
-                     
                           <EditCommentForm
                             commentDescription={comment.description}
                           />
@@ -206,7 +205,6 @@ function SingleComplaint() {
             </div>
           )}
         </div>
-       
 
         <>
           {Auth.loggedIn() ? (

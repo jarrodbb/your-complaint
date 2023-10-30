@@ -1,6 +1,7 @@
+import "./adminDelete.css";
 import Button from "@mui/material/Button";
 import { useMutation } from "@apollo/client";
-import Auth from "../../utils/auth";
+
 import { ADMIN_DELETE } from "../../utils/mutations";
 import { GET_COMPLAINTS } from "../../utils/queries";
 
@@ -26,5 +27,9 @@ export default function DeleteAdmin({
       console.error(err);
     }
   };
-  return <Button onClick={handleClickDelete}>Confirm</Button>;
+  return (
+    <div id="button background-delete">
+      <Button onClick={handleClickDelete}>Confirm</Button>
+    </div>
+  );
 }

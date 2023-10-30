@@ -218,17 +218,12 @@ function SingleComplaint() {
             </div>
           ) : (
             <div></div>
-            // <p>
-            //   You need to be logged in to add a vote. Please{" "}
-            //   <Link to="/SignIn">login</Link> or {" "}
-            //   <Link to="/SignUp">signup.</Link>
-            // </p>
           )}
         </div>
         <div>
           {!Auth.loggedIn() ? (
             <p>
-              You need to be logged in to add a vote. Please{" "}
+              You need to be logged in to add a vote or comment. Please{" "}
               <Link to="/SignIn">login</Link> or{" "}
               <Link to="/SignUp">signup.</Link>
             </p>
@@ -238,38 +233,17 @@ function SingleComplaint() {
         </div>
         <>
           {Auth.loggedIn() ? (
-          
-              <button onClick={openModal} className="make-complaint-button">
-                Add a comment
-              </button>
-              // <Modal
-              //   open={isModalOpen}
-              //   onClose={openModal}
-              //   aria-labelledby="parent-modal-title"
-              //   aria-describedby="parent-modal-description"
-              // >
-              //   <Box sx={{ ...style, width: 400 }}>
-              //     <CommentForm
-              //       closeModal={closeModal}
-              //       singleComplaint={singleComplaint}
-              //     />
-              //   </Box>
-              // </Modal>
-          
+            <button onClick={openModal} className="make-complaint-button">
+              Add a comment
+            </button>
           ) : (
-            <p>
-              You need to be logged in to add a comment. Please{" "}
-              <Link to="/login">login</Link> or{" "}
-              <Link to="/signup">signup.</Link>
-            </p>
+            <></>
           )}
           {isModalOpen && (
-         
-                <CommentForm
-                  closeModal={closeModal}
-                  singleComplaint={singleComplaint}
-                />
-           
+            <CommentForm
+              closeModal={closeModal}
+              singleComplaint={singleComplaint}
+            />
           )}
         </>
       </Grid>
