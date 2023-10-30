@@ -137,7 +137,7 @@ function SingleComplaint() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={12}>
         <Card sx={{ display: "flex" }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
@@ -238,7 +238,7 @@ function SingleComplaint() {
           )}
         </div>
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={12}>
         <div className="col-12 col-md-10 my-3">
           {loading ? (
             <div>Loading...</div>
