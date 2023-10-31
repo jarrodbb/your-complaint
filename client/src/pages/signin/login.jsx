@@ -1,5 +1,3 @@
-import "./login.css";
-
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -12,16 +10,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+//Import mutation to log user in
 import { LOGIN_USER } from "../../utils/mutations";
 import { useState } from "react"; // Import useState
+
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import { useStoreContext } from "../../utils/GlobalState";
-import { ADD_COMPLAINT } from "../../utils/actions";
-import { GET_ME} from "../../utils/queries";
-import { GET_COMPLAINTS } from "../../utils/queries";
-import { useQuery } from "@apollo/client";
-import { reducer } from "../../utils/reducers";
 
 function Copyright(props) {
   return (
@@ -44,16 +38,17 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const [state, dispatch] = useStoreContext();
+  //define states
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
-  // const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  //mutation to login
   const [login, { error, data }] = useMutation(LOGIN_USER);
-
+  //function to handle input change in form
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
+  //function to handle submit
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -73,37 +68,16 @@ export default function SignIn() {
       Auth.login(data.login.token);
 
       const userInfo = Auth.getProfile().data._id;
-
-      if (userInfo) {
-        const { loading, data } = useQuery(GET_COMPLAINTS);
-
-        const usersComplaints = data?.complaints || [];
-
-        if (usersComplaints) {
-          dispatch({
-            type: ADD_COMPLAINT,
-            complaints: usersComplaints,
-          });
-        }
-      }
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-
+    //reset states
     setUserFormData({
       email: "",
       password: "",
     });
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>

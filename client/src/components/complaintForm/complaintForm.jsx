@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from "react";
+//Import Datepicker from React
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useMutation } from "@apollo/client";
+//Mutation to create Mutation
 import { CREATE_COMPLAINT } from "../../utils/mutations";
 import PropTypes from "prop-types";
+//Query to get all complaints
 import { GET_COMPLAINTS } from "../../utils/queries";
+//Import Auth
 import Auth from "../../utils/auth";
+//Import from MUI
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
+//Create complaint
 const ComplaintForm = ({ closeModal }) => {
   const [username, setUsername] = useState("");
 
+  //UseEffect to get username from Auth
   useEffect(() => {
     const userInfo = Auth.getProfile().data.username;
     setUsername(userInfo);
   }, []);
 
+  //Mutation to add complaint
   const [addComplaint, { error }] = useMutation(CREATE_COMPLAINT);
 
+  //Set states
   const [category, setCategory] = useState("General");
   const [complaintText, setComplaintText] = useState("");
   const [image, setImage] = useState(null);
@@ -31,7 +40,7 @@ const ComplaintForm = ({ closeModal }) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
   };
-
+//Validation for description included. Description required
   const handleTextChange = (e) => {
     const { target } = e;
     const inputValue = target.value;
@@ -43,7 +52,7 @@ const ComplaintForm = ({ closeModal }) => {
       setComplaintText(e.target.value);
     }
   };
-
+//validation for title included. Title is required and error message displays if not included
   const handleTitleChange = (e) => {
     const { target } = e;
     const inputValue = target.value;
@@ -60,8 +69,10 @@ const ComplaintForm = ({ closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //handle submit if date is selected. Date not required
 
     if (selectedDate) {
+      //Format date
       const test = selectedDate.toString();
       const myArray = test.split(" ");
       let elementstodelete = 6;
@@ -80,7 +91,7 @@ const ComplaintForm = ({ closeModal }) => {
           },
           refetchQueries: [{ query: GET_COMPLAINTS }],
         });
-
+        // reset states
         setCategory("General");
         setImage("");
         setComplaintText("");
@@ -90,7 +101,7 @@ const ComplaintForm = ({ closeModal }) => {
         console.error(err);
       }
     }
-
+//mutation if no date selected. Date not passed as variable
     if (!selectedDate) {
       try {
         const { data } = await addComplaint({
@@ -116,7 +127,8 @@ const ComplaintForm = ({ closeModal }) => {
 
     handleClose();
   };
-
+//Convert image to base64 string from upload
+//validation if image is too large
   function convertToBase64(e) {
     const file = e.target.files[0];
 
@@ -154,7 +166,7 @@ const ComplaintForm = ({ closeModal }) => {
         <IconButton className="close-button" onClick={handleClose}>
           <CloseIcon />
         </IconButton>
-        
+
         <form onSubmit={handleSubmit}>
           <label>
             Category:

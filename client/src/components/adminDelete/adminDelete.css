@@ -1,4 +1,7 @@
-button backgound-delete {
-  background-color: red !important;
+.button-background-delete {
+  color: black !important;
+  background-color: rgb(202, 172, 61) !important;
   text-align: center;
+  font-weight: bolder !important;
+  border-radius: 25px;
 }

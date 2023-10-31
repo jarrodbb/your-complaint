@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-
+//Side bar on homepage. functional links are future development
 function Sidebar(props) {
   const { archives, description, social, title } = props;
 

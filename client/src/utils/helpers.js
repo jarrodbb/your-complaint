@@ -1,4 +1,4 @@
-//Utilis to validate password
+//Utilis to validate email
 
 export function validateEmail(email) {
   const re =
@@ -6,6 +6,7 @@ export function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+//utilis to validate password
 export function checkPassword(input) {
   const passw = /^[A-Za-z]\w{5,}$/;
   if (input.match(passw)) {

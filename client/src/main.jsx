@@ -15,22 +15,10 @@ import SignIn from "./pages/signin/login.jsx";
 import SingleComplaint from "./pages/SingleComplaint/SingleComplaint.jsx";
 import CategoryPage from "./pages/categorypage/categorypage.jsx";
 
-// Import specific components from 'react-router-dom' library
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// Import React component from 'CreateComplaint'
-// import CreateComplaint from './components/CreateComplaint';
 
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <Router>
-//     <switch>
-//       <Route exact path="/" component={App} />
-//       <Route path="/create-complaint" component={CreateComplaint} />
-//     </switch>
-//   </Router>,
-//   document.getElementById('root')
-// );
 
-//Define some routes
+
+//Define routes
 const router = createBrowserRouter([
   {
     path: "/",
@@ -81,6 +69,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <RouterProvider router={router} />
 );
 
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <App />
-// );
+

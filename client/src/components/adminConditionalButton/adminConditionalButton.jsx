@@ -3,9 +3,10 @@ import Box from "@mui/material/Box";
 import DeleteAdmin from "../adminDelete/adminDelete";
 import * as React from "react";
 import Button from "@mui/material/Button";
-import { red } from "@mui/material/colors";
 
+import "./adminButton.css"
 
+//modal styling
 const style = {
   position: "absolute",
   top: "50%",
@@ -21,9 +22,9 @@ const style = {
 };
 
 export default function AdminConditionalButton({ complaint, isAdmin }) {
+  //State of Modal
   const [open, setOpen] = React.useState(false);
-  console.log("is this person admin " + isAdmin);
-  console.log(complaint);
+  
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,7 +37,7 @@ export default function AdminConditionalButton({ complaint, isAdmin }) {
     <div>
       {isAdmin === true ? (
         <div>
-          <Button onClick={handleOpen}>Admin Delete</Button>
+          <Button className={"delete-display"} onClick={handleOpen}>Admin Delete</Button>
           <>
             <Modal
               open={open}
@@ -45,7 +46,7 @@ export default function AdminConditionalButton({ complaint, isAdmin }) {
               aria-describedby="parent-modal-description"
             >
               <Box sx={{ ...style, width: 200 }}>
-             
+             {/* complaintID and username passed as props to modal */}
                 <DeleteAdmin
                   complaintID={complaint._id}
                   complaintUsername={complaint.username}

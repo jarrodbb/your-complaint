@@ -1,6 +1,6 @@
 const models = require('../models');
 const db = require('../config/connection');
-
+//clean db when seeds are run
 module.exports = async (modelName, collectionName) => {
   try {
     let modelExists = await models[modelName].db.db.listCollections({

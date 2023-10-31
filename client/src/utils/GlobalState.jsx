@@ -1,3 +1,4 @@
+//Future dev. Global states and reducers to be used for future dev to optimise code
 import { createContext, useContext, useReducer } from "react";
 import { reducer } from "./reducers";
 

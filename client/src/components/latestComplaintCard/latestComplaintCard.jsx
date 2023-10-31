@@ -3,19 +3,23 @@ import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+
 import Grid from "@mui/material/Grid";
+//import component for admin user
 import AdminConditionalButton from "../adminConditionalButton/adminConditionalButton";
 
 export default function LatestComplaintCard({ complaint, isAdmin }) {
+  //default image 
   const defaultImageLink = "https://source.unsplash.com/random?wallpapers";
   return (
     <Grid>
+      {/* card action area used to make box selectable */}
       <CardActionArea
         component="a"
         href={`/Complaint/${complaint._id}`}
         key={complaint._id}
       >
+        {/* display complaint details */}
         <Card sx={{ display: "flex", width: "100%" }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
@@ -42,28 +46,9 @@ export default function LatestComplaintCard({ complaint, isAdmin }) {
           />
         </Card>
       </CardActionArea>
-
+    {/* component for if user is admin */}
       <AdminConditionalButton complaint={complaint} isAdmin={isAdmin} />
     </Grid>
-    //  {isAdmin === true ? (
-    //     <div>
-    //       <Button onClick={handleOpen}>Admin Delete</Button>
-    //       <>
-    //         <Modal
-    //           open={open}
-    //           onClose={handleClose}
-    //           aria-labelledby="parent-modal-title"
-    //           aria-describedby="parent-modal-description"
-    //         >
-    //           <Box sx={{ ...style, width: 400 }}>
-    //             <h2 id="parent-modal-title"></h2>
-    //             <DeleteAdmin complaintID={complaint._id} complaintUsername={complaint.username} />
-    //           </Box>
-    //         </Modal>
-    //       </>
-    //     </div>
-    //   ) : (
-    //     <div></div>
-    //   )}
+   
   );
 }

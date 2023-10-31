@@ -1,14 +1,14 @@
-// ADD REACTIONS. thumbs up, thumbs down...But maybe somthing different.
-
 //Import User and Complaint models
 const { User, Complaints } = require("../models");
 //Import for authentication
 const { signToken, AuthenticationError } = require("../utils/auth");
+//require bcrypt for new passwords
 const bcrypt = require("bcrypt");
 
 const resolvers = {
-  //Query defined to return user. Context used for authentication
+  
   Query: {
+    //Query defined to return user. Context used for authentication
     me: async (parent, args, context) => {
       if (context.user) {
         const user = await User.findOne({ _id: context.user._id }).populate(
@@ -18,23 +18,26 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    //Query defined to return all complaints
     complaints: async () => {
       const complaints = await Complaints.find();
       console.log(complaints);
       console.log(complaints[1].comments);
       return complaints;
     },
+    // Query defined to return a single complaint by ID
     complaint: async (parent, { complaintID }) => {
       const complaint = await Complaints.findOne({ _id: complaintID });
       return complaint;
     },
+    //Query define to return a user where a complaint ID matches
     userComplaint: async (parent, { complaintID }) => {
       const user = await User.findOne({ complaints: complaintID }).populate(
         "complaints"
       );
       return user;
     },
-
+//Query defined to return complaints by category
     complaintsByCategory: async (parent, { category }) => {
       const complaints = await Complaints.find({ category: category });
       return complaints;
@@ -67,7 +70,9 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-
+//delete user defined. Pass userID and username.
+//find and remove user 
+// find complaints with username and remove
     deleteUser: async (parent, { userID, username }, context) => {
       if (context.user) {
         const user = await User.findByIdAndRemove({ _id: userID });
@@ -79,7 +84,9 @@ const resolvers = {
         return message;
       }
     },
-
+//Update user by context ID. Pass username, email and password
+//Hash password if included
+// return Token and user
     updateUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
         if (password) {
@@ -121,7 +128,8 @@ const resolvers = {
 
       throw AuthenticationError;
     },
-
+//Add a complaint. Check contex
+//Create complaint. Add complaint to user using context
     addComplaint: async (
       parent,
       { title, description, category, username, date, image },
@@ -147,7 +155,7 @@ const resolvers = {
       throw AuthenticationError;
     },
 
-    //How to pass the complaint id from the front end? Will it be stored in the state?
+    //Update complaint with context. find complaint by ID and update. Context used to check Auth
     updateComplaint: async (
       parent,
       { complaintID, title, description, category, date },
@@ -170,7 +178,8 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-
+//Delete complaint. Remove complaint by ID
+// find user using context and remove complaint ID
     deleteComplaint: async (parent, { complaintID }, context) => {
       if (context.user) {
         const complaint = await Complaints.findOneAndRemove({
@@ -185,7 +194,9 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-
+//Add a comment. check context
+// find complaint by ID and update
+//Add comment using add to set
     addComment: async (
       parent,
       { complaintID, author, description },
@@ -208,7 +219,9 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    //https://mongoosejs.com/docs/api/model.html#Model.find()
+   //Update comment. check user context
+   // find complaint ID and comment ID
+   // set comment 
     updateComment: async (
       parent,
       { complaintID, commentID, description, author },
@@ -221,10 +234,7 @@ const resolvers = {
             $set: {
               "comments.$.author": author,
               "comments.$.description": description,
-              // comments: {
-              //   author,
-              //   description,
-              // },
+             
             },
           },
           { runValidators: true, new: true }
@@ -233,7 +243,8 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-
+// remove comment. check context
+//find complaint by ID and pull comment by ID
     removeComment: async (parent, { complaintID, commentID }, context) => {
       if (context.user) {
         const complaint = await Complaints.findOneAndUpdate(
@@ -245,7 +256,7 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-
+// Create vote. Find complaint by ID and update. increase vote by 1
     createVote: async (parent, { complaintID }) => {
       const complaints = await Complaints.findOneAndUpdate(
         { _id: complaintID },
@@ -254,7 +265,7 @@ const resolvers = {
       );
       return complaints;
     },
-
+// Create unsupported vote. Find complaint by ID and update. increase vote by 1
     createVoteUnsupported: async (parent, { complaintID }) => {
       const complaints = await Complaints.findOneAndUpdate(
         { _id: complaintID },
@@ -263,7 +274,9 @@ const resolvers = {
       );
       return complaints;
     },
-
+// admin delete. check context
+//Find and remove complaint by ID
+// Find user by user name and pull complaint by ID
     adminDelete: async (parent, { complaintID, username }, context) => {
       if (context.user) {
         const userComplaint = await Complaints.findByIdAndRemove({
@@ -283,26 +296,4 @@ const resolvers = {
 
 module.exports = resolvers;
 
-// updateComment: async (
-//   parent,
-//   { complaintID, commentID, description, author },
-//   context
-// ) => {
-//   if (context.user) {
-//     const complaint = await Complaints.findOneAndUpdate(
-//       { _id: complaintID, "comments._id": commentID },
-//       {
-//         $set: {
-//           comments: {
-//             author,
-//             description,
 
-//           },
-//         },
-//       },
-//       { runValidators: true, new: true }
-//     );
-//     return complaint;
-//   }
-//   throw AuthenticationError;
-// },

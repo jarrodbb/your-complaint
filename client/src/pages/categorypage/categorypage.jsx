@@ -11,27 +11,28 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-
+//import categories from utils
 import { GET_COMPLAINTS_BY_CATEGORY } from "../../utils/queries";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
   console.log(categoryName);
+  //Query to get complaint by category
   const { loading, error, data } = useQuery(GET_COMPLAINTS_BY_CATEGORY, {
     variables: { category: categoryName },
   });
-
+  //if loading display loading
   if (loading) {
     return <p>Loading...</p>;
   }
-
+  //if error display error
   if (error) {
     return <p>Error: {error.message}</p>;
   }
 
   const complaints = data?.complaintsByCategory || [];
-  console.log(complaints);
 
+  //if complaint in category display
   if (complaints.length > 0) {
     return (
       <Grid item xs={12} md={6}>
@@ -69,6 +70,7 @@ const CategoryPage = () => {
       </Grid>
     );
   } else {
+    // display message if no complaints in that category
     return <p>No complaints found in this category.</p>;
   }
 };
@@ -84,21 +86,3 @@ PropTypes.propTypes = {
 };
 
 export default CategoryPage;
-
-// if (complaints.length > 0) {
-//   return (
-//     <div>
-//       <h2>Complaints in {categoryName}</h2>
-//       <ul>
-//         {complaints.map((complaint) => (
-//           <li key={complaint._id}>{complaint.title}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// } else {
-//   return <p>No complaints found in this category.</p>;
-// }
-// };
-
-// export default CategoryPage;

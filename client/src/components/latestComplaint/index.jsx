@@ -1,62 +1,28 @@
-import { useState, useEffect } from "react";
-
 import { useQuery } from "@apollo/client";
+//import query
 import { GET_COMPLAINTS } from "../../utils/queries";
 
-import Container from "@mui/material/Container";
-import Post from "../../components/posts/Post";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+
 import Grid from "@mui/material/Grid";
 import PropTypes from "prop-types";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import { useStoreContext } from "../../utils/GlobalState";
-import Modal from "@mui/material/Modal";
+//Import component
 import LatestComplaintCard from "../latestComplaintCard/latestComplaintCard";
 
 import * as React from "react";
-import Box from "@mui/material/Box";
-import DeleteAdmin from "../adminDelete/adminDelete";
 
 const theme = createTheme();
 
 function LatestComplaint({ isAdmin }) {
-  const [open, setOpen] = React.useState(false);
-  console.log("is this person admin " + isAdmin);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const [state, dispatch] = useStoreContext();
-
-  const { complaints } = state;
-
-  console.log(complaints);
-  const [allComplaints, setComplaints] = useState([]);
-
+  //query to get all complaints
   const { loading, data } = useQuery(GET_COMPLAINTS);
-  console.log(data);
   const complaintData = data?.complaints || [];
-
-  const defaultImageLink = "https://source.unsplash.com/random?wallpapers";
-
-  const handleDelete = async (e) => {
-    console.log;
-  };
 
   return (
     <Grid item xs={12} md={6}>
       {complaintData.map((complaint) => (
         <div key={complaint._id}>
+          {/* pass complaint and isAdmin condition as props */}
           <LatestComplaintCard complaint={complaint} isAdmin={isAdmin} />
         </div>
       ))}

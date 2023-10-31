@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import Auth from "../../utils/auth";
+//Import datepicker incase user needs to change date
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UPDATE_COMPLAINT } from "../../utils/mutations";
@@ -9,12 +9,12 @@ export default function EditComplaint({
   complaintId,
   title,
   category,
-  username,
+
   date,
   description,
   handleClose,
 }) {
-  //   const userName = Auth.getProfile().data.username;
+  //Set states from porps to fill default values in form
   const [complaintTitle, setTitle] = useState(title);
   const [complaintCategory, setCategory] = useState(category);
   const [complaintText, setComplaintText] = useState(description);
@@ -22,8 +22,7 @@ export default function EditComplaint({
   const [selectedDate, setSelectedDate] = useState(null);
   const [updateComplaint, { error }] = useMutation(UPDATE_COMPLAINT);
 
-  console.log("id of complaint " + complaintId);
-
+  //Handle chnage in form. Validation included to ensure user provides a description
   const handleTextChange = (e) => {
     const { target } = e;
     const inputType = target.name;
@@ -37,12 +36,11 @@ export default function EditComplaint({
     }
   };
 
-  console.log(selectedDate);
-
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
 
+  //Validation included. Title required
   const handleTitleChange = (e) => {
     const { target } = e;
     const inputType = target.name;
@@ -56,8 +54,8 @@ export default function EditComplaint({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //Handle submit if date note included. Previous value for date passes as variable
     if (selectedDate === null) {
-      console.log(date);
       try {
         const { data } = await updateComplaint({
           variables: {
@@ -73,6 +71,7 @@ export default function EditComplaint({
       }
       handleClose();
     } else {
+      //If date selected. Date is first formatted and then passed as variable
       const test = selectedDate.toString();
       const myArray = test.split(" ");
       console.log(myArray);
@@ -100,7 +99,6 @@ export default function EditComplaint({
 
   return (
     <div className="complaint-form">
-     
       <form onSubmit={handleSubmit}>
         <label>
           Category:
@@ -115,7 +113,7 @@ export default function EditComplaint({
             <option value="Random">Random</option>
           </select>
         </label>
-        {/* Textarea for entering the complaint text */}
+        {/* Textarea for entering the title and complaint text */}
         <textarea
           placeholder="Title"
           value={complaintTitle}
@@ -132,6 +130,7 @@ export default function EditComplaint({
           required
           onChange={handleTextChange}
         />
+        {/* date */}
         <div className="App">
           <DatePicker
             selected={selectedDate}

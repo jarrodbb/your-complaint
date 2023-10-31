@@ -146,7 +146,7 @@ export const LOGIN_USER = gql`
     }
   }
 `;
-
+//mutation to create vote
 export const CREATE_VOTE = gql`
   mutation createVote($complaintID: ID!) {
     createVote(complaintID: $complaintID) {
@@ -169,7 +169,7 @@ export const CREATE_VOTE = gql`
     }
   }
 `;
-
+// mutation to create vote of unsupport
 export const CREATE_VOTE_UNSUPPORTED = gql`
   mutation createVoteUnsupported($complaintID: ID!) {
     createVoteUnsupported(complaintID: $complaintID) {
@@ -193,7 +193,7 @@ export const CREATE_VOTE_UNSUPPORTED = gql`
     }
   }
 `;
-
+// mutation to create a comment 
 export const CREATE_COMMENT = gql`
   mutation addComment(
     $complaintID: ID!
@@ -225,7 +225,7 @@ export const CREATE_COMMENT = gql`
     }
   }
 `;
-
+// mutation to update a comment
 export const UPDATE_COMMENT = gql`
   mutation updateComment(
     $complaintID: ID!
@@ -259,7 +259,7 @@ export const UPDATE_COMMENT = gql`
     }
   }
 `;
-
+// mutation to delete a comment
 export const DELETE_COMMENT = gql`
   mutation removeComment($complaintID: ID!, $commentID: ID!) {
     removeComment(complaintID: $complaintID, commentID: $commentID) {
@@ -283,7 +283,7 @@ export const DELETE_COMMENT = gql`
     }
   }
 `;
-
+// mutation to update a user
 export const UPDATE_USER = gql`
   mutation updateUser($username: String!, $email: String!, $password: String) {
     updateUser(username: $username, email: $email, password: $password) {
@@ -317,7 +317,7 @@ export const UPDATE_USER = gql`
     }
   }
 `;
-
+// mutation to delete a user
 export const DELETE_USER = gql`
   mutation deleteUser($userID: ID!, $username: String!) {
     deleteUser(userID: $userID, username: $username) {
@@ -325,7 +325,7 @@ export const DELETE_USER = gql`
     }
   }
 `;
-
+// mutation to delete as an admin user
 export const ADMIN_DELETE = gql`
   mutation adminDelete($complaintID: ID!, $username: String!) {
     adminDelete(complaintID: $complaintID, username: $username) {

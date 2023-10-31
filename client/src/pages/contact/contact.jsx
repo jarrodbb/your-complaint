@@ -1,32 +1,20 @@
+//import CSS for contact page
 import "./contact.css";
 import React, { useState } from "react";
+//import from semantic UI
 import { Form, Input, TextArea, Button } from "semantic-ui-react";
-// import dotenv from "react-dotenv";
-//Form, Input, TextArea, and Button are components from the Semantic UI React library for building forms.
+//import emailjs
 import emailjs from "emailjs-com";
-//emailjs is a library for sending emails using JavaScript.
+
 import Swal from "sweetalert2";
-//Swal is an external library for displaying pop-up alerts (SweetAlert2).
+//import validation for emails
 import { validateEmail } from "../../components/utils/Email Validate/helpers";
-// import "semantic-ui-css/semantic.min.css";
-
 
 // EmailJS
 // /Constant that stores the required IDs for sending emails via the EmailJS Service
-const TEMPLATE_ID = "template_4aipo27";
-const USER_ID = "dNo7JEuizWBnqYSMg";
-const SERVICE_ID = "service_lv2pvc8";
-
-// EmailJS
-// /Constant that stores the required IDs for sending emails via the EmailJS Service
-// const TEMPLATE_ID = import.meta.env.TEMPLATE_ID;
-// const USER_ID = import.meta.env.USER_ID;
-// const SERVICE_ID = import.meta.env.SERVICE_ID;
-// console.log(import.meta.env);
-
-
-// !!!!!Refer to this !!!!!!!!!!!!
-//https://plainenglish.io/blog/how-to-build-a-contact-form-in-react-that-sends-emails-using-emailjs-70011d2563a3
+const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
+const USER_ID = import.meta.env.VITE_USER_ID;
+const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
 
 export default function Contact() {
   //Define states
@@ -84,7 +72,7 @@ export default function Contact() {
   const handleFormSubmit = (e) => {
     //prevent default on form
     e.preventDefault();
-//Checks if email is valid and returns a error message if not
+    //Checks if email is valid and returns a error message if not
     if (!validateEmail(email)) {
       setErrorMessage("Error! Email is invalid, please try again");
       return;
@@ -167,7 +155,7 @@ export default function Contact() {
       </div>
       <div className="App">
         <h3>{submission}</h3>
-        <Form className="contact-bg" onSubmit={handleFormSubmit}>
+        <Form className="contact-bg alignBox" onSubmit={handleFormSubmit}>
           <Form.Field
             id="form-input-control-last-name"
             value={name}

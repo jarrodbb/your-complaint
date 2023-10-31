@@ -5,7 +5,7 @@ const cleanDB = require("./cleanDB");
 db.once("open", async () => {
   await cleanDB("Complaints", "complaints");
   await cleanDB("User", "users");
-
+//seed data
   const complaints = await Complaints.insertMany([
     {
       title: "Brave Karen fights minimum wage workers",
