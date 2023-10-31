@@ -21,8 +21,7 @@ const resolvers = {
     //Query defined to return all complaints
     complaints: async () => {
       const complaints = await Complaints.find();
-      console.log(complaints);
-      console.log(complaints[1].comments);
+      
       return complaints;
     },
     // Query defined to return a single complaint by ID
