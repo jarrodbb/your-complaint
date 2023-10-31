@@ -29,7 +29,7 @@ export default function Contact() {
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
-    console.log(inputType);
+    
     if (userLocation === "") {
     }
   };
@@ -79,7 +79,7 @@ export default function Contact() {
     }
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, USER_ID).then(
       (result) => {
-        console.log(result.text);
+        
         Swal.fire({
           icon: "success",
           title: "Message Sent Successfully",
@@ -103,7 +103,7 @@ export default function Contact() {
     setEmail("");
   };
   const checkName = (event) => {
-    console.log(event.target.value);
+   
     const { target } = event;
     const inputType = target.name;
     const inputValue = target.value;

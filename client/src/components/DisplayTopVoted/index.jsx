@@ -27,7 +27,7 @@ function DisplayTopVoted() {
       maxVotesComplaint = complaintData[i];
     }
   }
-  console.log("maxVotesComplaint is", maxVotesComplaint);
+
 
   return (
     <CardActionArea

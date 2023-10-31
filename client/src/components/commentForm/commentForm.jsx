@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 //Form to add comment
 const CommentForm = ({ closeModal, singleComplaint }) => {
-  console.log(singleComplaint);
+  
   const [addComment, { error }] = useMutation(CREATE_COMMENT);
 
   const [author, setAuthor] = useState("");

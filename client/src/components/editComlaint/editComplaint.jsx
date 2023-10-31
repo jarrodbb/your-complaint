@@ -74,12 +74,12 @@ export default function EditComplaint({
       //If date selected. Date is first formatted and then passed as variable
       const test = selectedDate.toString();
       const myArray = test.split(" ");
-      console.log(myArray);
+      
       let elementstodelete = 6;
       let k = myArray.filter((x, i) => i + elementstodelete < myArray.length);
-      console.log(k);
+      
       const formattedDate = k.join(" ");
-      console.log(formattedDate);
+      
       try {
         const { data } = await updateComplaint({
           variables: {

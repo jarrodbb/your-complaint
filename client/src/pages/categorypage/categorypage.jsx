@@ -16,7 +16,7 @@ import { GET_COMPLAINTS_BY_CATEGORY } from "../../utils/queries";
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
-  console.log(categoryName);
+ 
   //Query to get complaint by category
   const { loading, error, data } = useQuery(GET_COMPLAINTS_BY_CATEGORY, {
     variables: { category: categoryName },

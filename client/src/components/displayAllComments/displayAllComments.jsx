@@ -60,7 +60,7 @@ function DisplayAllComments({ complaintID, comment, currentUser }) {
         <CardContent sx={{ flex: 1 }}>
           <Typography component="h2" variant="h5">
             {comment.author}
-            {console.log("test" + comment.description)}
+            
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
             {comment.description}
