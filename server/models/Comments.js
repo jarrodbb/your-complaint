@@ -1,5 +1,5 @@
 const { Schema } = require("mongoose");
-
+//define Comments schema
 const commentsSchema = new Schema({
   author: {
     type: String,

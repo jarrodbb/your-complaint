@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const commentsSchema = require("./Comments");
-
+// define complaints schema
 const complaintSchema = new Schema(
   {
     title: {

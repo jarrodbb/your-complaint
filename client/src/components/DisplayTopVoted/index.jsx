@@ -11,11 +11,11 @@ import { Link } from "react-router-dom";
 
 function DisplayTopVoted() {
   const [allComplaints, setComplaints] = useState([]);
-
+//Query to get all complaints
   const { loading, data } = useQuery(GET_COMPLAINTS);
-  console.log(data);
+
   const complaintData = data?.complaints || [];
-  console.log("test test" + complaintData);
+  
 
   // Find the complaint with the highest votes using sorting
   let maxVotesComplaint = null;

@@ -1,7 +1,6 @@
 import React from 'react'
-// import Navbar from '../../components/navbar/navbar.jsx'
-// import Layout from '../../components/layout'
 
+//display contents for 404
 const WrongPage = () => {
   return (
     <section id='wrongPage'>

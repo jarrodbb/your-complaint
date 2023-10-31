@@ -35,3 +35,8 @@ Form {
   color: red;
   font-size: 16px;
 }
+
+.alignBox {
+  align-items: center !important;
+  
+}

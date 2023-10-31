@@ -1,5 +1,7 @@
+//import css for footer
 import "./footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import icons
 import {
   faGithub,
   faLinkedin,
@@ -14,29 +16,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 
-// const FooterBottom = () => {
-//   return (
-//     <div className="footer-text">
-//       <p>Made by Brian Trang, Jarrod Blanning and Kalid Nadere
-//  </p>
-//       <div className="social-icons">
-//         <a href="https://github.com/MakeRedundant">
-//           <FontAwesomeIcon icon={faGithub} size="2x" className="icon" />
-//         </a>
-//         <a href="https://www.linkedin.com/in/brian-t-webdeveloper/">
-//           <FontAwesomeIcon icon={faLinkedin} size="2x" className="icon" />
-//         </a>
-//         <a href="https://twitter.com/fireship_dev">
-//           <FontAwesomeIcon icon={faTwitter} size="2x" className="icon" />
-//         </a>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default FooterBottom;
 
 
+//Copyright details for footer
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
@@ -49,9 +31,10 @@ function Copyright() {
     </Typography>
   );
 }
-
+//create theme from MUI
 const defaultTheme = createTheme();
 
+//footer
 export default function FooterBottom() {
   return (
     <ThemeProvider theme={defaultTheme}>

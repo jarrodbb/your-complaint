@@ -1,25 +1,34 @@
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
+
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { useState, useEffect } from "react";
+//Import to get ID from param
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
+//import query to get user of complaint
 import { GET_USER_BY_COMPLAINT } from "../../utils/queries";
+//import query to get single complaint
 import { GET_COMPLAINT } from "../../utils/queries";
 import DisplayAllComments from "../../components/displayAllComments/displayAllComments";
+// Mutations to vote
 import { CREATE_VOTE } from "../../utils/mutations";
 import { CREATE_VOTE_UNSUPPORTED } from "../../utils/mutations";
+
+// Import component to add a comment
 import CommentForm from "../../components/commentForm/commentForm";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
+// Import from MUI
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
+//Import Component to edit complaint
 import EditComplaint from "../../components/editComlaint/editComplaint";
+// Mutation to delete a complaint
 import { DELETE_COMPLAINT } from "../../utils/mutations";
 import { useNavigate } from "react-router-dom";
 
@@ -38,8 +47,9 @@ const style = {
 };
 
 function SingleComplaint() {
+  //mutation to delete complaint
   const [deleteComplaint, { error: err }] = useMutation(DELETE_COMPLAINT);
-
+  //modal
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -48,11 +58,11 @@ function SingleComplaint() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  //state for modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  //state of current user
   const [currentUser, setCurrentUser] = useState("");
-
+  //UseEffect to get username of current user
   useEffect(() => {
     if (Auth.loggedIn()) {
       const userInfo = Auth.getProfile().data.username;
@@ -63,34 +73,33 @@ function SingleComplaint() {
     }
   }, []);
 
-  console.log("username " + currentUser);
-
+  //function to openmodal
   const openModal = () => {
     setIsModalOpen(true);
   };
-
+  //function to close modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
+  //save complaint ID from Params
   const { complaintID } = useParams();
-  console.log(complaintID);
 
+  //mutation to create vote
   const [createVote, { error }] = useMutation(CREATE_VOTE);
-
+  //mutation to creat unsupported vote
   const [createVoteUnsupported, { error: mutation_error }] = useMutation(
     CREATE_VOTE_UNSUPPORTED
   );
-
+  //query to get a single complaint by ID
   const { loading, data } = useQuery(GET_COMPLAINT, {
     variables: { complaintID: complaintID },
   });
-
+  //save single complaint to const
   const singleComplaint = data?.complaint || [];
-  console.log(singleComplaint);
 
+  // get comments belonging to single complaint
   const complaintComments = singleComplaint.comments;
-
+  //Query to get user of complaint by complaint ID
   const { loading: branch_loading, data: branch_data } = useQuery(
     GET_USER_BY_COMPLAINT,
     {
@@ -99,7 +108,7 @@ function SingleComplaint() {
   );
 
   const userComplaint = branch_data?.userComplaint || [];
-
+  //function to handle vote
   const handleVote = async () => {
     try {
       await createVote({
@@ -109,7 +118,7 @@ function SingleComplaint() {
       console.error(err);
     }
   };
-
+  // function to handle unsupported vote
   const handleVoteUnsupport = async () => {
     try {
       await createVoteUnsupported({
@@ -120,7 +129,7 @@ function SingleComplaint() {
     }
   };
   let navigate = useNavigate();
-
+  // function to handle deletion of complaint by ID. re-route to homepage
   const handleDeleteComplaint = async () => {
     try {
       await deleteComplaint({
@@ -139,6 +148,7 @@ function SingleComplaint() {
     <Grid container spacing={2}>
       <Grid item xs={12} md={12}>
         <Card sx={{ display: "flex" }}>
+          {/* display complaint info */}
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
               {singleComplaint.category}
@@ -172,6 +182,7 @@ function SingleComplaint() {
             alt="text"
           />
         </Card>
+        {/* if current user is the same as the user of the complpaint, edit button for complpaint is displayed */}
         {currentUser === userComplaint.username ? (
           <div>
             <Button onClick={handleOpen}>Edit</Button>
@@ -201,6 +212,7 @@ function SingleComplaint() {
           <div></div>
         )}
         <div>
+          {/* if user is logged in and not the same as the username of complaint, vote buttons are displayed. This is to ensure a user cannot vote for their own complaint */}
           {Auth.loggedIn() && currentUser != userComplaint.username ? (
             <div>
               <button
@@ -221,6 +233,7 @@ function SingleComplaint() {
           )}
         </div>
         <div>
+          {/* if not loggged in the user is prompted to login or sign up */}
           {!Auth.loggedIn() ? (
             <p>
               You need to be logged in to add a vote or comment. Please{" "}
@@ -232,6 +245,7 @@ function SingleComplaint() {
           )}
         </div>
         <>
+          {/* if user is logged in, and add comment button is displayed */}
           {Auth.loggedIn() ? (
             <button onClick={openModal} className="make-complaint-button">
               Add a comment
@@ -253,6 +267,7 @@ function SingleComplaint() {
             <div>Loading...</div>
           ) : (
             <div>
+              {/* map over comments and display */}
               {{ complaintComments } ? (
                 complaintComments.map((comment) => (
                   <div key={comment._id}>

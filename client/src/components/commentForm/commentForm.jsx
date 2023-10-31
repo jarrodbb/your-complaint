@@ -1,29 +1,22 @@
 import { useState, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
+
 import { useMutation } from "@apollo/client";
+// import mutation to add comment
 import { CREATE_COMMENT } from "../../utils/mutations";
-// import { gql } from "@apollo/client";
+
 import PropTypes from "prop-types";
 import Auth from "../../utils/auth";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-// const UPLOAD_IMAGE = gql`
-//   mutation uploadImage($file: Upload!) {
-//     uploadImage(file: $file) {
-//       filename
-//       mimetype
-//       encoding
-//     }
-//   }
-// `;
-
+//Form to add comment
 const CommentForm = ({ closeModal, singleComplaint }) => {
   console.log(singleComplaint);
   const [addComment, { error }] = useMutation(CREATE_COMMENT);
 
   const [author, setAuthor] = useState("");
 
+  //UseEffect to get username of logged in user
   useEffect(() => {
     const userInfo = Auth.getProfile().data.username;
 
@@ -32,14 +25,13 @@ const CommentForm = ({ closeModal, singleComplaint }) => {
 
   const [complaintText, setComplaintText] = useState("");
 
-  const [image, setImage] = useState(
-    "https://i5.walmartimages.com/asr/9b971d54-7995-4a47-aa7a-adb2d7630c6c.f21033ccb62a1d89e93c2402428e6085.jpeg"
-  );
+  
 
   const handleTextChange = (e) => {
     setComplaintText(e.target.value);
   };
 
+  //Handle submit. Pass ComplaintID, author and description 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

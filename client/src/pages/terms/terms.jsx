@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 const Terms = () => {
+  // define state
   const [consent, setConsent] = useState(false);
 
+  //Display terms and conditions based on consent state
   return (
     <section id='terms'>
       <h1>Terms and Conditions</h1>

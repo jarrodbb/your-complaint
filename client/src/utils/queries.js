@@ -132,7 +132,7 @@ export const GET_COMPLAINTS_BY_CATEGORY = gql`
     }
   }
 `;
-
+// query to get user
 export const GET_ME = gql`
   query me {
     me {

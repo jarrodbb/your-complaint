@@ -2,14 +2,11 @@ import { useState } from "react";
 import Auth from "../../utils/auth";
 import { useMutation } from "@apollo/client";
 import { validateEmail, checkPassword } from "../../utils/helpers";
+//Mutation to update user
 import { UPDATE_USER } from "../../utils/mutations";
 
-export default function EditUserDetails({
-  userID,
-  username,
-  email,
-  handleClose,
-}) {
+export default function EditUserDetails({ username, email }) {
+  //State to set existing values in form
   const [userEmail, setUserEmail] = useState(email);
   const [userName, setUserName] = useState(username);
   const [userPassword, setPassword] = useState("");
@@ -30,16 +27,19 @@ export default function EditUserDetails({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //Validation to check email is correct format
     if (!validateEmail(userEmail)) {
       setErrorMessage("Email is invalid, please try again");
       return;
     }
     if (userPassword) {
+      //If user updates password, validation to check min lenght of password
       if (!userPassword) {
         setErrorMessage("Password is invalid, please try again");
         return;
       }
       try {
+        //If password provided, it is passed as a variable
         const { data } = await updateUser({
           variables: {
             username: userName,
@@ -47,7 +47,7 @@ export default function EditUserDetails({
             password: userPassword,
           },
         });
-
+        //Update auth login to ensure latest user details are captured
         Auth.login(data.updateUser.token);
       } catch (err) {
         console.error(err);
@@ -61,13 +61,14 @@ export default function EditUserDetails({
     }
 
     try {
+      //If no password provided, password is not passed as a variable. The user will keep old password
       const { data } = await updateUser({
         variables: {
           username: userName,
           email: userEmail,
         },
       });
-
+      //Update auth login to ensure latest user details are captured
       Auth.login(data.updateUser.token);
     } catch (err) {
       console.error(err);

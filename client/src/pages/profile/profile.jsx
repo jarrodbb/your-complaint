@@ -1,17 +1,16 @@
-import "./profile.css";
-// import React from "react";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+//Import query to get user
 import { GET_ME } from "../../utils/queries";
 import Auth from "../../utils/auth";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import * as React from "react";
 import Box from "@mui/material/Box";
+//import components
 import EditUserDetails from "../../components/editUserDetails/editUserDetails";
 import DeleteUser from "../../components/deleteUser/deleteUser";
-
+//Styling for modal
 const style = {
   position: "absolute",
   top: "50%",
@@ -25,13 +24,14 @@ const style = {
   px: 4,
   pb: 3,
 };
-
+//Import from MUI
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 const Profile = () => {
+  //modal to update user
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -40,7 +40,7 @@ const Profile = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  //modal to delete user
   const [deleteModalOpen, setDeleteOpen] = React.useState(false);
 
   const handledeleteOpen = () => {
@@ -49,20 +49,23 @@ const Profile = () => {
   const handledeleteClose = () => {
     setDeleteOpen(false);
   };
-
+  //UseQuery
   const { loading, data } = useQuery(GET_ME);
-
+  //If loading display loading
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-
+  //save user to varibale
   const userData = data?.me || {};
+  //save user's complaints
   const complaints = userData.complaints || [];
+  //default image link
   const defaultImageLink = "https://source.unsplash.com/random?wallpapers";
 
   return (
     <section id="profile">
       <h1>Profile</h1>
+      {/* check if user is logged in to display user's complaints, delete button and update button */}
       {Auth.loggedIn() ? (
         <div>
           <Typography variant="body1">
@@ -77,6 +80,7 @@ const Profile = () => {
           >
             <Box sx={{ ...style, width: 400 }}>
               <h2 id="parent-modal-title"></h2>
+              {/* component to update user. Pass username, userId and email as props */}
               <EditUserDetails
                 userID={userData._id}
                 username={userData.username}
@@ -94,10 +98,11 @@ const Profile = () => {
           >
             <Box sx={{ ...style, width: 400 }}>
               <h2 id="parent-modal-title"></h2>
+              {/* pass user ID and user name as props */}
               <DeleteUser userID={userData._id} username={userData.username} />
             </Box>
           </Modal>
-
+          {/* map over complaints and display user's complaints. React router link added to Action area to send user to the single complaints page */}
           <Typography variant="h2"> Your Complaints:</Typography>
           {complaints.map((complaint) => (
             <CardActionArea

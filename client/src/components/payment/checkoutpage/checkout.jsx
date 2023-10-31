@@ -11,6 +11,8 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+
+//import components
 import AddressForm from "../addressform/addressform";
 import PaymentForm from "../paymentform/paymentform";
 import Review from "../review/review";
@@ -32,17 +34,17 @@ const steps = ["Shipping address", "Payment details", "Review your order"];
 
 function getStepContent(step) {
   switch (step) {
-  case 0:
-    return <AddressForm />;
-  case 1:
-    return <PaymentForm />;
-  case 2:
-    return <Review />;
-  default:
-    throw new Error("Unknown step");
+    case 0:
+      return <AddressForm />;
+    case 1:
+      return <PaymentForm />;
+    case 2:
+      return <Review />;
+    default:
+      throw new Error("Unknown step");
   }
 }
-
+//Checkout form
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -73,7 +75,10 @@ export default function Checkout() {
         </Toolbar>
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+        <Paper
+          variant="outlined"
+          sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        >
           <Typography component="h1" variant="h4" align="center">
             Checkout
           </Typography>

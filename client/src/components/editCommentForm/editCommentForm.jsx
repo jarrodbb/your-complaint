@@ -5,8 +5,10 @@ import { UPDATE_COMMENT } from "../../utils/mutations";
 
 import Auth from "../../utils/auth";
 
+//Edit form. ComplaintID and comment passed down as props
 export default function EditCommentForm({ complaintID, comment, handleClose }) {
   const userName = Auth.getProfile().data.username;
+  //Mutation to update comment
   const [updateComment, { error }] = useMutation(UPDATE_COMMENT);
   const [descriptionText, setDescriptionText] = useState(comment.description);
 
@@ -14,6 +16,7 @@ export default function EditCommentForm({ complaintID, comment, handleClose }) {
     setDescriptionText(e.target.value);
   };
 
+  //On submit, call mutation and pass form inputs as variables
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

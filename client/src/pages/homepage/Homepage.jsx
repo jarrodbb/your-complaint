@@ -1,10 +1,6 @@
+// import CSS for homepage
 import "./Homepage.css";
 import React, { useState } from "react";
-import ComplaintForm from "../../components/complaintForm/complaintForm";
-
-// import {complainCategories} from "../../components/utils/";
-// import MainFeaturedPost from "../../components/FeaturedPost/FeaturedPost";
-// import Post from "../../components/posts/Post";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
@@ -13,18 +9,16 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import components
 import LatestComplaint from "../../components/latestComplaint";
 import DisplayTopVoted from "../../components/DisplayTopVoted";
-import { useStoreContext } from "../../utils/GlobalState";
-import { ADD_COMPLAINT } from "../../utils/actions";
-import { GET_ME } from "../../utils/queries";
-import { useQuery } from "@apollo/client";
+// import Auth
 import Auth from "../../utils/auth";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebars/sidebar";
 import { useEffect } from "react";
 const theme = createTheme();
-
+// sections to be displayed with React router links
 const sections = [
   { title: "General", url: "/category/General" },
   { title: "Food", url: "/category/Food" },
@@ -35,7 +29,7 @@ const sections = [
   { title: "Technology", url: "/category/Technology" },
   { title: "Random", url: "/category/Random" },
 ];
-
+// display for sidebar
 const sidebar = {
   title: "About",
   description: "Complaining is a way of life",
@@ -60,8 +54,9 @@ const sidebar = {
 };
 
 export default function Homepage() {
+  // state for admin user
   const [isAdmin, setIsAdmin] = useState();
-
+  // useEffect to check if admin and set to state
   useEffect(() => {
     if (Auth.loggedIn()) {
       const userInfo = Auth.getProfile().data.isModerator;
@@ -72,23 +67,14 @@ export default function Homepage() {
     }
   }, []);
 
-  console.log(isAdmin);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container style={{paddingTop: "90px"}} maxWidth="lg">
+      <Container style={{ paddingTop: "90px" }} maxWidth="lg">
         <Header title="" sections={sections} />
+        {/* display top voted complaint */}
         <DisplayTopVoted />
+        {/* Pass Admin state to component */}
         <LatestComplaint isAdmin={isAdmin} />
         <Grid
           container
@@ -110,29 +96,3 @@ export default function Homepage() {
     </ThemeProvider>
   );
 }
-
-//   return (
-
-//     <ThemeProvider theme={theme}>
-//       <CssBaseline />
-//       <Container maxWidth="lg">
-//         <div>
-//           <DisplayTopVoted />
-//           <LatestComplaint />
-//           <button onClick={openModal} className="make-complaint-button">
-//           Make a Complaint
-//           </button>
-//           {isModalOpen && <ComplaintForm closeModal={closeModal} />}
-//         </div>
-//              <Grid container spacing={5} sx={{ mt: 3 }}>
-//             <Sidebar
-//               title={sidebar.title}
-//               description={sidebar.description}
-//               archives={sidebar.archives}
-//               social={sidebar.social}
-//             />
-//           </Grid>
-//       </Container>
-//     </ThemeProvider>
-//   );
-// }
